@@ -1,0 +1,1 @@
+{"nodes":[{"id":"tailwind.config.ts","label":"tailwind.config.ts","sourceFile":"tailwind.config.ts","sourceLocation":"L1"},{"id":"module:tailwindcss","label":"tailwindcss","sourceFile":"<external>","sourceLocation":"L1"}],"edges":[{"source":"tailwind.config.ts","target":"module:tailwindcss","relation":"imports_from","confidence":"EXTRACTED"}]}

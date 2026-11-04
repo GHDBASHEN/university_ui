@@ -1,0 +1,2590 @@
+{
+  "options": {
+    "type": "directed",
+    "multi": true,
+    "allowSelfLoops": true
+  },
+  "attributes": {},
+  "nodes": [
+    {
+      "key": "module:@/components/home/AchievementsSection",
+      "attributes": {
+        "label": "@/components/home/AchievementsSection",
+        "sourceFile": "<external>",
+        "sourceLocation": "L1",
+        "community": 0,
+        "communityLabel": "src/app/page.tsx",
+        "communityHash": "764f0cbb0c6b77b441ec337752c5c676e575f98005d3e17d76e5bc377b83070a"
+      }
+    },
+    {
+      "key": "module:@/components/home/DestinationsPreview",
+      "attributes": {
+        "label": "@/components/home/DestinationsPreview",
+        "sourceFile": "<external>",
+        "sourceLocation": "L1",
+        "community": 0,
+        "communityLabel": "src/app/page.tsx",
+        "communityHash": "764f0cbb0c6b77b441ec337752c5c676e575f98005d3e17d76e5bc377b83070a"
+      }
+    },
+    {
+      "key": "module:@/components/home/HeroSection",
+      "attributes": {
+        "label": "@/components/home/HeroSection",
+        "sourceFile": "<external>",
+        "sourceLocation": "L1",
+        "community": 0,
+        "communityLabel": "src/app/page.tsx",
+        "communityHash": "764f0cbb0c6b77b441ec337752c5c676e575f98005d3e17d76e5bc377b83070a"
+      }
+    },
+    {
+      "key": "module:@/components/layout/Footer",
+      "attributes": {
+        "label": "@/components/layout/Footer",
+        "sourceFile": "<external>",
+        "sourceLocation": "L1",
+        "community": 1,
+        "communityLabel": "lucide-react",
+        "communityHash": "90bc573e8a58f7a4111045de5c8f9f1a7eafadc20743566feeb4f4d3c9f34096"
+      }
+    },
+    {
+      "key": "module:@/components/layout/Navbar",
+      "attributes": {
+        "label": "@/components/layout/Navbar",
+        "sourceFile": "<external>",
+        "sourceLocation": "L1",
+        "community": 1,
+        "communityLabel": "lucide-react",
+        "communityHash": "90bc573e8a58f7a4111045de5c8f9f1a7eafadc20743566feeb4f4d3c9f34096"
+      }
+    },
+    {
+      "key": "module:@/components/shared/ChatBot",
+      "attributes": {
+        "label": "@/components/shared/ChatBot",
+        "sourceFile": "<external>",
+        "sourceLocation": "L1",
+        "community": 1,
+        "communityLabel": "lucide-react",
+        "communityHash": "90bc573e8a58f7a4111045de5c8f9f1a7eafadc20743566feeb4f4d3c9f34096"
+      }
+    },
+    {
+      "key": "module:@/components/ui/LogoSlider",
+      "attributes": {
+        "label": "@/components/ui/LogoSlider",
+        "sourceFile": "<external>",
+        "sourceLocation": "L1",
+        "community": 0,
+        "communityLabel": "src/app/page.tsx",
+        "communityHash": "764f0cbb0c6b77b441ec337752c5c676e575f98005d3e17d76e5bc377b83070a"
+      }
+    },
+    {
+      "key": "module:@/components/ui/TestimonialSlider",
+      "attributes": {
+        "label": "@/components/ui/TestimonialSlider",
+        "sourceFile": "<external>",
+        "sourceLocation": "L1",
+        "community": 0,
+        "communityLabel": "src/app/page.tsx",
+        "communityHash": "764f0cbb0c6b77b441ec337752c5c676e575f98005d3e17d76e5bc377b83070a"
+      }
+    },
+    {
+      "key": "module:@/data/blogPosts",
+      "attributes": {
+        "label": "@/data/blogPosts",
+        "sourceFile": "<external>",
+        "sourceLocation": "L1",
+        "community": 1,
+        "communityLabel": "lucide-react",
+        "communityHash": "90bc573e8a58f7a4111045de5c8f9f1a7eafadc20743566feeb4f4d3c9f34096"
+      }
+    },
+    {
+      "key": "module:@/data/destinations",
+      "attributes": {
+        "label": "@/data/destinations",
+        "sourceFile": "<external>",
+        "sourceLocation": "L1",
+        "community": 2,
+        "communityLabel": "react",
+        "communityHash": "29460ee769e5cd6761af5447a150dfb2c0dc28ba7a15ca9711c6272aadf50af4"
+      }
+    },
+    {
+      "key": "module:@/data/events",
+      "attributes": {
+        "label": "@/data/events",
+        "sourceFile": "<external>",
+        "sourceLocation": "L1",
+        "community": 1,
+        "communityLabel": "lucide-react",
+        "communityHash": "90bc573e8a58f7a4111045de5c8f9f1a7eafadc20743566feeb4f4d3c9f34096"
+      }
+    },
+    {
+      "key": "module:@/data/partners",
+      "attributes": {
+        "label": "@/data/partners",
+        "sourceFile": "<external>",
+        "sourceLocation": "L1",
+        "community": 0,
+        "communityLabel": "src/app/page.tsx",
+        "communityHash": "764f0cbb0c6b77b441ec337752c5c676e575f98005d3e17d76e5bc377b83070a"
+      }
+    },
+    {
+      "key": "module:@/data/testimonials",
+      "attributes": {
+        "label": "@/data/testimonials",
+        "sourceFile": "<external>",
+        "sourceLocation": "L1",
+        "community": 0,
+        "communityLabel": "src/app/page.tsx",
+        "communityHash": "764f0cbb0c6b77b441ec337752c5c676e575f98005d3e17d76e5bc377b83070a"
+      }
+    },
+    {
+      "key": "module:canvas-confetti",
+      "attributes": {
+        "label": "canvas-confetti",
+        "sourceFile": "<external>",
+        "sourceLocation": "L1",
+        "community": 1,
+        "communityLabel": "lucide-react",
+        "communityHash": "90bc573e8a58f7a4111045de5c8f9f1a7eafadc20743566feeb4f4d3c9f34096"
+      }
+    },
+    {
+      "key": "module:framer-motion",
+      "attributes": {
+        "label": "framer-motion",
+        "sourceFile": "<external>",
+        "sourceLocation": "L1",
+        "community": 3,
+        "communityLabel": "framer-motion",
+        "communityHash": "df471f3e7612ca08df4e6960e37b4d3cdc830b8bcbc4b10b8254a697101ee24a"
+      }
+    },
+    {
+      "key": "module:lucide-react",
+      "attributes": {
+        "label": "lucide-react",
+        "sourceFile": "<external>",
+        "sourceLocation": "L1",
+        "community": 1,
+        "communityLabel": "lucide-react",
+        "communityHash": "90bc573e8a58f7a4111045de5c8f9f1a7eafadc20743566feeb4f4d3c9f34096"
+      }
+    },
+    {
+      "key": "module:next",
+      "attributes": {
+        "label": "next",
+        "sourceFile": "<external>",
+        "sourceLocation": "L1",
+        "community": 4,
+        "communityLabel": "src/app/layout.tsx",
+        "communityHash": "9e27d79648ee6110497d13276303bad549c55358db8dfbc8d1e041e8746ace64"
+      }
+    },
+    {
+      "key": "module:next/font/google",
+      "attributes": {
+        "label": "next/font/google",
+        "sourceFile": "<external>",
+        "sourceLocation": "L1",
+        "community": 4,
+        "communityLabel": "src/app/layout.tsx",
+        "communityHash": "9e27d79648ee6110497d13276303bad549c55358db8dfbc8d1e041e8746ace64"
+      }
+    },
+    {
+      "key": "module:next/image",
+      "attributes": {
+        "label": "next/image",
+        "sourceFile": "<external>",
+        "sourceLocation": "L1",
+        "community": 5,
+        "communityLabel": "src/components/ui/TestimonialSlider.tsx",
+        "communityHash": "8a89ba2703cea1bbfcdf355ad59f1f22497a9d4878d25c82376083b16ffdb4fc"
+      }
+    },
+    {
+      "key": "module:next/link",
+      "attributes": {
+        "label": "next/link",
+        "sourceFile": "<external>",
+        "sourceLocation": "L1",
+        "community": 2,
+        "communityLabel": "react",
+        "communityHash": "29460ee769e5cd6761af5447a150dfb2c0dc28ba7a15ca9711c6272aadf50af4"
+      }
+    },
+    {
+      "key": "module:next/navigation",
+      "attributes": {
+        "label": "next/navigation",
+        "sourceFile": "<external>",
+        "sourceLocation": "L1",
+        "community": 2,
+        "communityLabel": "react",
+        "communityHash": "29460ee769e5cd6761af5447a150dfb2c0dc28ba7a15ca9711c6272aadf50af4"
+      }
+    },
+    {
+      "key": "module:react",
+      "attributes": {
+        "label": "react",
+        "sourceFile": "<external>",
+        "sourceLocation": "L1",
+        "community": 2,
+        "communityLabel": "react",
+        "communityHash": "29460ee769e5cd6761af5447a150dfb2c0dc28ba7a15ca9711c6272aadf50af4"
+      }
+    },
+    {
+      "key": "module:tailwindcss",
+      "attributes": {
+        "label": "tailwindcss",
+        "sourceFile": "<external>",
+        "sourceLocation": "L1",
+        "community": 6,
+        "communityLabel": "tailwindcss",
+        "communityHash": "f4d70b990e2db8f2556d44f8d9c1d0423e4f9cbeb491138f79024b813185575f"
+      }
+    },
+    {
+      "key": "next-env.d.ts",
+      "attributes": {
+        "label": "next-env.d.ts",
+        "sourceFile": "next-env.d.ts",
+        "sourceLocation": "L1",
+        "community": 7,
+        "communityLabel": "next-env.d.ts",
+        "communityHash": "45e6f9a5acfadb47f3139660fb262170726c667d0ebd73fa9181fb0fe99cd7ed"
+      }
+    },
+    {
+      "key": "next.config.mjs",
+      "attributes": {
+        "label": "next.config.mjs",
+        "sourceFile": "next.config.mjs",
+        "sourceLocation": "L1",
+        "community": 8,
+        "communityLabel": "next.config.mjs",
+        "communityHash": "18c049b08c4a0f5ab451c598aeb2c4848bb9d7877b51ca3e5effb94a225814d2"
+      }
+    },
+    {
+      "key": "postcss.config.mjs",
+      "attributes": {
+        "label": "postcss.config.mjs",
+        "sourceFile": "postcss.config.mjs",
+        "sourceLocation": "L1",
+        "community": 9,
+        "communityLabel": "postcss.config.mjs",
+        "communityHash": "ee58ff1e81b4d0efca6aa6346d4adef0583b7545e08768c7632e3f470b1409f4"
+      }
+    },
+    {
+      "key": "src/app/about/page.tsx",
+      "attributes": {
+        "label": "src/app/about/page.tsx",
+        "sourceFile": "src/app/about/page.tsx",
+        "sourceLocation": "L1",
+        "community": 0,
+        "communityLabel": "src/app/page.tsx",
+        "communityHash": "764f0cbb0c6b77b441ec337752c5c676e575f98005d3e17d76e5bc377b83070a"
+      }
+    },
+    {
+      "key": "src/app/about/page.tsx::AboutPage",
+      "attributes": {
+        "label": "function AboutPage",
+        "sourceFile": "src/app/about/page.tsx",
+        "sourceLocation": "L24",
+        "community": 0,
+        "communityLabel": "src/app/page.tsx",
+        "communityHash": "764f0cbb0c6b77b441ec337752c5c676e575f98005d3e17d76e5bc377b83070a"
+      }
+    },
+    {
+      "key": "src/app/appointments/page.tsx",
+      "attributes": {
+        "label": "src/app/appointments/page.tsx",
+        "sourceFile": "src/app/appointments/page.tsx",
+        "sourceLocation": "L1",
+        "community": 1,
+        "communityLabel": "lucide-react",
+        "communityHash": "90bc573e8a58f7a4111045de5c8f9f1a7eafadc20743566feeb4f4d3c9f34096"
+      }
+    },
+    {
+      "key": "src/app/appointments/page.tsx::AppointmentsPage",
+      "attributes": {
+        "label": "function AppointmentsPage",
+        "sourceFile": "src/app/appointments/page.tsx",
+        "sourceLocation": "L23",
+        "community": 1,
+        "communityLabel": "lucide-react",
+        "communityHash": "90bc573e8a58f7a4111045de5c8f9f1a7eafadc20743566feeb4f4d3c9f34096"
+      }
+    },
+    {
+      "key": "src/app/blog/page.tsx",
+      "attributes": {
+        "label": "src/app/blog/page.tsx",
+        "sourceFile": "src/app/blog/page.tsx",
+        "sourceLocation": "L1",
+        "community": 1,
+        "communityLabel": "lucide-react",
+        "communityHash": "90bc573e8a58f7a4111045de5c8f9f1a7eafadc20743566feeb4f4d3c9f34096"
+      }
+    },
+    {
+      "key": "src/app/blog/page.tsx::BlogPage",
+      "attributes": {
+        "label": "function BlogPage",
+        "sourceFile": "src/app/blog/page.tsx",
+        "sourceLocation": "L20",
+        "community": 1,
+        "communityLabel": "lucide-react",
+        "communityHash": "90bc573e8a58f7a4111045de5c8f9f1a7eafadc20743566feeb4f4d3c9f34096"
+      }
+    },
+    {
+      "key": "src/app/destinations/[slug]/page.tsx",
+      "attributes": {
+        "label": "src/app/destinations/[slug]/page.tsx",
+        "sourceFile": "src/app/destinations/[slug]/page.tsx",
+        "sourceLocation": "L1",
+        "community": 1,
+        "communityLabel": "lucide-react",
+        "communityHash": "90bc573e8a58f7a4111045de5c8f9f1a7eafadc20743566feeb4f4d3c9f34096"
+      }
+    },
+    {
+      "key": "src/app/destinations/[slug]/page.tsx::DestinationDetailPage",
+      "attributes": {
+        "label": "function DestinationDetailPage",
+        "sourceFile": "src/app/destinations/[slug]/page.tsx",
+        "sourceLocation": "L26",
+        "community": 2,
+        "communityLabel": "react",
+        "communityHash": "29460ee769e5cd6761af5447a150dfb2c0dc28ba7a15ca9711c6272aadf50af4"
+      }
+    },
+    {
+      "key": "src/app/destinations/page.tsx",
+      "attributes": {
+        "label": "src/app/destinations/page.tsx",
+        "sourceFile": "src/app/destinations/page.tsx",
+        "sourceLocation": "L1",
+        "community": 1,
+        "communityLabel": "lucide-react",
+        "communityHash": "90bc573e8a58f7a4111045de5c8f9f1a7eafadc20743566feeb4f4d3c9f34096"
+      }
+    },
+    {
+      "key": "src/app/destinations/page.tsx::DestinationsPage",
+      "attributes": {
+        "label": "function DestinationsPage",
+        "sourceFile": "src/app/destinations/page.tsx",
+        "sourceLocation": "L21",
+        "community": 2,
+        "communityLabel": "react",
+        "communityHash": "29460ee769e5cd6761af5447a150dfb2c0dc28ba7a15ca9711c6272aadf50af4"
+      }
+    },
+    {
+      "key": "src/app/events/page.tsx",
+      "attributes": {
+        "label": "src/app/events/page.tsx",
+        "sourceFile": "src/app/events/page.tsx",
+        "sourceLocation": "L1",
+        "community": 1,
+        "communityLabel": "lucide-react",
+        "communityHash": "90bc573e8a58f7a4111045de5c8f9f1a7eafadc20743566feeb4f4d3c9f34096"
+      }
+    },
+    {
+      "key": "src/app/events/page.tsx::EventsPage",
+      "attributes": {
+        "label": "function EventsPage",
+        "sourceFile": "src/app/events/page.tsx",
+        "sourceLocation": "L20",
+        "community": 1,
+        "communityLabel": "lucide-react",
+        "communityHash": "90bc573e8a58f7a4111045de5c8f9f1a7eafadc20743566feeb4f4d3c9f34096"
+      }
+    },
+    {
+      "key": "src/app/globals.css",
+      "attributes": {
+        "label": "./globals.css",
+        "sourceFile": "src/app/globals.css",
+        "sourceLocation": "L1",
+        "community": 10,
+        "communityLabel": "./globals.css",
+        "communityHash": "4f206759c961f544a48464ad2ee231adc87e72593d03a0004b68c17771f7a412"
+      }
+    },
+    {
+      "key": "src/app/layout.tsx",
+      "attributes": {
+        "label": "src/app/layout.tsx",
+        "sourceFile": "src/app/layout.tsx",
+        "sourceLocation": "L1",
+        "community": 4,
+        "communityLabel": "src/app/layout.tsx",
+        "communityHash": "9e27d79648ee6110497d13276303bad549c55358db8dfbc8d1e041e8746ace64"
+      }
+    },
+    {
+      "key": "src/app/layout.tsx::metadata",
+      "attributes": {
+        "label": "const metadata",
+        "sourceFile": "src/app/layout.tsx",
+        "sourceLocation": "L23",
+        "community": 4,
+        "communityLabel": "src/app/layout.tsx",
+        "communityHash": "9e27d79648ee6110497d13276303bad549c55358db8dfbc8d1e041e8746ace64"
+      }
+    },
+    {
+      "key": "src/app/layout.tsx::RootLayout",
+      "attributes": {
+        "label": "function RootLayout",
+        "sourceFile": "src/app/layout.tsx",
+        "sourceLocation": "L29",
+        "community": 4,
+        "communityLabel": "src/app/layout.tsx",
+        "communityHash": "9e27d79648ee6110497d13276303bad549c55358db8dfbc8d1e041e8746ace64"
+      }
+    },
+    {
+      "key": "src/app/page.tsx",
+      "attributes": {
+        "label": "src/app/page.tsx",
+        "sourceFile": "src/app/page.tsx",
+        "sourceLocation": "L1",
+        "community": 0,
+        "communityLabel": "src/app/page.tsx",
+        "communityHash": "764f0cbb0c6b77b441ec337752c5c676e575f98005d3e17d76e5bc377b83070a"
+      }
+    },
+    {
+      "key": "src/app/page.tsx::HomePage",
+      "attributes": {
+        "label": "function HomePage",
+        "sourceFile": "src/app/page.tsx",
+        "sourceLocation": "L18",
+        "community": 0,
+        "communityLabel": "src/app/page.tsx",
+        "communityHash": "764f0cbb0c6b77b441ec337752c5c676e575f98005d3e17d76e5bc377b83070a"
+      }
+    },
+    {
+      "key": "src/components/home/AchievementsSection.tsx",
+      "attributes": {
+        "label": "src/components/home/AchievementsSection.tsx",
+        "sourceFile": "src/components/home/AchievementsSection.tsx",
+        "sourceLocation": "L1",
+        "community": 3,
+        "communityLabel": "framer-motion",
+        "communityHash": "df471f3e7612ca08df4e6960e37b4d3cdc830b8bcbc4b10b8254a697101ee24a"
+      }
+    },
+    {
+      "key": "src/components/home/AchievementsSection.tsx::Achievement",
+      "attributes": {
+        "label": "interface Achievement",
+        "sourceFile": "src/components/home/AchievementsSection.tsx",
+        "sourceLocation": "L7",
+        "community": 3,
+        "communityLabel": "framer-motion",
+        "communityHash": "df471f3e7612ca08df4e6960e37b4d3cdc830b8bcbc4b10b8254a697101ee24a"
+      }
+    },
+    {
+      "key": "src/components/home/AchievementsSection.tsx::AchievementsSection",
+      "attributes": {
+        "label": "function AchievementsSection",
+        "sourceFile": "src/components/home/AchievementsSection.tsx",
+        "sourceLocation": "L154",
+        "community": 3,
+        "communityLabel": "framer-motion",
+        "communityHash": "df471f3e7612ca08df4e6960e37b4d3cdc830b8bcbc4b10b8254a697101ee24a"
+      }
+    },
+    {
+      "key": "src/components/home/AchievementsSection.tsx::CounterCard",
+      "attributes": {
+        "label": "function CounterCard",
+        "sourceFile": "src/components/home/AchievementsSection.tsx",
+        "sourceLocation": "L67",
+        "community": 3,
+        "communityLabel": "framer-motion",
+        "communityHash": "df471f3e7612ca08df4e6960e37b4d3cdc830b8bcbc4b10b8254a697101ee24a"
+      }
+    },
+    {
+      "key": "src/components/home/DestinationsPreview.tsx",
+      "attributes": {
+        "label": "src/components/home/DestinationsPreview.tsx",
+        "sourceFile": "src/components/home/DestinationsPreview.tsx",
+        "sourceLocation": "L1",
+        "community": 2,
+        "communityLabel": "react",
+        "communityHash": "29460ee769e5cd6761af5447a150dfb2c0dc28ba7a15ca9711c6272aadf50af4"
+      }
+    },
+    {
+      "key": "src/components/home/DestinationsPreview.tsx::DestinationsPreview",
+      "attributes": {
+        "label": "function DestinationsPreview",
+        "sourceFile": "src/components/home/DestinationsPreview.tsx",
+        "sourceLocation": "L9",
+        "community": 2,
+        "communityLabel": "react",
+        "communityHash": "29460ee769e5cd6761af5447a150dfb2c0dc28ba7a15ca9711c6272aadf50af4"
+      }
+    },
+    {
+      "key": "src/components/home/HeroSection.tsx",
+      "attributes": {
+        "label": "src/components/home/HeroSection.tsx",
+        "sourceFile": "src/components/home/HeroSection.tsx",
+        "sourceLocation": "L1",
+        "community": 2,
+        "communityLabel": "react",
+        "communityHash": "29460ee769e5cd6761af5447a150dfb2c0dc28ba7a15ca9711c6272aadf50af4"
+      }
+    },
+    {
+      "key": "src/components/home/HeroSection.tsx::HeroSection",
+      "attributes": {
+        "label": "function HeroSection",
+        "sourceFile": "src/components/home/HeroSection.tsx",
+        "sourceLocation": "L8",
+        "community": 2,
+        "communityLabel": "react",
+        "communityHash": "29460ee769e5cd6761af5447a150dfb2c0dc28ba7a15ca9711c6272aadf50af4"
+      }
+    },
+    {
+      "key": "src/components/layout/Footer.tsx",
+      "attributes": {
+        "label": "src/components/layout/Footer.tsx",
+        "sourceFile": "src/components/layout/Footer.tsx",
+        "sourceLocation": "L1",
+        "community": 2,
+        "communityLabel": "react",
+        "communityHash": "29460ee769e5cd6761af5447a150dfb2c0dc28ba7a15ca9711c6272aadf50af4"
+      }
+    },
+    {
+      "key": "src/components/layout/Footer.tsx::Footer",
+      "attributes": {
+        "label": "function Footer",
+        "sourceFile": "src/components/layout/Footer.tsx",
+        "sourceLocation": "L28",
+        "community": 2,
+        "communityLabel": "react",
+        "communityHash": "29460ee769e5cd6761af5447a150dfb2c0dc28ba7a15ca9711c6272aadf50af4"
+      }
+    },
+    {
+      "key": "src/components/layout/Navbar.tsx",
+      "attributes": {
+        "label": "src/components/layout/Navbar.tsx",
+        "sourceFile": "src/components/layout/Navbar.tsx",
+        "sourceLocation": "L1",
+        "community": 2,
+        "communityLabel": "react",
+        "communityHash": "29460ee769e5cd6761af5447a150dfb2c0dc28ba7a15ca9711c6272aadf50af4"
+      }
+    },
+    {
+      "key": "src/components/layout/Navbar.tsx::Navbar",
+      "attributes": {
+        "label": "function Navbar",
+        "sourceFile": "src/components/layout/Navbar.tsx",
+        "sourceLocation": "L18",
+        "community": 2,
+        "communityLabel": "react",
+        "communityHash": "29460ee769e5cd6761af5447a150dfb2c0dc28ba7a15ca9711c6272aadf50af4"
+      }
+    },
+    {
+      "key": "src/components/shared/ChatBot.tsx",
+      "attributes": {
+        "label": "src/components/shared/ChatBot.tsx",
+        "sourceFile": "src/components/shared/ChatBot.tsx",
+        "sourceLocation": "L1",
+        "community": 11,
+        "communityLabel": "src/components/shared/ChatBot.tsx",
+        "communityHash": "ee48a59f524b5209e59b995c3f53d326250b12dd195f55f8285a5a1b7fae3e35"
+      }
+    },
+    {
+      "key": "src/components/shared/ChatBot.tsx::ChatBot",
+      "attributes": {
+        "label": "function ChatBot",
+        "sourceFile": "src/components/shared/ChatBot.tsx",
+        "sourceLocation": "L39",
+        "community": 11,
+        "communityLabel": "src/components/shared/ChatBot.tsx",
+        "communityHash": "ee48a59f524b5209e59b995c3f53d326250b12dd195f55f8285a5a1b7fae3e35"
+      }
+    },
+    {
+      "key": "src/components/shared/ChatBot.tsx::ChatMessage",
+      "attributes": {
+        "label": "interface ChatMessage",
+        "sourceFile": "src/components/shared/ChatBot.tsx",
+        "sourceLocation": "L7",
+        "community": 11,
+        "communityLabel": "src/components/shared/ChatBot.tsx",
+        "communityHash": "ee48a59f524b5209e59b995c3f53d326250b12dd195f55f8285a5a1b7fae3e35"
+      }
+    },
+    {
+      "key": "src/components/ui/AnimatedCounter.tsx",
+      "attributes": {
+        "label": "src/components/ui/AnimatedCounter.tsx",
+        "sourceFile": "src/components/ui/AnimatedCounter.tsx",
+        "sourceLocation": "L1",
+        "community": 3,
+        "communityLabel": "framer-motion",
+        "communityHash": "df471f3e7612ca08df4e6960e37b4d3cdc830b8bcbc4b10b8254a697101ee24a"
+      }
+    },
+    {
+      "key": "src/components/ui/AnimatedCounter.tsx::AnimatedCounter",
+      "attributes": {
+        "label": "function AnimatedCounter",
+        "sourceFile": "src/components/ui/AnimatedCounter.tsx",
+        "sourceLocation": "L13",
+        "community": 3,
+        "communityLabel": "framer-motion",
+        "communityHash": "df471f3e7612ca08df4e6960e37b4d3cdc830b8bcbc4b10b8254a697101ee24a"
+      }
+    },
+    {
+      "key": "src/components/ui/AnimatedCounter.tsx::AnimatedCounterProps",
+      "attributes": {
+        "label": "interface AnimatedCounterProps",
+        "sourceFile": "src/components/ui/AnimatedCounter.tsx",
+        "sourceLocation": "L6",
+        "community": 3,
+        "communityLabel": "framer-motion",
+        "communityHash": "df471f3e7612ca08df4e6960e37b4d3cdc830b8bcbc4b10b8254a697101ee24a"
+      }
+    },
+    {
+      "key": "src/components/ui/LogoSlider.tsx",
+      "attributes": {
+        "label": "src/components/ui/LogoSlider.tsx",
+        "sourceFile": "src/components/ui/LogoSlider.tsx",
+        "sourceLocation": "L1",
+        "community": 5,
+        "communityLabel": "src/components/ui/TestimonialSlider.tsx",
+        "communityHash": "8a89ba2703cea1bbfcdf355ad59f1f22497a9d4878d25c82376083b16ffdb4fc"
+      }
+    },
+    {
+      "key": "src/components/ui/LogoSlider.tsx::Logo",
+      "attributes": {
+        "label": "interface Logo",
+        "sourceFile": "src/components/ui/LogoSlider.tsx",
+        "sourceLocation": "L5",
+        "community": 5,
+        "communityLabel": "src/components/ui/TestimonialSlider.tsx",
+        "communityHash": "8a89ba2703cea1bbfcdf355ad59f1f22497a9d4878d25c82376083b16ffdb4fc"
+      }
+    },
+    {
+      "key": "src/components/ui/LogoSlider.tsx::LogoSlider",
+      "attributes": {
+        "label": "function LogoSlider",
+        "sourceFile": "src/components/ui/LogoSlider.tsx",
+        "sourceLocation": "L15",
+        "community": 5,
+        "communityLabel": "src/components/ui/TestimonialSlider.tsx",
+        "communityHash": "8a89ba2703cea1bbfcdf355ad59f1f22497a9d4878d25c82376083b16ffdb4fc"
+      }
+    },
+    {
+      "key": "src/components/ui/LogoSlider.tsx::LogoSliderProps",
+      "attributes": {
+        "label": "interface LogoSliderProps",
+        "sourceFile": "src/components/ui/LogoSlider.tsx",
+        "sourceLocation": "L11",
+        "community": 5,
+        "communityLabel": "src/components/ui/TestimonialSlider.tsx",
+        "communityHash": "8a89ba2703cea1bbfcdf355ad59f1f22497a9d4878d25c82376083b16ffdb4fc"
+      }
+    },
+    {
+      "key": "src/components/ui/SectionHeading.tsx",
+      "attributes": {
+        "label": "src/components/ui/SectionHeading.tsx",
+        "sourceFile": "src/components/ui/SectionHeading.tsx",
+        "sourceLocation": "L1",
+        "community": 3,
+        "communityLabel": "framer-motion",
+        "communityHash": "df471f3e7612ca08df4e6960e37b4d3cdc830b8bcbc4b10b8254a697101ee24a"
+      }
+    },
+    {
+      "key": "src/components/ui/SectionHeading.tsx::SectionHeading",
+      "attributes": {
+        "label": "function SectionHeading",
+        "sourceFile": "src/components/ui/SectionHeading.tsx",
+        "sourceLocation": "L13",
+        "community": 3,
+        "communityLabel": "framer-motion",
+        "communityHash": "df471f3e7612ca08df4e6960e37b4d3cdc830b8bcbc4b10b8254a697101ee24a"
+      }
+    },
+    {
+      "key": "src/components/ui/SectionHeading.tsx::SectionHeadingProps",
+      "attributes": {
+        "label": "interface SectionHeadingProps",
+        "sourceFile": "src/components/ui/SectionHeading.tsx",
+        "sourceLocation": "L6",
+        "community": 3,
+        "communityLabel": "framer-motion",
+        "communityHash": "df471f3e7612ca08df4e6960e37b4d3cdc830b8bcbc4b10b8254a697101ee24a"
+      }
+    },
+    {
+      "key": "src/components/ui/TestimonialSlider.tsx",
+      "attributes": {
+        "label": "src/components/ui/TestimonialSlider.tsx",
+        "sourceFile": "src/components/ui/TestimonialSlider.tsx",
+        "sourceLocation": "L1",
+        "community": 5,
+        "communityLabel": "src/components/ui/TestimonialSlider.tsx",
+        "communityHash": "8a89ba2703cea1bbfcdf355ad59f1f22497a9d4878d25c82376083b16ffdb4fc"
+      }
+    },
+    {
+      "key": "src/components/ui/TestimonialSlider.tsx::Testimonial",
+      "attributes": {
+        "label": "interface Testimonial",
+        "sourceFile": "src/components/ui/TestimonialSlider.tsx",
+        "sourceLocation": "L8",
+        "community": 5,
+        "communityLabel": "src/components/ui/TestimonialSlider.tsx",
+        "communityHash": "8a89ba2703cea1bbfcdf355ad59f1f22497a9d4878d25c82376083b16ffdb4fc"
+      }
+    },
+    {
+      "key": "src/components/ui/TestimonialSlider.tsx::TestimonialSlider",
+      "attributes": {
+        "label": "function TestimonialSlider",
+        "sourceFile": "src/components/ui/TestimonialSlider.tsx",
+        "sourceLocation": "L39",
+        "community": 5,
+        "communityLabel": "src/components/ui/TestimonialSlider.tsx",
+        "communityHash": "8a89ba2703cea1bbfcdf355ad59f1f22497a9d4878d25c82376083b16ffdb4fc"
+      }
+    },
+    {
+      "key": "src/components/ui/TestimonialSlider.tsx::TestimonialSliderProps",
+      "attributes": {
+        "label": "interface TestimonialSliderProps",
+        "sourceFile": "src/components/ui/TestimonialSlider.tsx",
+        "sourceLocation": "L20",
+        "community": 5,
+        "communityLabel": "src/components/ui/TestimonialSlider.tsx",
+        "communityHash": "8a89ba2703cea1bbfcdf355ad59f1f22497a9d4878d25c82376083b16ffdb4fc"
+      }
+    },
+    {
+      "key": "src/data/blogPosts.ts",
+      "attributes": {
+        "label": "src/data/blogPosts.ts",
+        "sourceFile": "src/data/blogPosts.ts",
+        "sourceLocation": "L1",
+        "community": 12,
+        "communityLabel": "src/data/blogPosts.ts",
+        "communityHash": "c1fea2f5a2856eff26e3ce488de228fc5e9c5ba6dfe3f8c820d433c694e41ca7"
+      }
+    },
+    {
+      "key": "src/data/blogPosts.ts::BLOG_POSTS",
+      "attributes": {
+        "label": "const BLOG_POSTS",
+        "sourceFile": "src/data/blogPosts.ts",
+        "sourceLocation": "L19",
+        "community": 12,
+        "communityLabel": "src/data/blogPosts.ts",
+        "communityHash": "c1fea2f5a2856eff26e3ce488de228fc5e9c5ba6dfe3f8c820d433c694e41ca7"
+      }
+    },
+    {
+      "key": "src/data/blogPosts.ts::BlogPost",
+      "attributes": {
+        "label": "interface BlogPost",
+        "sourceFile": "src/data/blogPosts.ts",
+        "sourceLocation": "L5",
+        "community": 12,
+        "communityLabel": "src/data/blogPosts.ts",
+        "communityHash": "c1fea2f5a2856eff26e3ce488de228fc5e9c5ba6dfe3f8c820d433c694e41ca7"
+      }
+    },
+    {
+      "key": "src/data/destinations.ts",
+      "attributes": {
+        "label": "src/data/destinations.ts",
+        "sourceFile": "src/data/destinations.ts",
+        "sourceLocation": "L1",
+        "community": 13,
+        "communityLabel": "src/data/destinations.ts",
+        "communityHash": "1306ec1370a0eabc646f3a30f11b10555c1e96ee2dd60db1a572f8b62aa1f966"
+      }
+    },
+    {
+      "key": "src/data/destinations.ts::Destination",
+      "attributes": {
+        "label": "interface Destination",
+        "sourceFile": "src/data/destinations.ts",
+        "sourceLocation": "L28",
+        "community": 13,
+        "communityLabel": "src/data/destinations.ts",
+        "communityHash": "1306ec1370a0eabc646f3a30f11b10555c1e96ee2dd60db1a572f8b62aa1f966"
+      }
+    },
+    {
+      "key": "src/data/destinations.ts::DestinationLifestyle",
+      "attributes": {
+        "label": "interface DestinationLifestyle",
+        "sourceFile": "src/data/destinations.ts",
+        "sourceLocation": "L21",
+        "community": 13,
+        "communityLabel": "src/data/destinations.ts",
+        "communityHash": "1306ec1370a0eabc646f3a30f11b10555c1e96ee2dd60db1a572f8b62aa1f966"
+      }
+    },
+    {
+      "key": "src/data/destinations.ts::DESTINATIONS",
+      "attributes": {
+        "label": "const DESTINATIONS",
+        "sourceFile": "src/data/destinations.ts",
+        "sourceLocation": "L46",
+        "community": 13,
+        "communityLabel": "src/data/destinations.ts",
+        "communityHash": "1306ec1370a0eabc646f3a30f11b10555c1e96ee2dd60db1a572f8b62aa1f966"
+      }
+    },
+    {
+      "key": "src/data/destinations.ts::DestinationStats",
+      "attributes": {
+        "label": "interface DestinationStats",
+        "sourceFile": "src/data/destinations.ts",
+        "sourceLocation": "L13",
+        "community": 13,
+        "communityLabel": "src/data/destinations.ts",
+        "communityHash": "1306ec1370a0eabc646f3a30f11b10555c1e96ee2dd60db1a572f8b62aa1f966"
+      }
+    },
+    {
+      "key": "src/data/destinations.ts::UniversityEntry",
+      "attributes": {
+        "label": "interface UniversityEntry",
+        "sourceFile": "src/data/destinations.ts",
+        "sourceLocation": "L5",
+        "community": 13,
+        "communityLabel": "src/data/destinations.ts",
+        "communityHash": "1306ec1370a0eabc646f3a30f11b10555c1e96ee2dd60db1a572f8b62aa1f966"
+      }
+    },
+    {
+      "key": "src/data/events.ts",
+      "attributes": {
+        "label": "src/data/events.ts",
+        "sourceFile": "src/data/events.ts",
+        "sourceLocation": "L1",
+        "community": 14,
+        "communityLabel": "src/data/events.ts",
+        "communityHash": "575f599b02c3e5537fffd70886eeb17a42bfd090f43aeb7a582302c0460d9604"
+      }
+    },
+    {
+      "key": "src/data/events.ts::Event",
+      "attributes": {
+        "label": "interface Event",
+        "sourceFile": "src/data/events.ts",
+        "sourceLocation": "L5",
+        "community": 14,
+        "communityLabel": "src/data/events.ts",
+        "communityHash": "575f599b02c3e5537fffd70886eeb17a42bfd090f43aeb7a582302c0460d9604"
+      }
+    },
+    {
+      "key": "src/data/events.ts::EVENTS",
+      "attributes": {
+        "label": "const EVENTS",
+        "sourceFile": "src/data/events.ts",
+        "sourceLocation": "L17",
+        "community": 14,
+        "communityLabel": "src/data/events.ts",
+        "communityHash": "575f599b02c3e5537fffd70886eeb17a42bfd090f43aeb7a582302c0460d9604"
+      }
+    },
+    {
+      "key": "src/data/partners.ts",
+      "attributes": {
+        "label": "src/data/partners.ts",
+        "sourceFile": "src/data/partners.ts",
+        "sourceLocation": "L1",
+        "community": 15,
+        "communityLabel": "src/data/partners.ts",
+        "communityHash": "24779170faa3aee6c7eef4913502b20ebc573d6dbf21e9fc80d6902166d57b3a"
+      }
+    },
+    {
+      "key": "src/data/partners.ts::PARTNER_LOGOS",
+      "attributes": {
+        "label": "const PARTNER_LOGOS",
+        "sourceFile": "src/data/partners.ts",
+        "sourceLocation": "L11",
+        "community": 15,
+        "communityLabel": "src/data/partners.ts",
+        "communityHash": "24779170faa3aee6c7eef4913502b20ebc573d6dbf21e9fc80d6902166d57b3a"
+      }
+    },
+    {
+      "key": "src/data/partners.ts::PartnerLogo",
+      "attributes": {
+        "label": "interface PartnerLogo",
+        "sourceFile": "src/data/partners.ts",
+        "sourceLocation": "L5",
+        "community": 15,
+        "communityLabel": "src/data/partners.ts",
+        "communityHash": "24779170faa3aee6c7eef4913502b20ebc573d6dbf21e9fc80d6902166d57b3a"
+      }
+    },
+    {
+      "key": "src/data/testimonials.ts",
+      "attributes": {
+        "label": "src/data/testimonials.ts",
+        "sourceFile": "src/data/testimonials.ts",
+        "sourceLocation": "L1",
+        "community": 16,
+        "communityLabel": "src/data/testimonials.ts",
+        "communityHash": "d4d991ccba8b60a2d83a802b58f29c23a03556861b88be39a87d4f718cf6fe37"
+      }
+    },
+    {
+      "key": "src/data/testimonials.ts::Testimonial",
+      "attributes": {
+        "label": "interface Testimonial",
+        "sourceFile": "src/data/testimonials.ts",
+        "sourceLocation": "L5",
+        "community": 16,
+        "communityLabel": "src/data/testimonials.ts",
+        "communityHash": "d4d991ccba8b60a2d83a802b58f29c23a03556861b88be39a87d4f718cf6fe37"
+      }
+    },
+    {
+      "key": "src/data/testimonials.ts::TESTIMONIALS",
+      "attributes": {
+        "label": "const TESTIMONIALS",
+        "sourceFile": "src/data/testimonials.ts",
+        "sourceLocation": "L17",
+        "community": 16,
+        "communityLabel": "src/data/testimonials.ts",
+        "communityHash": "d4d991ccba8b60a2d83a802b58f29c23a03556861b88be39a87d4f718cf6fe37"
+      }
+    },
+    {
+      "key": "tailwind.config.ts",
+      "attributes": {
+        "label": "tailwind.config.ts",
+        "sourceFile": "tailwind.config.ts",
+        "sourceLocation": "L1",
+        "community": 6,
+        "communityLabel": "tailwindcss",
+        "communityHash": "f4d70b990e2db8f2556d44f8d9c1d0423e4f9cbeb491138f79024b813185575f"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "key": "src/app/about/page.tsx|imports_from|module:@/components/home/AchievementsSection",
+      "source": "src/app/about/page.tsx",
+      "target": "module:@/components/home/AchievementsSection",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/about/page.tsx|imports|module:@/components/layout/Footer",
+      "source": "src/app/about/page.tsx",
+      "target": "module:@/components/layout/Footer",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/about/page.tsx|imports|module:@/components/layout/Navbar",
+      "source": "src/app/about/page.tsx",
+      "target": "module:@/components/layout/Navbar",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/about/page.tsx|imports|module:@/components/shared/ChatBot",
+      "source": "src/app/about/page.tsx",
+      "target": "module:@/components/shared/ChatBot",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/about/page.tsx|imports|module:@/components/ui/LogoSlider",
+      "source": "src/app/about/page.tsx",
+      "target": "module:@/components/ui/LogoSlider",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/about/page.tsx|imports_from|module:@/data/partners",
+      "source": "src/app/about/page.tsx",
+      "target": "module:@/data/partners",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/about/page.tsx|imports_from|module:framer-motion",
+      "source": "src/app/about/page.tsx",
+      "target": "module:framer-motion",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/about/page.tsx|imports_from|module:lucide-react",
+      "source": "src/app/about/page.tsx",
+      "target": "module:lucide-react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/about/page.tsx|imports|module:next/link",
+      "source": "src/app/about/page.tsx",
+      "target": "module:next/link",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/about/page.tsx|imports|module:react",
+      "source": "src/app/about/page.tsx",
+      "target": "module:react",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/about/page.tsx|contains|src/app/about/page.tsx::AboutPage",
+      "source": "src/app/about/page.tsx",
+      "target": "src/app/about/page.tsx::AboutPage",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/appointments/page.tsx|imports|module:@/components/layout/Footer",
+      "source": "src/app/appointments/page.tsx",
+      "target": "module:@/components/layout/Footer",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/appointments/page.tsx|imports|module:@/components/layout/Navbar",
+      "source": "src/app/appointments/page.tsx",
+      "target": "module:@/components/layout/Navbar",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/appointments/page.tsx|imports|module:@/components/shared/ChatBot",
+      "source": "src/app/appointments/page.tsx",
+      "target": "module:@/components/shared/ChatBot",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/appointments/page.tsx|imports_from|module:@/data/destinations",
+      "source": "src/app/appointments/page.tsx",
+      "target": "module:@/data/destinations",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/appointments/page.tsx|imports|module:canvas-confetti",
+      "source": "src/app/appointments/page.tsx",
+      "target": "module:canvas-confetti",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/appointments/page.tsx|imports_from|module:framer-motion",
+      "source": "src/app/appointments/page.tsx",
+      "target": "module:framer-motion",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/appointments/page.tsx|imports_from|module:lucide-react",
+      "source": "src/app/appointments/page.tsx",
+      "target": "module:lucide-react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/appointments/page.tsx|imports|module:react",
+      "source": "src/app/appointments/page.tsx",
+      "target": "module:react",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/appointments/page.tsx|imports_from|module:react",
+      "source": "src/app/appointments/page.tsx",
+      "target": "module:react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/appointments/page.tsx|contains|src/app/appointments/page.tsx::AppointmentsPage",
+      "source": "src/app/appointments/page.tsx",
+      "target": "src/app/appointments/page.tsx::AppointmentsPage",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/appointments/page.tsx::AppointmentsPage|calls|module:canvas-confetti",
+      "source": "src/app/appointments/page.tsx::AppointmentsPage",
+      "target": "module:canvas-confetti",
+      "attributes": {
+        "relation": "calls",
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "key": "src/app/appointments/page.tsx::AppointmentsPage|calls|module:react",
+      "source": "src/app/appointments/page.tsx::AppointmentsPage",
+      "target": "module:react",
+      "attributes": {
+        "relation": "calls",
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "key": "src/app/blog/page.tsx|imports|module:@/components/layout/Footer",
+      "source": "src/app/blog/page.tsx",
+      "target": "module:@/components/layout/Footer",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/blog/page.tsx|imports|module:@/components/layout/Navbar",
+      "source": "src/app/blog/page.tsx",
+      "target": "module:@/components/layout/Navbar",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/blog/page.tsx|imports|module:@/components/shared/ChatBot",
+      "source": "src/app/blog/page.tsx",
+      "target": "module:@/components/shared/ChatBot",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/blog/page.tsx|imports_from|module:@/data/blogPosts",
+      "source": "src/app/blog/page.tsx",
+      "target": "module:@/data/blogPosts",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/blog/page.tsx|imports_from|module:framer-motion",
+      "source": "src/app/blog/page.tsx",
+      "target": "module:framer-motion",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/blog/page.tsx|imports_from|module:lucide-react",
+      "source": "src/app/blog/page.tsx",
+      "target": "module:lucide-react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/blog/page.tsx|imports|module:next/link",
+      "source": "src/app/blog/page.tsx",
+      "target": "module:next/link",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/blog/page.tsx|imports|module:react",
+      "source": "src/app/blog/page.tsx",
+      "target": "module:react",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/blog/page.tsx|imports_from|module:react",
+      "source": "src/app/blog/page.tsx",
+      "target": "module:react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/blog/page.tsx|contains|src/app/blog/page.tsx::BlogPage",
+      "source": "src/app/blog/page.tsx",
+      "target": "src/app/blog/page.tsx::BlogPage",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/blog/page.tsx::BlogPage|calls|module:@/data/blogPosts",
+      "source": "src/app/blog/page.tsx::BlogPage",
+      "target": "module:@/data/blogPosts",
+      "attributes": {
+        "relation": "calls",
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "key": "src/app/blog/page.tsx::BlogPage|calls|module:react",
+      "source": "src/app/blog/page.tsx::BlogPage",
+      "target": "module:react",
+      "attributes": {
+        "relation": "calls",
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "key": "src/app/destinations/[slug]/page.tsx|imports|module:@/components/layout/Footer",
+      "source": "src/app/destinations/[slug]/page.tsx",
+      "target": "module:@/components/layout/Footer",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/destinations/[slug]/page.tsx|imports|module:@/components/layout/Navbar",
+      "source": "src/app/destinations/[slug]/page.tsx",
+      "target": "module:@/components/layout/Navbar",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/destinations/[slug]/page.tsx|imports|module:@/components/shared/ChatBot",
+      "source": "src/app/destinations/[slug]/page.tsx",
+      "target": "module:@/components/shared/ChatBot",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/destinations/[slug]/page.tsx|imports_from|module:@/data/destinations",
+      "source": "src/app/destinations/[slug]/page.tsx",
+      "target": "module:@/data/destinations",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/destinations/[slug]/page.tsx|imports_from|module:framer-motion",
+      "source": "src/app/destinations/[slug]/page.tsx",
+      "target": "module:framer-motion",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/destinations/[slug]/page.tsx|imports_from|module:lucide-react",
+      "source": "src/app/destinations/[slug]/page.tsx",
+      "target": "module:lucide-react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/destinations/[slug]/page.tsx|imports|module:next/link",
+      "source": "src/app/destinations/[slug]/page.tsx",
+      "target": "module:next/link",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/destinations/[slug]/page.tsx|imports_from|module:next/navigation",
+      "source": "src/app/destinations/[slug]/page.tsx",
+      "target": "module:next/navigation",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/destinations/[slug]/page.tsx|imports|module:react",
+      "source": "src/app/destinations/[slug]/page.tsx",
+      "target": "module:react",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/destinations/[slug]/page.tsx|imports_from|module:react",
+      "source": "src/app/destinations/[slug]/page.tsx",
+      "target": "module:react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/destinations/[slug]/page.tsx|contains|src/app/destinations/[slug]/page.tsx::DestinationDetailPage",
+      "source": "src/app/destinations/[slug]/page.tsx",
+      "target": "src/app/destinations/[slug]/page.tsx::DestinationDetailPage",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/destinations/[slug]/page.tsx::DestinationDetailPage|calls|module:@/data/destinations",
+      "source": "src/app/destinations/[slug]/page.tsx::DestinationDetailPage",
+      "target": "module:@/data/destinations",
+      "attributes": {
+        "relation": "calls",
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "key": "src/app/destinations/[slug]/page.tsx::DestinationDetailPage|calls|module:next/navigation",
+      "source": "src/app/destinations/[slug]/page.tsx::DestinationDetailPage",
+      "target": "module:next/navigation",
+      "attributes": {
+        "relation": "calls",
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "key": "src/app/destinations/[slug]/page.tsx::DestinationDetailPage|calls|module:react",
+      "source": "src/app/destinations/[slug]/page.tsx::DestinationDetailPage",
+      "target": "module:react",
+      "attributes": {
+        "relation": "calls",
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "key": "src/app/destinations/page.tsx|imports|module:@/components/layout/Footer",
+      "source": "src/app/destinations/page.tsx",
+      "target": "module:@/components/layout/Footer",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/destinations/page.tsx|imports|module:@/components/layout/Navbar",
+      "source": "src/app/destinations/page.tsx",
+      "target": "module:@/components/layout/Navbar",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/destinations/page.tsx|imports|module:@/components/shared/ChatBot",
+      "source": "src/app/destinations/page.tsx",
+      "target": "module:@/components/shared/ChatBot",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/destinations/page.tsx|imports_from|module:@/data/destinations",
+      "source": "src/app/destinations/page.tsx",
+      "target": "module:@/data/destinations",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/destinations/page.tsx|imports_from|module:framer-motion",
+      "source": "src/app/destinations/page.tsx",
+      "target": "module:framer-motion",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/destinations/page.tsx|imports_from|module:lucide-react",
+      "source": "src/app/destinations/page.tsx",
+      "target": "module:lucide-react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/destinations/page.tsx|imports|module:next/link",
+      "source": "src/app/destinations/page.tsx",
+      "target": "module:next/link",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/destinations/page.tsx|imports|module:react",
+      "source": "src/app/destinations/page.tsx",
+      "target": "module:react",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/destinations/page.tsx|imports_from|module:react",
+      "source": "src/app/destinations/page.tsx",
+      "target": "module:react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/destinations/page.tsx|contains|src/app/destinations/page.tsx::DestinationsPage",
+      "source": "src/app/destinations/page.tsx",
+      "target": "src/app/destinations/page.tsx::DestinationsPage",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/destinations/page.tsx::DestinationsPage|calls|module:@/data/destinations",
+      "source": "src/app/destinations/page.tsx::DestinationsPage",
+      "target": "module:@/data/destinations",
+      "attributes": {
+        "relation": "calls",
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "key": "src/app/destinations/page.tsx::DestinationsPage|calls|module:react",
+      "source": "src/app/destinations/page.tsx::DestinationsPage",
+      "target": "module:react",
+      "attributes": {
+        "relation": "calls",
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "key": "src/app/events/page.tsx|imports|module:@/components/layout/Footer",
+      "source": "src/app/events/page.tsx",
+      "target": "module:@/components/layout/Footer",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/events/page.tsx|imports|module:@/components/layout/Navbar",
+      "source": "src/app/events/page.tsx",
+      "target": "module:@/components/layout/Navbar",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/events/page.tsx|imports|module:@/components/shared/ChatBot",
+      "source": "src/app/events/page.tsx",
+      "target": "module:@/components/shared/ChatBot",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/events/page.tsx|imports_from|module:@/data/events",
+      "source": "src/app/events/page.tsx",
+      "target": "module:@/data/events",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/events/page.tsx|imports_from|module:framer-motion",
+      "source": "src/app/events/page.tsx",
+      "target": "module:framer-motion",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/events/page.tsx|imports_from|module:lucide-react",
+      "source": "src/app/events/page.tsx",
+      "target": "module:lucide-react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/events/page.tsx|imports|module:react",
+      "source": "src/app/events/page.tsx",
+      "target": "module:react",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/events/page.tsx|imports_from|module:react",
+      "source": "src/app/events/page.tsx",
+      "target": "module:react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/events/page.tsx|contains|src/app/events/page.tsx::EventsPage",
+      "source": "src/app/events/page.tsx",
+      "target": "src/app/events/page.tsx::EventsPage",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/events/page.tsx::EventsPage|calls|module:@/data/events",
+      "source": "src/app/events/page.tsx::EventsPage",
+      "target": "module:@/data/events",
+      "attributes": {
+        "relation": "calls",
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "key": "src/app/events/page.tsx::EventsPage|calls|module:react",
+      "source": "src/app/events/page.tsx::EventsPage",
+      "target": "module:react",
+      "attributes": {
+        "relation": "calls",
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "key": "src/app/layout.tsx|imports_from|module:next",
+      "source": "src/app/layout.tsx",
+      "target": "module:next",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/layout.tsx|calls|module:next/font/google",
+      "source": "src/app/layout.tsx",
+      "target": "module:next/font/google",
+      "attributes": {
+        "relation": "calls",
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "key": "src/app/layout.tsx|imports_from|module:next/font/google",
+      "source": "src/app/layout.tsx",
+      "target": "module:next/font/google",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/layout.tsx|contains|src/app/layout.tsx::metadata",
+      "source": "src/app/layout.tsx",
+      "target": "src/app/layout.tsx::metadata",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/layout.tsx|contains|src/app/layout.tsx::RootLayout",
+      "source": "src/app/layout.tsx",
+      "target": "src/app/layout.tsx::RootLayout",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/page.tsx|imports_from|module:@/components/home/AchievementsSection",
+      "source": "src/app/page.tsx",
+      "target": "module:@/components/home/AchievementsSection",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/page.tsx|imports_from|module:@/components/home/DestinationsPreview",
+      "source": "src/app/page.tsx",
+      "target": "module:@/components/home/DestinationsPreview",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/page.tsx|imports_from|module:@/components/home/HeroSection",
+      "source": "src/app/page.tsx",
+      "target": "module:@/components/home/HeroSection",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/page.tsx|imports|module:@/components/layout/Footer",
+      "source": "src/app/page.tsx",
+      "target": "module:@/components/layout/Footer",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/page.tsx|imports|module:@/components/layout/Navbar",
+      "source": "src/app/page.tsx",
+      "target": "module:@/components/layout/Navbar",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/page.tsx|imports|module:@/components/shared/ChatBot",
+      "source": "src/app/page.tsx",
+      "target": "module:@/components/shared/ChatBot",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/page.tsx|imports|module:@/components/ui/LogoSlider",
+      "source": "src/app/page.tsx",
+      "target": "module:@/components/ui/LogoSlider",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/page.tsx|imports|module:@/components/ui/TestimonialSlider",
+      "source": "src/app/page.tsx",
+      "target": "module:@/components/ui/TestimonialSlider",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/page.tsx|imports_from|module:@/data/partners",
+      "source": "src/app/page.tsx",
+      "target": "module:@/data/partners",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/page.tsx|imports_from|module:@/data/testimonials",
+      "source": "src/app/page.tsx",
+      "target": "module:@/data/testimonials",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/page.tsx|imports_from|module:framer-motion",
+      "source": "src/app/page.tsx",
+      "target": "module:framer-motion",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/page.tsx|imports_from|module:lucide-react",
+      "source": "src/app/page.tsx",
+      "target": "module:lucide-react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/page.tsx|imports|module:next/link",
+      "source": "src/app/page.tsx",
+      "target": "module:next/link",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/page.tsx|imports|module:react",
+      "source": "src/app/page.tsx",
+      "target": "module:react",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/app/page.tsx|contains|src/app/page.tsx::HomePage",
+      "source": "src/app/page.tsx",
+      "target": "src/app/page.tsx::HomePage",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/home/AchievementsSection.tsx|imports_from|module:framer-motion",
+      "source": "src/components/home/AchievementsSection.tsx",
+      "target": "module:framer-motion",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/home/AchievementsSection.tsx|imports_from|module:lucide-react",
+      "source": "src/components/home/AchievementsSection.tsx",
+      "target": "module:lucide-react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/home/AchievementsSection.tsx|imports|module:react",
+      "source": "src/components/home/AchievementsSection.tsx",
+      "target": "module:react",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/home/AchievementsSection.tsx|imports_from|module:react",
+      "source": "src/components/home/AchievementsSection.tsx",
+      "target": "module:react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/home/AchievementsSection.tsx|contains|src/components/home/AchievementsSection.tsx::Achievement",
+      "source": "src/components/home/AchievementsSection.tsx",
+      "target": "src/components/home/AchievementsSection.tsx::Achievement",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/home/AchievementsSection.tsx|contains|src/components/home/AchievementsSection.tsx::AchievementsSection",
+      "source": "src/components/home/AchievementsSection.tsx",
+      "target": "src/components/home/AchievementsSection.tsx::AchievementsSection",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/home/AchievementsSection.tsx|contains|src/components/home/AchievementsSection.tsx::CounterCard",
+      "source": "src/components/home/AchievementsSection.tsx",
+      "target": "src/components/home/AchievementsSection.tsx::CounterCard",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/home/AchievementsSection.tsx::CounterCard|calls|module:framer-motion",
+      "source": "src/components/home/AchievementsSection.tsx::CounterCard",
+      "target": "module:framer-motion",
+      "attributes": {
+        "relation": "calls",
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "key": "src/components/home/AchievementsSection.tsx::CounterCard|calls|module:react",
+      "source": "src/components/home/AchievementsSection.tsx::CounterCard",
+      "target": "module:react",
+      "attributes": {
+        "relation": "calls",
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "key": "src/components/home/DestinationsPreview.tsx|imports_from|module:@/data/destinations",
+      "source": "src/components/home/DestinationsPreview.tsx",
+      "target": "module:@/data/destinations",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/home/DestinationsPreview.tsx|imports_from|module:framer-motion",
+      "source": "src/components/home/DestinationsPreview.tsx",
+      "target": "module:framer-motion",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/home/DestinationsPreview.tsx|imports_from|module:lucide-react",
+      "source": "src/components/home/DestinationsPreview.tsx",
+      "target": "module:lucide-react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/home/DestinationsPreview.tsx|imports|module:next/link",
+      "source": "src/components/home/DestinationsPreview.tsx",
+      "target": "module:next/link",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/home/DestinationsPreview.tsx|imports|module:react",
+      "source": "src/components/home/DestinationsPreview.tsx",
+      "target": "module:react",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/home/DestinationsPreview.tsx|imports_from|module:react",
+      "source": "src/components/home/DestinationsPreview.tsx",
+      "target": "module:react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/home/DestinationsPreview.tsx|contains|src/components/home/DestinationsPreview.tsx::DestinationsPreview",
+      "source": "src/components/home/DestinationsPreview.tsx",
+      "target": "src/components/home/DestinationsPreview.tsx::DestinationsPreview",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/home/DestinationsPreview.tsx::DestinationsPreview|calls|module:@/data/destinations",
+      "source": "src/components/home/DestinationsPreview.tsx::DestinationsPreview",
+      "target": "module:@/data/destinations",
+      "attributes": {
+        "relation": "calls",
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "key": "src/components/home/DestinationsPreview.tsx::DestinationsPreview|calls|module:react",
+      "source": "src/components/home/DestinationsPreview.tsx::DestinationsPreview",
+      "target": "module:react",
+      "attributes": {
+        "relation": "calls",
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "key": "src/components/home/HeroSection.tsx|imports_from|module:framer-motion",
+      "source": "src/components/home/HeroSection.tsx",
+      "target": "module:framer-motion",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/home/HeroSection.tsx|imports_from|module:lucide-react",
+      "source": "src/components/home/HeroSection.tsx",
+      "target": "module:lucide-react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/home/HeroSection.tsx|imports|module:next/link",
+      "source": "src/components/home/HeroSection.tsx",
+      "target": "module:next/link",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/home/HeroSection.tsx|imports|module:react",
+      "source": "src/components/home/HeroSection.tsx",
+      "target": "module:react",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/home/HeroSection.tsx|imports_from|module:react",
+      "source": "src/components/home/HeroSection.tsx",
+      "target": "module:react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/home/HeroSection.tsx|contains|src/components/home/HeroSection.tsx::HeroSection",
+      "source": "src/components/home/HeroSection.tsx",
+      "target": "src/components/home/HeroSection.tsx::HeroSection",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/home/HeroSection.tsx::HeroSection|calls|module:framer-motion",
+      "source": "src/components/home/HeroSection.tsx::HeroSection",
+      "target": "module:framer-motion",
+      "attributes": {
+        "relation": "calls",
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "key": "src/components/home/HeroSection.tsx::HeroSection|calls|module:react",
+      "source": "src/components/home/HeroSection.tsx::HeroSection",
+      "target": "module:react",
+      "attributes": {
+        "relation": "calls",
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "key": "src/components/layout/Footer.tsx|imports_from|module:framer-motion",
+      "source": "src/components/layout/Footer.tsx",
+      "target": "module:framer-motion",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/layout/Footer.tsx|imports_from|module:lucide-react",
+      "source": "src/components/layout/Footer.tsx",
+      "target": "module:lucide-react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/layout/Footer.tsx|imports|module:next/link",
+      "source": "src/components/layout/Footer.tsx",
+      "target": "module:next/link",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/layout/Footer.tsx|imports_from|module:react",
+      "source": "src/components/layout/Footer.tsx",
+      "target": "module:react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/layout/Footer.tsx|contains|src/components/layout/Footer.tsx::Footer",
+      "source": "src/components/layout/Footer.tsx",
+      "target": "src/components/layout/Footer.tsx::Footer",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/layout/Footer.tsx::Footer|calls|module:react",
+      "source": "src/components/layout/Footer.tsx::Footer",
+      "target": "module:react",
+      "attributes": {
+        "relation": "calls",
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "key": "src/components/layout/Navbar.tsx|imports_from|module:framer-motion",
+      "source": "src/components/layout/Navbar.tsx",
+      "target": "module:framer-motion",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/layout/Navbar.tsx|imports_from|module:lucide-react",
+      "source": "src/components/layout/Navbar.tsx",
+      "target": "module:lucide-react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/layout/Navbar.tsx|imports|module:next/link",
+      "source": "src/components/layout/Navbar.tsx",
+      "target": "module:next/link",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/layout/Navbar.tsx|imports_from|module:next/navigation",
+      "source": "src/components/layout/Navbar.tsx",
+      "target": "module:next/navigation",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/layout/Navbar.tsx|imports_from|module:react",
+      "source": "src/components/layout/Navbar.tsx",
+      "target": "module:react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/layout/Navbar.tsx|contains|src/components/layout/Navbar.tsx::Navbar",
+      "source": "src/components/layout/Navbar.tsx",
+      "target": "src/components/layout/Navbar.tsx::Navbar",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/layout/Navbar.tsx::Navbar|calls|module:next/navigation",
+      "source": "src/components/layout/Navbar.tsx::Navbar",
+      "target": "module:next/navigation",
+      "attributes": {
+        "relation": "calls",
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "key": "src/components/layout/Navbar.tsx::Navbar|calls|module:react",
+      "source": "src/components/layout/Navbar.tsx::Navbar",
+      "target": "module:react",
+      "attributes": {
+        "relation": "calls",
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "key": "src/components/shared/ChatBot.tsx|imports_from|module:framer-motion",
+      "source": "src/components/shared/ChatBot.tsx",
+      "target": "module:framer-motion",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/shared/ChatBot.tsx|imports_from|module:lucide-react",
+      "source": "src/components/shared/ChatBot.tsx",
+      "target": "module:lucide-react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/shared/ChatBot.tsx|imports_from|module:react",
+      "source": "src/components/shared/ChatBot.tsx",
+      "target": "module:react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/shared/ChatBot.tsx|contains|src/components/shared/ChatBot.tsx::ChatBot",
+      "source": "src/components/shared/ChatBot.tsx",
+      "target": "src/components/shared/ChatBot.tsx::ChatBot",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/shared/ChatBot.tsx|contains|src/components/shared/ChatBot.tsx::ChatMessage",
+      "source": "src/components/shared/ChatBot.tsx",
+      "target": "src/components/shared/ChatBot.tsx::ChatMessage",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/shared/ChatBot.tsx::ChatBot|calls|module:react",
+      "source": "src/components/shared/ChatBot.tsx::ChatBot",
+      "target": "module:react",
+      "attributes": {
+        "relation": "calls",
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "key": "src/components/ui/AnimatedCounter.tsx|imports_from|module:framer-motion",
+      "source": "src/components/ui/AnimatedCounter.tsx",
+      "target": "module:framer-motion",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/ui/AnimatedCounter.tsx|imports_from|module:react",
+      "source": "src/components/ui/AnimatedCounter.tsx",
+      "target": "module:react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/ui/AnimatedCounter.tsx|contains|src/components/ui/AnimatedCounter.tsx::AnimatedCounter",
+      "source": "src/components/ui/AnimatedCounter.tsx",
+      "target": "src/components/ui/AnimatedCounter.tsx::AnimatedCounter",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/ui/AnimatedCounter.tsx|contains|src/components/ui/AnimatedCounter.tsx::AnimatedCounterProps",
+      "source": "src/components/ui/AnimatedCounter.tsx",
+      "target": "src/components/ui/AnimatedCounter.tsx::AnimatedCounterProps",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/ui/AnimatedCounter.tsx::AnimatedCounter|calls|module:framer-motion",
+      "source": "src/components/ui/AnimatedCounter.tsx::AnimatedCounter",
+      "target": "module:framer-motion",
+      "attributes": {
+        "relation": "calls",
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "key": "src/components/ui/AnimatedCounter.tsx::AnimatedCounter|calls|module:react",
+      "source": "src/components/ui/AnimatedCounter.tsx::AnimatedCounter",
+      "target": "module:react",
+      "attributes": {
+        "relation": "calls",
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "key": "src/components/ui/LogoSlider.tsx|imports|module:next/image",
+      "source": "src/components/ui/LogoSlider.tsx",
+      "target": "module:next/image",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/ui/LogoSlider.tsx|contains|src/components/ui/LogoSlider.tsx::Logo",
+      "source": "src/components/ui/LogoSlider.tsx",
+      "target": "src/components/ui/LogoSlider.tsx::Logo",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/ui/LogoSlider.tsx|contains|src/components/ui/LogoSlider.tsx::LogoSlider",
+      "source": "src/components/ui/LogoSlider.tsx",
+      "target": "src/components/ui/LogoSlider.tsx::LogoSlider",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/ui/LogoSlider.tsx|contains|src/components/ui/LogoSlider.tsx::LogoSliderProps",
+      "source": "src/components/ui/LogoSlider.tsx",
+      "target": "src/components/ui/LogoSlider.tsx::LogoSliderProps",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/ui/SectionHeading.tsx|imports_from|module:framer-motion",
+      "source": "src/components/ui/SectionHeading.tsx",
+      "target": "module:framer-motion",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/ui/SectionHeading.tsx|imports|module:react",
+      "source": "src/components/ui/SectionHeading.tsx",
+      "target": "module:react",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/ui/SectionHeading.tsx|contains|src/components/ui/SectionHeading.tsx::SectionHeading",
+      "source": "src/components/ui/SectionHeading.tsx",
+      "target": "src/components/ui/SectionHeading.tsx::SectionHeading",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/ui/SectionHeading.tsx|contains|src/components/ui/SectionHeading.tsx::SectionHeadingProps",
+      "source": "src/components/ui/SectionHeading.tsx",
+      "target": "src/components/ui/SectionHeading.tsx::SectionHeadingProps",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/ui/TestimonialSlider.tsx|imports_from|module:framer-motion",
+      "source": "src/components/ui/TestimonialSlider.tsx",
+      "target": "module:framer-motion",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/ui/TestimonialSlider.tsx|imports_from|module:lucide-react",
+      "source": "src/components/ui/TestimonialSlider.tsx",
+      "target": "module:lucide-react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/ui/TestimonialSlider.tsx|imports|module:next/image",
+      "source": "src/components/ui/TestimonialSlider.tsx",
+      "target": "module:next/image",
+      "attributes": {
+        "relation": "imports",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/ui/TestimonialSlider.tsx|imports_from|module:react",
+      "source": "src/components/ui/TestimonialSlider.tsx",
+      "target": "module:react",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/ui/TestimonialSlider.tsx|contains|src/components/ui/TestimonialSlider.tsx::Testimonial",
+      "source": "src/components/ui/TestimonialSlider.tsx",
+      "target": "src/components/ui/TestimonialSlider.tsx::Testimonial",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/ui/TestimonialSlider.tsx|contains|src/components/ui/TestimonialSlider.tsx::TestimonialSlider",
+      "source": "src/components/ui/TestimonialSlider.tsx",
+      "target": "src/components/ui/TestimonialSlider.tsx::TestimonialSlider",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/ui/TestimonialSlider.tsx|contains|src/components/ui/TestimonialSlider.tsx::TestimonialSliderProps",
+      "source": "src/components/ui/TestimonialSlider.tsx",
+      "target": "src/components/ui/TestimonialSlider.tsx::TestimonialSliderProps",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/components/ui/TestimonialSlider.tsx::TestimonialSlider|calls|module:react",
+      "source": "src/components/ui/TestimonialSlider.tsx::TestimonialSlider",
+      "target": "module:react",
+      "attributes": {
+        "relation": "calls",
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "key": "src/data/blogPosts.ts|contains|src/data/blogPosts.ts::BLOG_POSTS",
+      "source": "src/data/blogPosts.ts",
+      "target": "src/data/blogPosts.ts::BLOG_POSTS",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/data/blogPosts.ts|contains|src/data/blogPosts.ts::BlogPost",
+      "source": "src/data/blogPosts.ts",
+      "target": "src/data/blogPosts.ts::BlogPost",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/data/destinations.ts|contains|src/data/destinations.ts::Destination",
+      "source": "src/data/destinations.ts",
+      "target": "src/data/destinations.ts::Destination",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/data/destinations.ts|contains|src/data/destinations.ts::DestinationLifestyle",
+      "source": "src/data/destinations.ts",
+      "target": "src/data/destinations.ts::DestinationLifestyle",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/data/destinations.ts|contains|src/data/destinations.ts::DESTINATIONS",
+      "source": "src/data/destinations.ts",
+      "target": "src/data/destinations.ts::DESTINATIONS",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/data/destinations.ts|contains|src/data/destinations.ts::DestinationStats",
+      "source": "src/data/destinations.ts",
+      "target": "src/data/destinations.ts::DestinationStats",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/data/destinations.ts|contains|src/data/destinations.ts::UniversityEntry",
+      "source": "src/data/destinations.ts",
+      "target": "src/data/destinations.ts::UniversityEntry",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/data/events.ts|contains|src/data/events.ts::Event",
+      "source": "src/data/events.ts",
+      "target": "src/data/events.ts::Event",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/data/events.ts|contains|src/data/events.ts::EVENTS",
+      "source": "src/data/events.ts",
+      "target": "src/data/events.ts::EVENTS",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/data/partners.ts|contains|src/data/partners.ts::PARTNER_LOGOS",
+      "source": "src/data/partners.ts",
+      "target": "src/data/partners.ts::PARTNER_LOGOS",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/data/partners.ts|contains|src/data/partners.ts::PartnerLogo",
+      "source": "src/data/partners.ts",
+      "target": "src/data/partners.ts::PartnerLogo",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/data/testimonials.ts|contains|src/data/testimonials.ts::Testimonial",
+      "source": "src/data/testimonials.ts",
+      "target": "src/data/testimonials.ts::Testimonial",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "src/data/testimonials.ts|contains|src/data/testimonials.ts::TESTIMONIALS",
+      "source": "src/data/testimonials.ts",
+      "target": "src/data/testimonials.ts::TESTIMONIALS",
+      "attributes": {
+        "relation": "contains",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "key": "tailwind.config.ts|imports_from|module:tailwindcss",
+      "source": "tailwind.config.ts",
+      "target": "module:tailwindcss",
+      "attributes": {
+        "relation": "imports_from",
+        "confidence": "EXTRACTED"
+      }
+    }
+  ]
+}
