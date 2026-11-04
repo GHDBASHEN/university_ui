@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { DESTINATIONS, Destination } from "@/data/destinations";
+import { soundEngine } from "@/components/shared/SoundEngine";
 import { ArrowRight, MapPin, Sparkles, Building2, CheckCircle2 } from "lucide-react";
 
 export const DestinationsPreview: React.FC = () => {
@@ -65,11 +66,16 @@ export const DestinationsPreview: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ delay: idx * 0.12, duration: 0.6 }}
-              onHoverStart={() => setHoveredIdx(idx)}
+              onHoverStart={() => {
+                soundEngine.playCardSwoosh();
+                setHoveredIdx(idx);
+              }}
               onHoverEnd={() => setHoveredIdx(null)}
+              whileTap={{ scale: 0.98 }}
             >
               <Link
                 href={`/destinations/${dest.slug}`}
+                onClick={() => soundEngine.playZoomChime()}
                 className="group block relative h-[480px] sm:h-[540px] rounded-3xl overflow-hidden glass-card cursor-pointer border border-white/15 transition-all duration-500 hover:border-amber-400/50 shadow-2xl"
               >
                 {/* Background Image with VR-style Zoom Scale */}

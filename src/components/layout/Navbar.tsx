@@ -5,11 +5,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { soundEngine } from "@/components/shared/SoundEngine";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
   { href: "/destinations", label: "Destinations" },
+  { href: "/expedition", label: "3D Odyssey" },
+  { href: "/about", label: "About" },
   { href: "/events", label: "Events" },
   { href: "/blog", label: "Blog" },
   { href: "/appointments", label: "Appointments" },
@@ -55,7 +57,11 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group">
+            <Link
+              href="/"
+              onClick={() => soundEngine.playClick()}
+              className="flex items-center gap-3 group"
+            >
               <div className="flex items-center">
                 <span className="text-3xl font-display font-bold tracking-wider text-slate-100 group-hover:text-amber-400 transition-colors duration-300">
                   AURA
@@ -80,6 +86,7 @@ export default function Navbar() {
                   <Link
                     key={link.href}
                     href={link.href}
+                    onClick={() => soundEngine.playClick()}
                     className="relative px-4 py-2 text-sm font-heading tracking-wide transition-colors duration-300 group"
                   >
                     <span
@@ -107,7 +114,8 @@ export default function Navbar() {
             <div className="flex items-center gap-4">
               <Link
                 href="/appointments"
-                className="hidden sm:inline-flex items-center px-5 py-2.5 bg-amber-400 hover:bg-amber-300 text-black text-sm font-heading font-semibold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-amber-400/20"
+                onClick={() => soundEngine.playClick()}
+                className="hidden sm:inline-flex items-center px-5 py-2.5 bg-amber-400 hover:bg-amber-300 text-black text-sm font-heading font-semibold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-amber-400/20 active:scale-95"
               >
                 Book Free Consultation
               </Link>
