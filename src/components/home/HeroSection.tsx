@@ -382,10 +382,6 @@ export const HeroSection: React.FC = () => {
           className="absolute inset-0"
         />
 
-        {/* Horizon Light Beam (Exact motif from the 10 frames) */}
-        <div className="absolute top-[52%] left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-amber-400/40 to-transparent blur-[1px]" />
-        <div className="absolute top-[52%] left-1/4 right-1/4 h-[8px] bg-gradient-to-r from-transparent via-amber-300/20 to-transparent blur-md" />
-
         {/* Top & Bottom Vignette Shadow Gradients */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#05070c] via-black/30 to-black/70 pointer-events-none" />
         <div className="absolute inset-0 shadow-[inset_0_0_120px_rgba(0,0,0,0.85)] pointer-events-none" />
