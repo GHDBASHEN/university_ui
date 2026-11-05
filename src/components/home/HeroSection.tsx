@@ -34,8 +34,9 @@ import {
 
 // ============================================================================
 // INDIVIDUAL LARGE UNIVERSITY DESTINATION CARD
-// Slides normally from right to left as user scrolls.
-// When it reaches the left corner, it smoothly fades out and disappears completely.
+// Hidden on first load (title screen).
+// Glides smoothly in from right to left when scrolling.
+// When reaching the left corner, each card smoothly fades and disappears.
 // All relevant text is kept inside the card box.
 // ============================================================================
 interface DestinationCardProps {
@@ -55,37 +56,46 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
   onCardClick,
   cardSpacing,
 }) => {
-  // 1. Normal horizontal sliding from right to left:
-  // When smoothProgress = index -> card is centered (x = 0)
-  // When smoothProgress < index -> card is to the right (x > 0)
-  // When smoothProgress > index -> card moves to the left (x < 0)
+  // Slot assignment: UK is at slot 1, Australia at 2, Canada at 3, USA at 4.
+  // Slot 0 is reserved for the initial Title + Background screen (where slides are not visible).
+  const cardSlot = index + 1;
+
+  // 1. Horizontal movement: glides right-to-left as user scrolls
+  // When smoothProgress = cardSlot -> card is centered (x = 0)
+  // When smoothProgress < cardSlot -> card is to the right (x > 0)
+  // When smoothProgress > cardSlot -> card moves to the left (x < 0)
   const x = useTransform(smoothProgress, (p) => {
-    return (index - p) * cardSpacing;
+    return (cardSlot - p) * cardSpacing;
   });
 
-  // 2. Visible, smooth fade and disappear right in the left side corner:
-  // - In center and middle (diff from -1 to 0.35): opacity = 1.0 (never disappears in middle!)
-  // - Reaching the left corner (diff from 0.35 to 0.95): smoothly fades from 1.0 down to 0.0
-  // - Past left corner (diff >= 0.95): opacity = 0.0 (completely disappeared in the left corner)
+  // 2. Opacity curve:
+  // - On initial title load (p <= 0.15): card is COMPLETELY INVISIBLE (opacity = 0)
+  // - As user scrolls from title into this card: fades in smoothly as it glides into center
+  // - In center: 100% solid & visible (opacity = 1.0)
+  // - Gliding into left corner (diff > 0.35): smoothly fades from 1.0 down to 0.0
+  // - Past left corner (diff >= 0.95): completely disappeared (opacity = 0)
   const opacity = useTransform(smoothProgress, (p) => {
-    const diff = p - index;
+    // Hidden on first loading title screen
+    if (p <= 0.15) return 0;
+
+    const diff = p - cardSlot;
     if (diff > 0.35) {
-      // Smoothly fades out as it glides into the left side corner
+      // Fading out into the left side corner
       const fadeProgress = Math.min(1, (diff - 0.35) / 0.6);
       return Math.max(0, 1 - Math.pow(fadeProgress, 1.2));
-    } else if (diff >= -1) {
-      // Centered and upcoming card on the right: fully visible & solid
-      return 1;
+    } else if (p < cardSlot) {
+      // Entering from the right as user scrolls into this slide
+      const entrance = Math.max(0, Math.min(1, (p - (cardSlot - 1.0)) / 0.65));
+      return entrance;
     } else {
-      // Further queued cards on the right
-      const rightDiff = -diff;
-      return Math.max(0.4, 1 - (rightDiff - 1) * 0.3);
+      // Centered & active: fully visible & solid
+      return 1;
     }
   });
 
-  // 3. Subtle scale: stays 1.0 across the screen, eases to 0.92 as it fades in the left corner
+  // 3. Subtle scale: stays 1.0 across center, eases to 0.92 as it exits in the left corner
   const scale = useTransform(smoothProgress, (p) => {
-    const diff = p - index;
+    const diff = p - cardSlot;
     if (diff > 0.35) {
       const shrinkProgress = Math.min(1, (diff - 0.35) / 0.6);
       return 1.0 - shrinkProgress * 0.08;
@@ -97,13 +107,13 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
     }
   });
 
-  // 4. Disable pointer events when faded out in the left corner
+  // 4. Disable pointer events when invisible on intro screen or when faded out in left corner
   const pointerEvents = useTransform(smoothProgress, (p) => {
-    const diff = p - index;
-    return diff > 0.9 ? "none" : "auto";
+    if (p <= 0.25 || p - cardSlot > 0.9) return "none";
+    return "auto";
   });
 
-  // 5. Z-index stacking: active card highest, earlier cards layer naturally
+  // 5. Z-index stacking
   const zIndex = isActive ? 30 : Math.max(1, 20 - index);
 
   return (
@@ -197,14 +207,15 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
 };
 
 // ============================================================================
-// MAIN HERO SECTION: SAME BACKGROUND & NORMAL RIGHT-TO-LEFT SCROLL SLIDER
+// MAIN HERO SECTION: TITLE ON FIRST LOAD (NO SLIDES) -> GLIDE IN ON SCROLL
 // ============================================================================
 export const HeroSection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [activeIdx, setActiveIdx] = useState<number>(0);
+  // activeIdx: -1 = Intro title screen, 0 = UK, 1 = Australia, 2 = Canada, 3 = USA
+  const [activeIdx, setActiveIdx] = useState<number>(-1);
   const [isContentExpanded, setIsContentExpanded] = useState<boolean>(false);
   const [cardSpacing, setCardSpacing] = useState<number>(540);
-  const prevSlideRef = useRef<number>(0);
+  const prevSlideRef = useRef<number>(-1);
 
   // Responsive card spacing computation
   useEffect(() => {
@@ -224,52 +235,62 @@ export const HeroSection: React.FC = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Virtual scroll accumulator: 0 to (DESTINATIONS.length - 1)
+  // Virtual scroll accumulator: 0 (Intro Title) to DESTINATIONS.length (4)
   const targetProgress = useRef<number>(0);
   const progressMotion = useMotionValue(0);
 
-  // Crisp, fast momentum spring physics for the virtual scroll
+  // Smooth momentum spring physics for the virtual scroll
   const smoothProgress = useSpring(progressMotion, {
     stiffness: 150,
     damping: 24,
     mass: 0.45,
   });
 
+  // Title animations based on scroll progress:
+  // 100% visible on first load (progress = 0), smoothly fades out and hides on scroll
+  const titleOpacity = useTransform(smoothProgress, [0, 0.45], [1, 0]);
+  const titleY = useTransform(smoothProgress, [0, 0.45], [0, -45]);
+  const titleScale = useTransform(smoothProgress, [0, 0.45], [1, 0.95]);
+  const titlePointerEvents = useTransform(smoothProgress, (p) =>
+    p < 0.25 ? "auto" : "none"
+  );
+
   // Track the continuous active slide index based on progress
   useMotionValueEvent(smoothProgress, "change", (latest) => {
-    const roundedIdx = Math.min(
-      DESTINATIONS.length - 1,
-      Math.max(0, Math.round(latest))
-    );
+    const slot = Math.round(latest);
+    const newActiveIdx = slot <= 0 ? -1 : Math.min(DESTINATIONS.length - 1, slot - 1);
 
-    if (roundedIdx !== prevSlideRef.current) {
-      soundEngine.playCardSwoosh();
-      prevSlideRef.current = roundedIdx;
-      setActiveIdx(roundedIdx);
+    if (newActiveIdx !== prevSlideRef.current) {
+      if (newActiveIdx >= 0) {
+        soundEngine.playCardSwoosh();
+      }
+      prevSlideRef.current = newActiveIdx;
+      setActiveIdx(newActiveIdx);
     }
   });
 
-  const currentDest = DESTINATIONS[activeIdx] || DESTINATIONS[0];
+  const currentDest =
+    activeIdx >= 0 ? DESTINATIONS[activeIdx] : DESTINATIONS[0];
 
-  // Smooth slide jump
+  // Smooth slide jump: 0 = Intro title, 1 = UK, 2 = Australia, 3 = Canada, 4 = USA
   const goToSlide = useCallback(
-    (index: number) => {
+    (slotIndex: number) => {
       soundEngine.playCardSwoosh();
-      const clamped = Math.max(0, Math.min(DESTINATIONS.length - 1, index));
+      const clamped = Math.max(0, Math.min(DESTINATIONS.length, slotIndex));
       targetProgress.current = clamped;
       progressMotion.set(clamped);
-      setActiveIdx(clamped);
+      setActiveIdx(clamped <= 0 ? -1 : clamped - 1);
     },
     [progressMotion]
   );
 
   const handlePrev = useCallback(() => {
-    goToSlide(activeIdx - 1);
-  }, [activeIdx, goToSlide]);
+    goToSlide(Math.max(0, Math.round(progressMotion.get()) - 1));
+  }, [goToSlide, progressMotion]);
 
   const handleNext = useCallback(() => {
-    goToSlide(activeIdx + 1);
-  }, [activeIdx, goToSlide]);
+    goToSlide(Math.min(DESTINATIONS.length, Math.round(progressMotion.get()) + 1));
+  }, [goToSlide, progressMotion]);
 
   // WHEEL SCROLL EVENT HANDLER:
   // Intercepts wheel scroll to drive slides horizontally right-to-left
@@ -285,11 +306,11 @@ export const HeroSection: React.FC = () => {
       e.stopPropagation();
 
       const delta = e.deltaY !== 0 ? e.deltaY : e.deltaX;
-      // Faster, responsive scrolling speed (slides glide swiftly without endless scrolling)
       const sensitivity = 0.0055;
+      const maxSlot = DESTINATIONS.length;
       const newTarget = Math.max(
         0,
-        Math.min(DESTINATIONS.length - 1, targetProgress.current + delta * sensitivity)
+        Math.min(maxSlot, targetProgress.current + delta * sensitivity)
       );
 
       targetProgress.current = newTarget;
@@ -324,9 +345,10 @@ export const HeroSection: React.FC = () => {
       if (Math.abs(deltaY) > 8 || Math.abs(deltaX) > 8) {
         e.preventDefault();
         const dominantDelta = Math.abs(deltaX) > Math.abs(deltaY) ? deltaX : deltaY;
+        const maxSlot = DESTINATIONS.length;
         const newTarget = Math.max(
           0,
-          Math.min(DESTINATIONS.length - 1, targetProgress.current + dominantDelta * 0.008)
+          Math.min(maxSlot, targetProgress.current + dominantDelta * 0.008)
         );
         targetProgress.current = newTarget;
         progressMotion.set(newTarget);
@@ -347,9 +369,7 @@ export const HeroSection: React.FC = () => {
   // Click card: opens full university content with smooth in-place transition
   const handleCardClick = (dest: Destination, index: number) => {
     soundEngine.playZoomChime();
-    if (index !== activeIdx) {
-      goToSlide(index);
-    }
+    goToSlide(index + 1);
     setIsContentExpanded(true);
   };
 
@@ -375,7 +395,7 @@ export const HeroSection: React.FC = () => {
       ref={containerRef}
       className="relative w-full h-screen overflow-hidden bg-[#05070c] select-none flex flex-col justify-between"
     >
-      {/* 1. SINGLE CONSISTENT CINEMATIC BACKGROUND (SAME BACKGROUND ALWAYS) */}
+      {/* 1. SINGLE CONSISTENT CINEMATIC BACKGROUND (ALWAYS CONSTANT) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         <div
           className="w-full h-full bg-cover bg-center filter brightness-[0.38] contrast-125 saturate-105"
@@ -388,25 +408,25 @@ export const HeroSection: React.FC = () => {
         <div className="absolute inset-0 shadow-[inset_0_0_160px_rgba(5,7,12,0.95)]" />
       </div>
 
-      {/* 2. TOP HUD BAR: UNIVERSITY MATRIX BRANDING */}
+      {/* 2. TOP HUD BAR: BRANDING & NAVIGATION */}
       <header className="relative z-20 pt-20 sm:pt-22 px-6 md:px-12 flex items-center justify-between">
         {/* Left Title with Vertical Yellow Bar */}
         <motion.div
-          key={currentDest.slug}
+          key={activeIdx >= 0 ? currentDest.slug : "intro"}
           initial={{ opacity: 0, x: -15 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4 }}
           className="flex items-start gap-3 cursor-pointer group"
-          onClick={() => setIsContentExpanded((prev) => !prev)}
+          onClick={() => goToSlide(0)}
         >
           <div className="w-[3px] h-8 bg-amber-400 rounded-full shadow-[0_0_12px_rgba(251,191,36,0.8)] mt-0.5 group-hover:scale-y-110 transition-transform" />
           <div>
             <div className="flex items-center gap-2">
               <span className="font-display font-extrabold text-lg md:text-2xl tracking-wider uppercase text-white drop-shadow">
-                {currentDest.name}
+                {activeIdx >= 0 ? currentDest.name : "GLOBAL ADMISSIONS"}
               </span>
               <span className="text-[10px] uppercase font-mono-tech px-2 py-0.5 rounded bg-white/10 text-amber-300 border border-amber-400/30">
-                {currentDest.code}
+                {activeIdx >= 0 ? currentDest.code : "WORLD ODYSSEY"}
               </span>
             </div>
             <span className="text-[10px] md:text-xs text-slate-400 tracking-widest font-mono-tech uppercase">
@@ -424,7 +444,7 @@ export const HeroSection: React.FC = () => {
             {DESTINATIONS.map((d, i) => (
               <button
                 key={d.slug}
-                onClick={() => goToSlide(i)}
+                onClick={() => goToSlide(i + 1)}
                 className={`px-3 py-1 rounded-full text-xs font-mono-tech uppercase tracking-wider transition-all duration-300 ${
                   activeIdx === i
                     ? "bg-amber-400 text-black font-bold shadow-[0_0_12px_rgba(251,191,36,0.6)] scale-105"
@@ -439,6 +459,9 @@ export const HeroSection: React.FC = () => {
           {/* Toggle In-Place Content View */}
           <button
             onClick={() => {
+              if (activeIdx < 0) {
+                goToSlide(1);
+              }
               soundEngine.playZoomChime();
               setIsContentExpanded((prev) => !prev);
             }}
@@ -644,10 +667,7 @@ export const HeroSection: React.FC = () => {
             </motion.div>
           ) : (
             /* ================================================================
-               MODE B: NORMAL RIGHT-TO-LEFT CARDS SLIDER
-               Cards slide normally from right to left as user scrolls.
-               When reaching the left corner, each card smoothly fades and disappears.
-               All text is inside the card box.
+               MODE B: TITLE SCREEN (INITIAL LOAD) -> CARDS SLIDER ON SCROLL
                ================================================================ */
             <motion.div
               key="carousel-stage"
@@ -655,8 +675,39 @@ export const HeroSection: React.FC = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.4 }}
-              className="w-full flex flex-col items-center justify-center"
+              className="relative w-full flex flex-col items-center justify-center"
             >
+              {/* CINEMATIC TITLE ON FIRST LOAD: BACKGROUND + TITLE ONLY, NO SLIDES */}
+              <motion.div
+                style={{
+                  opacity: titleOpacity,
+                  y: titleY,
+                  scale: titleScale,
+                  pointerEvents: titlePointerEvents,
+                }}
+                className="absolute inset-0 z-40 flex flex-col items-center justify-center pointer-events-none px-4 select-none"
+              >
+                <div className="flex flex-col items-center text-center max-w-4xl mx-auto p-6 sm:p-12">
+                  <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-amber-400/15 border border-amber-400/30 text-amber-300 text-xs sm:text-sm font-mono-tech tracking-[0.28em] uppercase mb-5 backdrop-blur-md shadow-[0_0_25px_rgba(251,191,36,0.25)]">
+                    <Sparkles className="w-4 h-4 text-amber-400" />
+                    <span>GLOBAL HIGHER EDUCATION ODYSSEY</span>
+                  </div>
+
+                  <h1 className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-white tracking-tight drop-shadow-[0_15px_40px_rgba(0,0,0,0.95)] leading-[1.05]">
+                    Traverse World Universities
+                  </h1>
+
+                  <p className="mt-4 text-slate-200 text-sm sm:text-base md:text-lg font-light max-w-2xl mx-auto leading-relaxed font-mono-tech tracking-wider uppercase drop-shadow">
+                    Collegiate Heritage • Russell Group • Ivy League • Group of Eight
+                  </p>
+
+                  <div className="mt-8 flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/10 border border-white/25 backdrop-blur-md text-white text-xs sm:text-sm font-mono-tech shadow-lg animate-pulse">
+                    <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping" />
+                    <span className="tracking-widest uppercase">SCROLL TO EXPLORE DESTINATIONS</span>
+                  </div>
+                </div>
+              </motion.div>
+
               {/* Horizontal Large Cards Stage */}
               <div className="relative w-full max-w-7xl h-[500px] sm:h-[550px] md:h-[590px] lg:h-[620px] flex items-center justify-center overflow-visible">
                 {DESTINATIONS.map((dest, i) => (
@@ -674,8 +725,8 @@ export const HeroSection: React.FC = () => {
 
               {/* Scroll Hint beneath the large cards */}
               <div className="mt-4 text-center">
-                <span className="text-[10px] font-mono-tech text-slate-400 uppercase tracking-widest animate-pulse">
-                  SCROLL MOUSE WHEEL TO GLIDE SLIDES RIGHT TO LEFT • CLICK CARD TO OPEN FULL DOSSIER
+                <span className="text-[10px] font-mono-tech text-slate-400 uppercase tracking-widest">
+                  SCROLL MOUSE WHEEL TO GLIDE DESTINATIONS RIGHT TO LEFT • CLICK CARD TO OPEN FULL DOSSIER
                 </span>
               </div>
             </motion.div>
@@ -690,6 +741,7 @@ export const HeroSection: React.FC = () => {
           <div className="flex items-center gap-2">
             <button
               onClick={() => {
+                if (activeIdx < 0) goToSlide(1);
                 soundEngine.playClick();
                 setIsContentExpanded((prev) => !prev);
               }}
@@ -704,7 +756,7 @@ export const HeroSection: React.FC = () => {
                 goToSlide(0);
               }}
               className="w-8 h-8 rounded-full glass-pill text-slate-400 hover:text-white flex items-center justify-center active:scale-95 transition-all"
-              title="UK Flagship"
+              title="Return to Intro Title"
             >
               <Activity className="w-3.5 h-3.5" />
             </button>
@@ -794,7 +846,9 @@ export const HeroSection: React.FC = () => {
         <div className="flex items-center gap-4 w-full md:w-auto justify-end">
           <div className="flex items-center gap-2 font-mono-tech text-xs tracking-widest text-slate-300">
             <span className="text-amber-400 font-bold">
-              {String(activeIdx + 1).padStart(2, "0")}
+              {activeIdx >= 0
+                ? String(activeIdx + 1).padStart(2, "0")
+                : "INTRO"}
             </span>
             <span className="opacity-40">/</span>
             <span className="opacity-70">
@@ -807,7 +861,11 @@ export const HeroSection: React.FC = () => {
             <motion.div
               className="h-full bg-amber-400"
               animate={{
-                width: `${((activeIdx + 1) / DESTINATIONS.length) * 100}%`,
+                width: `${
+                  activeIdx >= 0
+                    ? ((activeIdx + 1) / DESTINATIONS.length) * 100
+                    : 0
+                }%`,
               }}
               transition={{ ease: "easeInOut", duration: 0.3 }}
             />
@@ -817,7 +875,7 @@ export const HeroSection: React.FC = () => {
           <div className="flex items-center gap-1">
             <button
               onClick={handlePrev}
-              disabled={activeIdx === 0}
+              disabled={progressMotion.get() <= 0.1}
               className="p-1.5 rounded-md hover:bg-white/10 text-slate-300 hover:text-white transition-colors active:scale-90 disabled:opacity-30 disabled:pointer-events-none"
               aria-label="Previous Destination"
             >
@@ -825,7 +883,7 @@ export const HeroSection: React.FC = () => {
             </button>
             <button
               onClick={handleNext}
-              disabled={activeIdx === DESTINATIONS.length - 1}
+              disabled={progressMotion.get() >= DESTINATIONS.length - 0.1}
               className="p-1.5 rounded-md hover:bg-white/10 text-slate-300 hover:text-white transition-colors active:scale-90 disabled:opacity-30 disabled:pointer-events-none"
               aria-label="Next Destination"
             >
