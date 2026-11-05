@@ -11,39 +11,41 @@ import {
   MotionValue,
 } from "framer-motion";
 import Link from "next/link";
-import { EXPEDITION_DESTINATIONS, ExpeditionDestination } from "@/data/expeditions";
+import { DESTINATIONS, Destination } from "@/data/destinations";
 import { soundEngine } from "@/components/shared/SoundEngine";
 import {
   Compass,
   ArrowRight,
   Sparkles,
-  MapPin,
   ChevronLeft,
   ChevronRight,
   Eye,
   Activity,
   Layers,
-  Radio,
-  Mountain,
-  Gauge,
-  Thermometer,
-  Shield,
+  GraduationCap,
+  Building2,
+  Calendar,
+  Award,
+  DollarSign,
+  Briefcase,
+  CheckCircle2,
   Maximize2,
 } from "lucide-react";
 
 // ============================================================================
-// INDIVIDUAL EXPEDITION CARD
-// Moves from right to left as user scrolls, disappearing into the left corner
+// INDIVIDUAL LARGE UNIVERSITY DESTINATION CARD
+// High-res imagery, all relevant text (title, tagline, description, stats) inside the box
+// Moves right to left as user scrolls, disappearing into the left corner
 // ============================================================================
-interface ExpeditionCardProps {
-  dest: ExpeditionDestination;
+interface DestinationCardProps {
+  dest: Destination;
   index: number;
   smoothProgress: MotionValue<number>;
   isActive: boolean;
-  onCardClick: (dest: ExpeditionDestination, index: number) => void;
+  onCardClick: (dest: Destination, index: number) => void;
 }
 
-const ExpeditionCard: React.FC<ExpeditionCardProps> = ({
+const DestinationCard: React.FC<DestinationCardProps> = ({
   dest,
   index,
   smoothProgress,
@@ -51,19 +53,19 @@ const ExpeditionCard: React.FC<ExpeditionCardProps> = ({
   onCardClick,
 }) => {
   // Horizontal motion:
-  // Before index: queued on right (+360px per step)
+  // Before index: queued on right (+480px per step)
   // At index: centered (0px)
-  // Past index: slides far left into the corner (-780px) and disappears
+  // Past index: slides far left into the corner (-920px) and disappears
   const x = useTransform(smoothProgress, (p) => {
     const diff = p - index;
     if (diff > 0) {
       // Past center: glides rapidly towards the left corner
       const leftProgress = Math.min(1.2, diff);
-      return -leftProgress * 780; // 0px -> -780px off to left corner
+      return -leftProgress * 920; // 0px -> -920px off to left corner
     } else {
-      // Before center: queued on right
+      // Before center: queued on right with generous spacing for large cards
       const rightDiff = -diff;
-      return rightDiff * 360; // 0px, +360px, +720px...
+      return rightDiff * 480; // 0px, +480px, +960px...
     }
   });
 
@@ -72,7 +74,7 @@ const ExpeditionCard: React.FC<ExpeditionCardProps> = ({
     const diff = p - index;
     if (diff > 0) {
       const leftProgress = Math.min(1, diff);
-      return -leftProgress * 45; // slight upward drift into the corner
+      return -leftProgress * 40; // slight upward drift into corner
     }
     return 0;
   });
@@ -81,41 +83,38 @@ const ExpeditionCard: React.FC<ExpeditionCardProps> = ({
   const opacity = useTransform(smoothProgress, (p) => {
     const diff = p - index;
     if (diff > 0) {
-      // Disappears completely in the left corner
       const leftProgress = Math.min(1, diff);
-      return Math.max(0, 1 - leftProgress * 1.4);
+      return Math.max(0, 1 - leftProgress * 1.35);
     } else {
-      // Incoming from right: soft visible queue
       const rightDiff = -diff;
-      return Math.max(0.2, 1 - rightDiff * 0.3);
+      return Math.max(0.3, 1 - rightDiff * 0.32);
     }
   });
 
-  // Scale: enlarges at center -> shrinks as it disappears into the corner
+  // Scale: large at center -> shrinks as it disappears into the corner
   const scale = useTransform(smoothProgress, (p) => {
     const diff = p - index;
     if (diff > 0) {
       const leftProgress = Math.min(1, diff);
-      return 1.15 - leftProgress * 0.42; // 1.15 down to 0.73
+      return 1.10 - leftProgress * 0.35; // 1.10 down to 0.75
     } else {
       const rightDiff = Math.min(2, -diff);
-      return 1.15 - rightDiff * 0.25; // 0.90 up to 1.15
+      return 1.10 - rightDiff * 0.20; // 0.90 up to 1.10
     }
   });
 
-  // 3D rotation: tilts in amphitheater view, turns outward into the corner
+  // 3D rotation: subtle amphitheater tilt, turns outward into the corner
   const rotateY = useTransform(smoothProgress, (p) => {
     const diff = p - index;
     if (diff > 0) {
       const leftProgress = Math.min(1, diff);
-      return leftProgress * 26; // tilts outward into left corner
+      return leftProgress * 22; // outward tilt into left corner
     } else {
       const rightDiff = Math.min(1, -diff);
-      return -rightDiff * 18; // incoming amphitheater tilt
+      return -rightDiff * 16; // incoming amphitheater slant
     }
   });
 
-  // Z-Index: active card remains on top
   const zIndex = isActive ? 30 : 15 - Math.abs(index);
 
   return (
@@ -130,59 +129,81 @@ const ExpeditionCard: React.FC<ExpeditionCardProps> = ({
         transformStyle: "preserve-3d",
       }}
       onClick={() => onCardClick(dest, index)}
-      className={`absolute w-[240px] sm:w-[300px] md:w-[330px] h-[310px] sm:h-[380px] md:h-[420px] rounded-3xl overflow-hidden cursor-pointer group shadow-[0_20px_50px_rgba(0,0,0,0.85)] border transition-all duration-300 will-change-transform ${
+      className={`absolute w-[320px] sm:w-[420px] md:w-[480px] lg:w-[520px] h-[480px] sm:h-[530px] md:h-[570px] lg:h-[600px] rounded-3xl overflow-hidden cursor-pointer group shadow-[0_25px_60px_rgba(0,0,0,0.9)] border transition-all duration-300 will-change-transform ${
         isActive
-          ? "border-amber-400/80 ring-2 ring-amber-400/40 shadow-[0_0_35px_rgba(251,191,36,0.35)]"
-          : "border-white/15 hover:border-white/40 hover:opacity-90"
+          ? "border-amber-400/80 ring-2 ring-amber-400/40 shadow-[0_0_40px_rgba(251,191,36,0.35)]"
+          : "border-white/15 hover:border-white/40 hover:opacity-95"
       }`}
     >
-      {/* Card Background Artwork */}
+      {/* 1. Large High-Resolution Campus Photography */}
       <div
-        className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105 filter brightness-90 group-hover:brightness-100"
-        style={{ backgroundImage: `url(${dest.image})` }}
+        className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105 filter brightness-[0.88] group-hover:brightness-95"
+        style={{ backgroundImage: `url(${dest.cardImage})` }}
       />
 
-      {/* Card Gradient Dark Vignette */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+      {/* 2. Frosted Gradient Overlay: crystal-clear readability for text inside the box */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/55 to-black/30" />
 
-      {/* Card Top Orb & Code Badge */}
-      <div className="absolute top-4 left-4 right-4 z-10 flex items-center justify-between">
+      {/* 3. Card Top Header inside the box */}
+      <div className="absolute top-5 left-5 right-5 z-10 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          {/* Glowing Planet Orb matching frame 1 */}
-          <div
-            className="w-4 h-4 rounded-full shadow-[0_0_10px_currentColor] border border-white/50"
-            style={{
-              backgroundColor: dest.orbColor,
-              color: dest.orbColor,
-            }}
-          />
-          <span className="font-mono-tech text-[10px] uppercase px-2 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-white border border-white/20">
-            {dest.code}
+          <span className="text-2xl drop-shadow">{dest.flagEmoji}</span>
+          <span className="font-mono-tech text-xs uppercase px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-white border border-white/20">
+            {dest.name} • {dest.shortName}
           </span>
         </div>
 
-        <span className="text-[9px] font-mono-tech uppercase text-amber-300 bg-amber-400/20 px-2 py-0.5 rounded-full border border-amber-400/30">
-          {dest.difficulty}
+        <span className="text-[10px] font-mono-tech uppercase text-amber-300 bg-amber-400/20 px-3 py-1 rounded-full border border-amber-400/30 backdrop-blur-md">
+          {dest.stats.visaSuccessRate} VISA APPROVAL
         </span>
       </div>
 
-      {/* Card Bottom Typography */}
-      <div className="absolute inset-x-0 bottom-0 p-5 z-10">
-        <h3 className="condensed-title text-2xl sm:text-3xl text-white tracking-wider drop-shadow group-hover:text-amber-300 transition-colors">
-          {dest.name}
-        </h3>
-        <p className="text-[11px] font-mono-tech text-slate-300 mt-1 uppercase tracking-widest flex items-center gap-1.5">
-          <MapPin className="w-3 h-3 text-amber-400" />
-          <span className="truncate">{dest.location}</span>
+      {/* 4. Card Interior Content: Relevant text directly in the box */}
+      <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7 z-10 flex flex-col justify-end text-left">
+        
+        {/* Tagline Badge inside the box */}
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[10px] sm:text-[11px] font-mono-tech tracking-widest text-amber-300 uppercase mb-2.5 backdrop-blur-md w-fit">
+          <Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+          <span className="truncate">{dest.tagline}</span>
+        </div>
+
+        {/* Grand Title inside the box */}
+        <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)] leading-tight group-hover:text-amber-300 transition-colors">
+          {dest.grandTitle}
+        </h2>
+
+        {/* Relevant Description inside the box */}
+        <p className="text-slate-200 text-xs sm:text-sm mt-2 font-light leading-relaxed line-clamp-2 sm:line-clamp-3 text-balance">
+          {dest.description}
         </p>
 
-        {/* Interactive Click Indicator */}
-        <div className="mt-3 pt-2.5 border-t border-white/20 flex items-center justify-between text-[11px] font-mono-tech text-amber-400">
-          <span className="flex items-center gap-1.5">
-            <Eye className="w-3.5 h-3.5" />
-            <span>CLICK TO OPEN CONTENT</span>
+        {/* Key Academic Quick Stats inside the box */}
+        <div className="mt-3.5 pt-3 border-t border-white/15 grid grid-cols-3 gap-2 text-[11px] font-mono-tech">
+          <div className="flex items-center gap-1.5 text-slate-300">
+            <Building2 className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+            <span className="truncate">{dest.stats.universities}+ Campuses</span>
+          </div>
+
+          <div className="flex items-center gap-1.5 text-slate-300">
+            <DollarSign className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+            <span className="truncate">{dest.stats.averageTuition.split("–")[0]}</span>
+          </div>
+
+          <div className="flex items-center gap-1.5 text-slate-300">
+            <Award className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+            <span className="truncate">{dest.stats.scholarshipsAvailable}+ Schol.</span>
+          </div>
+        </div>
+
+        {/* Interactive Click Button inside the box */}
+        <div className="mt-4 pt-3 border-t border-white/15 flex items-center justify-between text-xs font-mono-tech text-amber-400 group-hover:text-amber-300 transition-colors">
+          <span className="flex items-center gap-2 font-bold tracking-wider uppercase">
+            <Eye className="w-4 h-4 text-amber-400" />
+            <span>CLICK TO OPEN FULL DOSSIER</span>
           </span>
-          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+          <div className="w-7 h-7 rounded-full bg-amber-400/20 border border-amber-400/40 flex items-center justify-center group-hover:bg-amber-400 group-hover:text-black transition-all">
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+          </div>
         </div>
       </div>
     </motion.div>
@@ -190,7 +211,7 @@ const ExpeditionCard: React.FC<ExpeditionCardProps> = ({
 };
 
 // ============================================================================
-// MAIN HERO SECTION: SCROLL DRIVES SLIDES RIGHT-TO-LEFT, CLICK NAVIGATES TO CONTENT
+// MAIN HERO SECTION: LARGE IMAGES, TEXT INSIDE BOX, SCROLL-DRIVEN SLIDER
 // ============================================================================
 export const HeroSection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -198,7 +219,7 @@ export const HeroSection: React.FC = () => {
   const [isContentExpanded, setIsContentExpanded] = useState<boolean>(false);
   const prevSlideRef = useRef<number>(0);
 
-  // Virtual scroll accumulator: 0 to (EXPEDITIONS.length - 1)
+  // Virtual scroll accumulator: 0 to (DESTINATIONS.length - 1)
   const targetProgress = useRef<number>(0);
   const progressMotion = useMotionValue(0);
 
@@ -212,7 +233,7 @@ export const HeroSection: React.FC = () => {
   // Track the continuous active slide index based on progress
   useMotionValueEvent(smoothProgress, "change", (latest) => {
     const roundedIdx = Math.min(
-      EXPEDITION_DESTINATIONS.length - 1,
+      DESTINATIONS.length - 1,
       Math.max(0, Math.round(latest))
     );
 
@@ -223,16 +244,16 @@ export const HeroSection: React.FC = () => {
     }
   });
 
-  const currentDest = EXPEDITION_DESTINATIONS[activeIdx] || EXPEDITION_DESTINATIONS[0];
+  const currentDest = DESTINATIONS[activeIdx] || DESTINATIONS[0];
 
   // Parallax background scale on scroll
-  const bgScale = useTransform(smoothProgress, [0, EXPEDITION_DESTINATIONS.length - 1], [1.02, 1.15]);
+  const bgScale = useTransform(smoothProgress, [0, DESTINATIONS.length - 1], [1.02, 1.15]);
 
   // Smooth slide jump
   const goToSlide = useCallback(
     (index: number) => {
       soundEngine.playCardSwoosh();
-      const clamped = Math.max(0, Math.min(EXPEDITION_DESTINATIONS.length - 1, index));
+      const clamped = Math.max(0, Math.min(DESTINATIONS.length - 1, index));
       targetProgress.current = clamped;
       progressMotion.set(clamped);
       setActiveIdx(clamped);
@@ -250,24 +271,22 @@ export const HeroSection: React.FC = () => {
 
   // WHEEL SCROLL EVENT HANDLER:
   // Intercepts wheel scroll to drive slides horizontally right-to-left
-  // instead of scrolling the page down!
+  // without scrolling the page down!
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
     const handleWheel = (e: WheelEvent) => {
-      // If user is inside the expanded content view, allow them to scroll through content
       if (isContentExpanded) return;
 
-      // Prevent the page from scrolling down!
       e.preventDefault();
       e.stopPropagation();
 
       const delta = e.deltaY !== 0 ? e.deltaY : e.deltaX;
-      const sensitivity = 0.0022; // smooth pacing
+      const sensitivity = 0.0022;
       const newTarget = Math.max(
         0,
-        Math.min(EXPEDITION_DESTINATIONS.length - 1, targetProgress.current + delta * sensitivity)
+        Math.min(DESTINATIONS.length - 1, targetProgress.current + delta * sensitivity)
       );
 
       targetProgress.current = newTarget;
@@ -278,8 +297,7 @@ export const HeroSection: React.FC = () => {
     return () => container.removeEventListener("wheel", handleWheel);
   }, [isContentExpanded, progressMotion]);
 
-  // TOUCH SWIPE HANDLER FOR MOBILE:
-  // Drives slides smoothly on touch gestures without scrolling page away
+  // TOUCH SWIPE HANDLER FOR MOBILE
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -305,7 +323,7 @@ export const HeroSection: React.FC = () => {
         const dominantDelta = Math.abs(deltaX) > Math.abs(deltaY) ? deltaX : deltaY;
         const newTarget = Math.max(
           0,
-          Math.min(EXPEDITION_DESTINATIONS.length - 1, targetProgress.current + dominantDelta * 0.004)
+          Math.min(DESTINATIONS.length - 1, targetProgress.current + dominantDelta * 0.004)
         );
         targetProgress.current = newTarget;
         progressMotion.set(newTarget);
@@ -323,17 +341,16 @@ export const HeroSection: React.FC = () => {
     };
   }, [isContentExpanded, progressMotion]);
 
-  // Click card: navigates to full content with smooth in-place transition
-  const handleCardClick = (dest: ExpeditionDestination, index: number) => {
+  // Click card: navigates to full university content with smooth in-place transition
+  const handleCardClick = (dest: Destination, index: number) => {
     soundEngine.playZoomChime();
     if (index !== activeIdx) {
       goToSlide(index);
     }
-    // Open in-place content view (NOT a popup window)
     setIsContentExpanded(true);
   };
 
-  // Keyboard navigation (Arrow keys + Escape to return to slides)
+  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -355,25 +372,24 @@ export const HeroSection: React.FC = () => {
       ref={containerRef}
       className="relative w-full h-screen overflow-hidden bg-[#05070c] select-none flex flex-col justify-between"
     >
-      {/* 1. CINEMATIC FULL-SCREEN BACKGROUND & HORIZON ROAD */}
+      {/* 1. CINEMATIC FULL-SCREEN UNIVERSITY CAMPUS BACKGROUND */}
       <motion.div
         style={{ scale: bgScale }}
         className="absolute inset-0 pointer-events-none overflow-hidden z-0"
       >
-        {/* Cross-fading background landscapes */}
         <AnimatePresence mode="wait">
           <motion.div
-            key={currentDest.id}
+            key={currentDest.slug}
             initial={{ opacity: 0, scale: 1.12 }}
             animate={{ opacity: 1, scale: isContentExpanded ? 1.08 : 1.02 }}
             exit={{ opacity: 0, scale: 0.98 }}
             transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute inset-0 w-full h-full bg-cover bg-center filter brightness-[0.52] contrast-125 saturate-110"
-            style={{ backgroundImage: `url(${currentDest.image})` }}
+            className="absolute inset-0 w-full h-full bg-cover bg-center filter brightness-[0.50] contrast-125 saturate-110"
+            style={{ backgroundImage: `url(${currentDest.heroImage})` }}
           />
         </AnimatePresence>
 
-        {/* Dynamic Destination Ambient Glow radiating from the horizon */}
+        {/* Dynamic Country Accent Ambient Glow */}
         <motion.div
           animate={{
             background: `radial-gradient(circle at 50% 55%, ${currentDest.accentColor}35 0%, transparent 70%)`,
@@ -383,15 +399,15 @@ export const HeroSection: React.FC = () => {
         />
 
         {/* Top & Bottom Vignette Shadow Gradients */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#05070c] via-black/30 to-black/70 pointer-events-none" />
-        <div className="absolute inset-0 shadow-[inset_0_0_120px_rgba(0,0,0,0.85)] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#05070c] via-black/35 to-black/70 pointer-events-none" />
+        <div className="absolute inset-0 shadow-[inset_0_0_140px_rgba(0,0,0,0.9)] pointer-events-none" />
       </motion.div>
 
-      {/* 2. TOP HUD BAR */}
+      {/* 2. TOP HUD BAR: UNIVERSITY MATRIX BRANDING */}
       <header className="relative z-20 pt-20 sm:pt-22 px-6 md:px-12 flex items-center justify-between">
         {/* Left Title with Vertical Yellow Bar */}
         <motion.div
-          key={currentDest.id}
+          key={currentDest.slug}
           initial={{ opacity: 0, x: -15 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
@@ -409,18 +425,18 @@ export const HeroSection: React.FC = () => {
               </span>
             </div>
             <span className="text-[10px] md:text-xs text-slate-400 tracking-widest font-mono-tech uppercase">
-              {isContentExpanded ? "EXPLORING DESTINATION DOSSIER" : "SCROLL TO DISCOVER • ONE BY ONE"}
+              {isContentExpanded ? "EXPLORING UNIVERSITY DOSSIER" : "GLOBAL STUDY ODYSSEY • OFFICIAL ADMISSIONS PORTAL"}
             </span>
           </div>
         </motion.div>
 
         {/* Right Navigation & Content Toggle */}
         <div className="flex items-center gap-2">
-          {/* Waypoint Pills */}
+          {/* Destination Switcher Pills */}
           <div className="hidden sm:flex items-center gap-1.5 glass-panel px-3 py-1.5 rounded-full border border-white/10">
-            {EXPEDITION_DESTINATIONS.map((d, i) => (
+            {DESTINATIONS.map((d, i) => (
               <button
-                key={d.id}
+                key={d.slug}
                 onClick={() => goToSlide(i)}
                 className={`px-3 py-1 rounded-full text-xs font-mono-tech uppercase tracking-wider transition-all duration-300 ${
                   activeIdx === i
@@ -428,7 +444,7 @@ export const HeroSection: React.FC = () => {
                     : "text-slate-400 hover:text-white hover:bg-white/10"
                 }`}
               >
-                {d.name.split(" ")[0]}
+                {d.shortName}
               </button>
             ))}
           </div>
@@ -449,29 +465,29 @@ export const HeroSection: React.FC = () => {
             ) : (
               <>
                 <Maximize2 className="w-3.5 h-3.5 text-amber-400" />
-                <span>OPEN CONTENT</span>
+                <span>OPEN ACADEMICS</span>
               </>
             )}
           </button>
         </div>
       </header>
 
-      {/* 3. CENTER STAGE: DUAL MODE (SLIDER MODE vs FULL IN-PLACE CONTENT MODE) */}
+      {/* 3. CENTER STAGE: DUAL MODE (LARGE SLIDER vs IN-PLACE CONTENT VIEW) */}
       <main className="relative z-20 flex-1 flex flex-col items-center justify-center py-2 px-4 overflow-visible">
         <AnimatePresence mode="wait">
           {isContentExpanded ? (
             /* ================================================================
-               MODE A: IN-PLACE FULL-SCREEN CONTENT VIEW (NO POPUP WINDOW)
+               MODE A: IN-PLACE FULL-SCREEN UNIVERSITY CONTENT VIEW
                ================================================================ */
             <motion.div
-              key={`content-${currentDest.id}`}
+              key={`content-${currentDest.slug}`}
               initial={{ opacity: 0, y: 30, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -25, scale: 0.95 }}
               transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
               className="w-full max-w-5xl mx-auto flex flex-col items-center text-white my-auto max-h-[72vh] overflow-y-auto px-2"
             >
-              {/* Top Navigation Pill inside content view */}
+              {/* Back to Carousel Pill */}
               <button
                 onClick={() => {
                   soundEngine.playCardSwoosh();
@@ -480,14 +496,14 @@ export const HeroSection: React.FC = () => {
                 className="mb-4 px-4 py-1.5 rounded-full glass-pill border border-white/20 text-xs font-mono-tech text-slate-300 hover:text-white hover:border-amber-400/50 flex items-center gap-2 transition-all shadow-md group"
               >
                 <ChevronLeft className="w-3.5 h-3.5 text-amber-400 group-hover:-translate-x-1 transition-transform" />
-                <span>RETURN TO SCROLL CAROUSEL</span>
+                <span>RETURN TO SLIDER CAROUSEL</span>
               </button>
 
-              {/* Grand Destination Title */}
+              {/* Grand University Headline */}
               <div className="text-center mb-5">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 text-xs font-mono-tech tracking-wider uppercase mb-2">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                  <span>{currentDest.code} • {currentDest.badge}</span>
+                  <span className="text-base">{currentDest.flagEmoji}</span>
+                  <span>{currentDest.stats.visaSuccessRate} VISA APPROVAL RATE • {currentDest.code}</span>
                 </div>
 
                 <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight drop-shadow-[0_12px_30px_rgba(0,0,0,0.9)]">
@@ -495,93 +511,92 @@ export const HeroSection: React.FC = () => {
                 </h1>
 
                 <p className="text-slate-200 text-sm sm:text-base mt-2 max-w-2xl mx-auto font-light leading-relaxed">
-                  {currentDest.subtitle}
+                  {currentDest.description}
                 </p>
               </div>
 
-              {/* Telemetry Stats Grid */}
+              {/* University Telemetry Metrics */}
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 w-full mb-5">
                 <div className="glass-panel p-3 rounded-2xl border border-white/10">
-                  <MapPin className="w-4 h-4 text-amber-400 mb-1" />
-                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">Coordinates</div>
-                  <div className="text-xs font-bold font-mono-tech text-white truncate">{currentDest.coordinates}</div>
+                  <Building2 className="w-4 h-4 text-cyan-400 mb-1" />
+                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">Universities</div>
+                  <div className="text-xs font-bold font-mono-tech text-white">{currentDest.stats.universities}+ Campuses</div>
                 </div>
 
                 <div className="glass-panel p-3 rounded-2xl border border-white/10">
-                  <Mountain className="w-4 h-4 text-cyan-400 mb-1" />
-                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">Elevation</div>
-                  <div className="text-xs font-bold font-mono-tech text-white">{currentDest.elevation}</div>
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 mb-1" />
+                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">Visa Ratio</div>
+                  <div className="text-xs font-bold font-mono-tech text-white">{currentDest.stats.visaSuccessRate} Approval</div>
                 </div>
 
                 <div className="glass-panel p-3 rounded-2xl border border-white/10">
-                  <Gauge className="w-4 h-4 text-purple-400 mb-1" />
-                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">Traverse Dist</div>
-                  <div className="text-xs font-bold font-mono-tech text-white">{currentDest.distance}</div>
+                  <DollarSign className="w-4 h-4 text-amber-400 mb-1" />
+                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">Avg Tuition</div>
+                  <div className="text-xs font-bold font-mono-tech text-white truncate">{currentDest.stats.averageTuition}</div>
                 </div>
 
                 <div className="glass-panel p-3 rounded-2xl border border-white/10">
-                  <Compass className="w-4 h-4 text-emerald-400 mb-1" />
-                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">Bearing</div>
-                  <div className="text-xs font-bold font-mono-tech text-white">{currentDest.bearing}</div>
+                  <Calendar className="w-4 h-4 text-purple-400 mb-1" />
+                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">Intakes / Yr</div>
+                  <div className="text-xs font-bold font-mono-tech text-white">{currentDest.stats.intakesPerYear} Intakes</div>
                 </div>
 
                 <div className="glass-panel p-3 rounded-2xl border border-white/10">
-                  <Thermometer className="w-4 h-4 text-rose-400 mb-1" />
-                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">Temperature</div>
-                  <div className="text-xs font-bold font-mono-tech text-white truncate">{currentDest.temperature}</div>
+                  <Award className="w-4 h-4 text-rose-400 mb-1" />
+                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">Scholarships</div>
+                  <div className="text-xs font-bold font-mono-tech text-white">{currentDest.stats.scholarshipsAvailable}+ Listed</div>
                 </div>
 
                 <div className="glass-panel p-3 rounded-2xl border border-white/10">
-                  <Shield className="w-4 h-4 text-yellow-400 mb-1" />
-                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">Difficulty</div>
-                  <div className="text-xs font-bold font-mono-tech text-white">{currentDest.difficulty}</div>
+                  <Briefcase className="w-4 h-4 text-yellow-400 mb-1" />
+                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">Post-Study Work</div>
+                  <div className="text-xs font-bold font-mono-tech text-white truncate">2 – 4 Years</div>
                 </div>
               </div>
 
-              {/* Narrative Story & Waypoints Dashboard */}
+              {/* Two Column Layout: Highlights & Top Partner Universities */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full mb-5">
-                {/* Story Narrative */}
-                <div className="glass-panel p-5 rounded-2xl border border-white/10 space-y-2 text-left">
-                  <h3 className="text-xs font-mono-tech uppercase tracking-[0.2em] text-amber-400">
-                    EXPEDITION FIELD DOSSIER
+                {/* Academic Highlights & Lifestyle */}
+                <div className="glass-panel p-5 rounded-2xl border border-white/10 space-y-3 text-left">
+                  <h3 className="text-xs font-mono-tech uppercase tracking-[0.2em] text-amber-400 flex items-center gap-2">
+                    <GraduationCap className="w-4 h-4" />
+                    <span>ACADEMIC PRIVILEGES & LIFESTYLE</span>
                   </h3>
-                  <p className="text-sm text-slate-300 leading-relaxed">
-                    {currentDest.detailedStory}
-                  </p>
+                  <ul className="space-y-2">
+                    {currentDest.highlights.slice(0, 4).map((h, idx) => (
+                      <li key={idx} className="flex items-start gap-2 text-xs text-slate-300 leading-relaxed">
+                        <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0" />
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="pt-2 border-t border-white/10 text-xs font-mono-tech text-slate-400">
+                    <span className="text-white font-medium">Work Rights:</span> {currentDest.lifestyle.workRights}
+                  </div>
                 </div>
 
-                {/* Waypoints Route & Equipment */}
+                {/* Top Partner Universities List */}
                 <div className="glass-panel p-5 rounded-2xl border border-white/10 space-y-3 text-left">
                   <h3 className="text-xs font-mono-tech uppercase tracking-[0.2em] text-cyan-400 flex items-center gap-2">
-                    <Radio className="w-3.5 h-3.5" />
-                    <span>WAYPOINT CHECKLIST</span>
+                    <Building2 className="w-4 h-4" />
+                    <span>FLAGSHIP PARTNER INSTITUTIONS</span>
                   </h3>
                   <div className="space-y-2">
-                    {currentDest.waypoints.map((wp, idx) => (
+                    {currentDest.universities.slice(0, 4).map((uni, idx) => (
                       <div
-                        key={wp.name}
+                        key={uni.name}
                         className="flex items-center justify-between p-2 rounded-xl bg-white/5 border border-white/10 text-xs font-mono-tech"
                       >
-                        <div className="flex items-center gap-2">
-                          <span className="w-5 h-5 rounded-full bg-white/10 text-[10px] flex items-center justify-center text-slate-300">
+                        <div className="flex items-center gap-2 truncate">
+                          <span className="w-5 h-5 rounded-full bg-white/10 text-[10px] flex items-center justify-center text-slate-300 shrink-0">
                             {idx + 1}
                           </span>
-                          <span className="text-white font-medium">{wp.name}</span>
+                          <span className="text-white font-medium truncate">{uni.name}</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-slate-400">{wp.elevation}</span>
-                          <span
-                            className={`px-2 py-0.5 rounded text-[9px] font-bold ${
-                              wp.status === "CLEARED"
-                                ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40"
-                                : wp.status === "ACTIVE"
-                                ? "bg-amber-500/20 text-amber-300 border border-amber-500/40 animate-pulse"
-                                : "bg-slate-700/40 text-slate-400 border border-slate-600/30"
-                            }`}
-                          >
-                            {wp.status}
-                          </span>
-                        </div>
+                        <span className="px-2 py-0.5 rounded text-[9px] font-bold bg-amber-400/20 text-amber-300 border border-amber-400/30 shrink-0 ml-2">
+                          {uni.ranking.split("—")[0]}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -591,30 +606,28 @@ export const HeroSection: React.FC = () => {
               {/* Action Buttons */}
               <div className="flex flex-wrap items-center justify-center gap-4">
                 <Link
-                  href="/appointments"
+                  href={`/destinations/${currentDest.slug}`}
                   onClick={() => soundEngine.playClick()}
                   className="px-8 py-3 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 text-black font-bold font-mono-tech text-xs sm:text-sm uppercase tracking-wider shadow-[0_0_25px_rgba(251,191,36,0.5)] hover:scale-105 active:scale-95 transition-all flex items-center gap-2"
                 >
-                  <Sparkles className="w-4 h-4" />
-                  <span>BOOK ADVISORY FOR {currentDest.name}</span>
+                  <Building2 className="w-4 h-4 text-black" />
+                  <span>EXPLORE ALL {currentDest.name.toUpperCase()} UNIVERSITIES</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
 
-                <button
-                  onClick={() => {
-                    soundEngine.playCardSwoosh();
-                    setIsContentExpanded(false);
-                  }}
+                <Link
+                  href="/appointments"
+                  onClick={() => soundEngine.playClick()}
                   className="px-6 py-3 rounded-xl glass-panel border border-white/20 text-white font-mono-tech text-xs sm:text-sm uppercase tracking-wider hover:border-amber-400/50 hover:bg-white/10 transition-all flex items-center gap-2"
                 >
-                  <ChevronLeft className="w-4 h-4 text-amber-400" />
-                  <span>CLOSE & RETURN TO CAROUSEL</span>
-                </button>
+                  <Sparkles className="w-4 h-4 text-amber-400" />
+                  <span>BOOK FREE 1-ON-1 ADVISORY</span>
+                </Link>
               </div>
             </motion.div>
           ) : (
             /* ================================================================
-               MODE B: 3D SLIDER (RIGHT TO LEFT DISAPPEARING IN LEFT CORNER)
+               MODE B: 3D LARGE CARDS SLIDER (TEXT ALL INSIDE BOX, NO BIG FLOATING TITLE)
                ================================================================ */
             <motion.div
               key="carousel-stage"
@@ -622,39 +635,16 @@ export const HeroSection: React.FC = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.4 }}
-              className="w-full flex flex-col items-center"
+              className="w-full flex flex-col items-center justify-center"
             >
-              {/* Dynamic Center Title Reveal */}
-              <motion.div
-                key={currentDest.id + "-title"}
-                initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, y: -18, filter: "blur(6px)" }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="text-center max-w-4xl mb-4 sm:mb-6 pointer-events-none"
-              >
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/15 text-[11px] font-mono-tech tracking-widest text-slate-300 uppercase mb-2 backdrop-blur-md">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                  <span>{currentDest.tagline}</span>
-                </div>
-
-                <h1 className="font-display text-3xl sm:text-5xl md:text-7xl font-extrabold text-white tracking-tight drop-shadow-[0_12px_30px_rgba(0,0,0,0.9)]">
-                  {currentDest.grandTitle}
-                </h1>
-
-                <p className="text-slate-300 text-xs sm:text-base mt-2 max-w-xl mx-auto font-light leading-relaxed line-clamp-1 sm:line-clamp-none">
-                  {currentDest.subtitle}
-                </p>
-              </motion.div>
-
-              {/* Horizontal Cards Stage: Slides move right-to-left one by one, disappearing in left corner */}
+              {/* Horizontal Large Cards Stage: Slides move right-to-left one by one, disappearing in left corner */}
               <div
-                className="relative w-full max-w-7xl h-[330px] sm:h-[400px] md:h-[440px] flex items-center justify-center overflow-visible"
-                style={{ perspective: "1400px" }}
+                className="relative w-full max-w-7xl h-[500px] sm:h-[550px] md:h-[590px] lg:h-[620px] flex items-center justify-center overflow-visible"
+                style={{ perspective: "1500px" }}
               >
-                {EXPEDITION_DESTINATIONS.map((dest, i) => (
-                  <ExpeditionCard
-                    key={dest.id}
+                {DESTINATIONS.map((dest, i) => (
+                  <DestinationCard
+                    key={dest.slug}
                     dest={dest}
                     index={i}
                     smoothProgress={smoothProgress}
@@ -664,10 +654,10 @@ export const HeroSection: React.FC = () => {
                 ))}
               </div>
 
-              {/* Scroll Hint */}
-              <div className="mt-3 text-center">
+              {/* Scroll Hint beneath the large cards */}
+              <div className="mt-4 text-center">
                 <span className="text-[10px] font-mono-tech text-slate-400 uppercase tracking-widest animate-pulse">
-                  SCROLL MOUSE WHEEL TO GLIDE SLIDES RIGHT TO LEFT • CLICK TO EXPAND CONTENT
+                  SCROLL MOUSE WHEEL TO GLIDE SLIDES RIGHT TO LEFT • CLICK CARD TO OPEN FULL UNIVERSITY DOSSIER
                 </span>
               </div>
             </motion.div>
@@ -675,7 +665,7 @@ export const HeroSection: React.FC = () => {
         </AnimatePresence>
       </main>
 
-      {/* 4. BOTTOM HUD TELEMETRY BAR: EXACT MATCH TO FRAMES 1, 2, 4, 7, 9 */}
+      {/* 4. BOTTOM HUD TELEMETRY BAR */}
       <footer className="relative z-20 w-full px-6 md:px-12 py-4 border-t border-white/10 bg-black/75 backdrop-blur-md flex flex-col md:flex-row items-center justify-between gap-4">
         {/* Left HUD Controls & Telemetry Data */}
         <div className="flex items-center gap-4 sm:gap-6 w-full md:w-auto justify-between md:justify-start">
@@ -686,7 +676,7 @@ export const HeroSection: React.FC = () => {
                 setIsContentExpanded((prev) => !prev);
               }}
               className="w-9 h-9 rounded-full bg-amber-400 text-black flex items-center justify-center shadow-[0_0_15px_rgba(251,191,36,0.6)] active:scale-95 transition-all"
-              title="Toggle Content View"
+              title="Toggle Academic Dossier"
             >
               <Compass className="w-4 h-4" />
             </button>
@@ -696,21 +686,21 @@ export const HeroSection: React.FC = () => {
                 goToSlide(0);
               }}
               className="w-8 h-8 rounded-full glass-pill text-slate-400 hover:text-white flex items-center justify-center active:scale-95 transition-all"
-              title="Waypoint 01"
+              title="UK Flagship"
             >
               <Activity className="w-3.5 h-3.5" />
             </button>
             <Link
-              href="/expedition"
+              href="/destinations"
               onClick={() => soundEngine.playClick()}
               className="w-8 h-8 rounded-full glass-pill text-slate-400 hover:text-white flex items-center justify-center active:scale-95 transition-all"
-              title="Odyssey Portal"
+              title="Full University Matrix"
             >
               <Layers className="w-3.5 h-3.5" />
             </Link>
           </div>
 
-          {/* Telemetry Metric 1: Vector Circuit Map SVG */}
+          {/* Telemetry Metric 1: Vector Campus Circuit SVG */}
           <div className="hidden sm:flex items-center gap-3 pl-4 sm:pl-6 border-l border-white/10">
             <div className="w-12 h-8 flex items-center justify-center">
               <svg className="w-full h-full overflow-visible" viewBox="0 0 180 80">
@@ -726,15 +716,15 @@ export const HeroSection: React.FC = () => {
             </div>
             <div>
               <div className="font-mono-tech text-xs sm:text-sm font-bold text-white tracking-wider">
-                {currentDest.degrees}
+                {currentDest.stats.universities}+ CAMPUSES
               </div>
               <div className="text-[8px] sm:text-[9px] font-mono-tech uppercase text-slate-400">
-                {currentDest.bearing}
+                GLOBAL QS CONSORTIUM
               </div>
             </div>
           </div>
 
-          {/* Telemetry Metric 2: Elevation Waveform SVG */}
+          {/* Telemetry Metric 2: Visa Success Waveform SVG */}
           <div className="hidden md:flex items-center gap-3 pl-6 border-l border-white/10">
             <div className="w-12 h-8 flex items-center justify-center">
               <svg className="w-full h-full overflow-visible" viewBox="0 0 200 60">
@@ -749,10 +739,10 @@ export const HeroSection: React.FC = () => {
             </div>
             <div>
               <div className="font-mono-tech text-xs sm:text-sm font-bold text-white tracking-wider">
-                {currentDest.elevationValue}
+                {currentDest.stats.visaSuccessRate} VISA APPROVAL
               </div>
               <div className="text-[9px] font-mono-tech uppercase text-slate-400">
-                {currentDest.temperature}
+                {currentDest.stats.intakesPerYear} ANNUAL INTAKES
               </div>
             </div>
           </div>
@@ -768,7 +758,7 @@ export const HeroSection: React.FC = () => {
             <div className="w-8 h-8 rounded-full overflow-hidden border border-white/30 group-hover:border-amber-400 transition-colors">
               <div
                 className="w-full h-full bg-cover bg-center filter brightness-90 group-hover:scale-110 transition-transform"
-                style={{ backgroundImage: `url(${currentDest.image})` }}
+                style={{ backgroundImage: `url(${currentDest.cardImage})` }}
               />
             </div>
             <div>
@@ -776,7 +766,7 @@ export const HeroSection: React.FC = () => {
                 CAMPUS VIBE 360°
               </div>
               <div className="text-[8px] font-mono-tech text-emerald-400">
-                CLICK TO TOGGLE CONTENT
+                CLICK TO TOGGLE DOSSIER
               </div>
             </div>
           </div>
@@ -790,7 +780,7 @@ export const HeroSection: React.FC = () => {
             </span>
             <span className="opacity-40">/</span>
             <span className="opacity-70">
-              {String(EXPEDITION_DESTINATIONS.length).padStart(2, "0")}
+              {String(DESTINATIONS.length).padStart(2, "0")}
             </span>
           </div>
 
@@ -799,7 +789,7 @@ export const HeroSection: React.FC = () => {
             <motion.div
               className="h-full bg-amber-400"
               animate={{
-                width: `${((activeIdx + 1) / EXPEDITION_DESTINATIONS.length) * 100}%`,
+                width: `${((activeIdx + 1) / DESTINATIONS.length) * 100}%`,
               }}
               transition={{ ease: "easeInOut", duration: 0.3 }}
             />
@@ -811,15 +801,15 @@ export const HeroSection: React.FC = () => {
               onClick={handlePrev}
               disabled={activeIdx === 0}
               className="p-1.5 rounded-md hover:bg-white/10 text-slate-300 hover:text-white transition-colors active:scale-90 disabled:opacity-30 disabled:pointer-events-none"
-              aria-label="Previous Slide"
+              aria-label="Previous Destination"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
             <button
               onClick={handleNext}
-              disabled={activeIdx === EXPEDITION_DESTINATIONS.length - 1}
+              disabled={activeIdx === DESTINATIONS.length - 1}
               className="p-1.5 rounded-md hover:bg-white/10 text-slate-300 hover:text-white transition-colors active:scale-90 disabled:opacity-30 disabled:pointer-events-none"
-              aria-label="Next Slide"
+              aria-label="Next Destination"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
