@@ -10,13 +10,21 @@ export interface ExpeditionDestination {
   location: string;
   coordinates: string;
   distance: string;
+  degrees: string;
   elevation: string;
+  elevationValue: string;
   bearing: string;
   temperature: string;
   terrain: string;
   difficulty: "MODERATE" | "CHALLENGING" | "EXTREME";
   image: string;
   badge: string;
+  accentColor: string;
+  gradient: string;
+  orbColor: string;
+  circuitPath: string;
+  elevationPath: string;
+  academicCredits: string[];
   waypoints: { name: string; elevation: string; status: "CLEARED" | "ACTIVE" | "PENDING" }[];
   gearRequired: string[];
 }
@@ -36,13 +44,21 @@ export const EXPEDITION_DESTINATIONS: ExpeditionDestination[] = [
     location: "Patagonia, Chile & Argentina",
     coordinates: "51°15'S 72°59'W",
     distance: "20.5 km",
+    degrees: "20.5°",
     elevation: "950 m",
+    elevationValue: "950m",
     bearing: "194° SSW",
     temperature: "-4°C / 25°F",
     terrain: "Glacial Cirque / Granite Moraine",
     difficulty: "CHALLENGING",
     image: "https://images.unsplash.com/photo-1527004013197-933c4bb611b3?auto=format&fit=crop&w=2400&q=85",
     badge: "ROUTE ACTIVE",
+    accentColor: "#38BDF8",
+    gradient: "from-sky-500/30 via-cyan-400/10 to-transparent",
+    orbColor: "#38BDF8",
+    circuitPath: "M 10 35 C 25 15, 50 10, 75 22 C 100 32, 120 18, 145 28 C 165 35, 175 50, 150 60 C 120 70, 85 60, 60 52 C 35 44, 15 50, 10 35 Z",
+    elevationPath: "M 0 35 Q 30 10, 60 28 T 120 18 T 180 38 T 220 15",
+    academicCredits: ["Glaciology Field Study", "Earth Systems Research", "Alpine Climate Dynamics"],
     waypoints: [
       { name: "Basecamp Grey", elevation: "120 m", status: "CLEARED" },
       { name: "Paso John Gardner", elevation: "1,200 m", status: "ACTIVE" },
@@ -64,13 +80,21 @@ export const EXPEDITION_DESTINATIONS: ExpeditionDestination[] = [
     location: "Highland Interior, Iceland",
     coordinates: "64°08'N 19°03'W",
     distance: "34.2 km",
+    degrees: "34.2°",
     elevation: "1,840 m",
+    elevationValue: "1840m",
     bearing: "312° NW",
     temperature: "2°C / 36°F",
     terrain: "Basalt Lava / Active Fissure",
     difficulty: "EXTREME",
     image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=2400&q=85",
     badge: "GEOTHERMAL ALERT",
+    accentColor: "#F97316",
+    gradient: "from-orange-500/30 via-red-500/10 to-transparent",
+    orbColor: "#EF4444",
+    circuitPath: "M 10 30 C 35 15, 65 10, 95 25 C 130 40, 150 15, 175 30 C 185 45, 160 65, 130 68 C 90 72, 60 55, 35 60 C 15 62, 5 45, 10 30 Z",
+    elevationPath: "M 0 45 Q 35 2, 70 30 T 140 8 T 210 25",
+    academicCredits: ["Volcanology Field Survey", "Geothermal Geophysics", "Tectonic Petrology"],
     waypoints: [
       { name: "Landmannalaugar Basin", elevation: "600 m", status: "CLEARED" },
       { name: "Hrafntinnusker Ridge", elevation: "1,140 m", status: "ACTIVE" },
@@ -92,13 +116,21 @@ export const EXPEDITION_DESTINATIONS: ExpeditionDestination[] = [
     location: "Svalbard Archipelago, Norway",
     coordinates: "78°13'N 15°38'E",
     distance: "15.8 km",
-    elevation: "420 m",
+    degrees: "45.5°",
+    elevation: "620 m",
+    elevationValue: "620m",
     bearing: "028° NNE",
     temperature: "-18°C / 0°F",
     terrain: "Arctic Sea Ice / Snowy Tundra",
     difficulty: "CHALLENGING",
     image: "https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=2400&q=85",
     badge: "AURORA CONFIRMED",
+    accentColor: "#A855F7",
+    gradient: "from-purple-500/30 via-pink-500/10 to-transparent",
+    orbColor: "#F59E0B",
+    circuitPath: "M 15 45 C 35 20, 70 15, 95 25 C 125 35, 145 20, 170 35 C 180 45, 165 62, 140 66 C 110 70, 70 62, 45 68 C 20 72, 10 58, 15 45 Z",
+    elevationPath: "M 0 40 Q 35 8, 70 25 T 130 12 T 190 32 T 230 18",
+    academicCredits: ["Polar Marine Biology", "Permafrost Geocryology", "Aurora Magnetospheric Physics"],
     waypoints: [
       { name: "Longyearbyen Outpost", elevation: "30 m", status: "CLEARED" },
       { name: "Tempelfjorden Sea Ice", elevation: "5 m", status: "ACTIVE" },
@@ -120,13 +152,21 @@ export const EXPEDITION_DESTINATIONS: ExpeditionDestination[] = [
     location: "Yukon & Brooks Range, North America",
     coordinates: "66°33'N 150°48'W",
     distance: "52.0 km",
+    degrees: "52.0°",
     elevation: "1,120 m",
+    elevationValue: "1120m",
     bearing: "270° W",
     temperature: "-8°C / 18°F",
     terrain: "Permafrost Pass / Gravel Tundra",
     difficulty: "MODERATE",
     image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2400&q=85",
     badge: "ARCTIC CIRCLE",
+    accentColor: "#FBBF24",
+    gradient: "from-amber-500/30 via-yellow-500/10 to-transparent",
+    orbColor: "#06B6D4",
+    circuitPath: "M 20 40 C 40 25, 60 10, 100 20 C 130 30, 155 15, 180 32 C 190 48, 170 65, 135 60 C 95 65, 65 58, 35 65 C 18 68, 10 55, 20 40 Z",
+    elevationPath: "M 0 30 Q 40 12, 80 35 T 150 15 T 220 30",
+    academicCredits: ["Subarctic Ecology", "Permafrost Engineering", "Boreal Forest Dynamics"],
     waypoints: [
       { name: "Yukon River Crossing", elevation: "90 m", status: "CLEARED" },
       { name: "Arctic Circle Marker", elevation: "350 m", status: "CLEARED" },
@@ -135,4 +175,3 @@ export const EXPEDITION_DESTINATIONS: ExpeditionDestination[] = [
     gearRequired: ["Sub-Zero Sleeping Bag", "GPS Satellite Transceiver", "Heavy Snow Chains", "Radio Scanner", "MSR Stove"],
   },
 ];
-

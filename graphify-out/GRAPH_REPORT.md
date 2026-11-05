@@ -1,17 +1,17 @@
 # Graph Report
 
-Generated: 2026-11-04T09:40:44.316Z
+Generated: 2026-11-05T09:09:30.795Z
 
 ## Summary
 
-- **Nodes:** 92
-- **Edges:** 174
-- **Communities:** 17
+- **Nodes:** 112
+- **Edges:** 214
+- **Communities:** 19
 - **God nodes:** 4
 
 ## Communities
 
-### lucide-react (15 member(s))
+### lucide-react (17 member(s))
 
 - @/components/layout/Footer
 - @/components/layout/Navbar
@@ -20,6 +20,8 @@ Generated: 2026-11-04T09:40:44.316Z
 - @/data/events
 - canvas-confetti
 - lucide-react
+- src/app/about/page.tsx
+- function AboutPage
 - src/app/appointments/page.tsx
 - function AppointmentsPage
 - src/app/blog/page.tsx
@@ -29,30 +31,36 @@ Generated: 2026-11-04T09:40:44.316Z
 - src/app/events/page.tsx
 - function EventsPage
 
-### react (14 member(s))
+### react (17 member(s))
 
+- @/components/shared/SoundEngine
 - @/data/destinations
-- next/link
+- @/data/expeditions
 - next/navigation
 - react
 - function DestinationDetailPage
 - function DestinationsPage
+- src/components/home/Destination3DCarousel.tsx
 - src/components/home/DestinationsPreview.tsx
 - function DestinationsPreview
+- src/components/home/ExpeditionCarousel.tsx
+- function ExpeditionCarousel
+- interface ExpeditionCarouselProps
 - src/components/home/HeroSection.tsx
 - function HeroSection
-- src/components/layout/Footer.tsx
-- function Footer
 - src/components/layout/Navbar.tsx
 - function Navbar
 
-### framer-motion (11 member(s))
+### framer-motion (14 member(s))
 
 - framer-motion
 - src/components/home/AchievementsSection.tsx
 - interface Achievement
 - function AchievementsSection
 - function CounterCard
+- src/components/shared/ChatBot.tsx
+- function ChatBot
+- interface ChatMessage
 - src/components/ui/AnimatedCounter.tsx
 - function AnimatedCounter
 - interface AnimatedCounterProps
@@ -60,7 +68,7 @@ Generated: 2026-11-04T09:40:44.316Z
 - function SectionHeading
 - interface SectionHeadingProps
 
-### src/app/page.tsx (11 member(s))
+### src/app/page.tsx (12 member(s))
 
 - @/components/home/AchievementsSection
 - @/components/home/DestinationsPreview
@@ -69,22 +77,32 @@ Generated: 2026-11-04T09:40:44.316Z
 - @/components/ui/TestimonialSlider
 - @/data/partners
 - @/data/testimonials
-- src/app/about/page.tsx
-- function AboutPage
 - src/app/page.tsx
 - function HomePage
-
-### src/components/ui/TestimonialSlider.tsx (9 member(s))
-
-- next/image
 - src/components/ui/LogoSlider.tsx
-- interface Logo
 - function LogoSlider
 - interface LogoSliderProps
-- src/components/ui/TestimonialSlider.tsx
-- interface Testimonial
-- function TestimonialSlider
-- interface TestimonialSliderProps
+
+### class SoundEngine (9 member(s))
+
+- src/components/shared/SoundEngine.ts
+- const soundEngine
+- class SoundEngine
+- method SoundEngine.getIsMuted
+- method SoundEngine.init
+- method SoundEngine.playCardSwoosh
+- method SoundEngine.playClick
+- method SoundEngine.playZoomChime
+- method SoundEngine.toggleMute
+
+### next/link (6 member(s))
+
+- @/components/home/ExpeditionCarousel
+- next/link
+- src/app/expedition/page.tsx
+- function ExpeditionPage
+- src/components/layout/Footer.tsx
+- function Footer
 
 ### src/data/destinations.ts (6 member(s))
 
@@ -103,11 +121,13 @@ Generated: 2026-11-04T09:40:44.316Z
 - const metadata
 - function RootLayout
 
-### src/components/shared/ChatBot.tsx (3 member(s))
+### src/components/ui/TestimonialSlider.tsx (5 member(s))
 
-- src/components/shared/ChatBot.tsx
-- function ChatBot
-- interface ChatMessage
+- next/image
+- src/components/ui/TestimonialSlider.tsx
+- interface Testimonial
+- function TestimonialSlider
+- interface TestimonialSliderProps
 
 ### src/data/blogPosts.ts (3 member(s))
 
@@ -120,6 +140,12 @@ Generated: 2026-11-04T09:40:44.316Z
 - src/data/events.ts
 - interface Event
 - const EVENTS
+
+### src/data/expeditions.ts (3 member(s))
+
+- src/data/expeditions.ts
+- const EXPEDITION_DESTINATIONS
+- interface ExpeditionDestination
 
 ### src/data/partners.ts (3 member(s))
 
@@ -165,12 +191,12 @@ Nodes with unusually high fan-in + fan-out relative to the rest of this graph �
 
 ## Structural Surprises
 
-- framer-motion has 19 connections (fan-in + fan-out) — well above the graph average of 3.8. Likely a god node / hotspot worth reviewing for excessive coupling.
-- lucide-react has 14 connections (fan-in + fan-out) — well above the graph average of 3.8. Likely a god node / hotspot worth reviewing for excessive coupling.
-- react has 37 connections (fan-in + fan-out) — well above the graph average of 3.8. Likely a god node / hotspot worth reviewing for excessive coupling.
+- framer-motion has 20 connections (fan-in + fan-out) — well above the graph average of 3.8. Likely a god node / hotspot worth reviewing for excessive coupling.
+- lucide-react has 17 connections (fan-in + fan-out) — well above the graph average of 3.8. Likely a god node / hotspot worth reviewing for excessive coupling.
+- react has 42 connections (fan-in + fan-out) — well above the graph average of 3.8. Likely a god node / hotspot worth reviewing for excessive coupling.
 - src/app/page.tsx has 15 connections (fan-in + fan-out) — well above the graph average of 3.8. Likely a god node / hotspot worth reviewing for excessive coupling.
 
 ## Open Questions
 
 - 4 node(s) have no incoming or outgoing edges (next-env.d.ts, next.config.mjs, postcss.config.mjs, src/app/globals.css) — dead code, an entry point, or a gap in extraction?
-- The graph has 12 disconnected components — the largest has 63 node(s). Confirm this reflects real module boundaries rather than missed cross-file edges.
+- The graph has 14 disconnected components — the largest has 71 node(s). Confirm this reflects real module boundaries rather than missed cross-file edges.
