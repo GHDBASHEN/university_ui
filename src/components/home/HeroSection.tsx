@@ -63,31 +63,32 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
     return (index - p) * cardSpacing;
   });
 
-  // 2. Smooth fade and disappear ONLY when reaching the far left corner:
-  // Stays 100% solid & visible in the middle and across the left side!
-  // Only begins fading when reaching the far left corner (diff > 0.85).
+  // 2. Visible, smooth fade and disappear right in the left side corner:
+  // - In center and middle (diff from -1 to 0.35): opacity = 1.0 (never disappears in middle!)
+  // - Reaching the left corner (diff from 0.35 to 0.95): smoothly fades from 1.0 down to 0.0
+  // - Past left corner (diff >= 0.95): opacity = 0.0 (completely disappeared in the left corner)
   const opacity = useTransform(smoothProgress, (p) => {
     const diff = p - index;
-    if (diff > 0.85) {
-      // Reaching the far left corner: smoothly fades from 1.0 to 0.0
-      const fadeProgress = Math.min(1, (diff - 0.85) / 0.55);
-      return Math.max(0, 1 - fadeProgress);
+    if (diff > 0.35) {
+      // Smoothly fades out as it glides into the left side corner
+      const fadeProgress = Math.min(1, (diff - 0.35) / 0.6);
+      return Math.max(0, 1 - Math.pow(fadeProgress, 1.2));
     } else if (diff >= -1) {
-      // Centered and upcoming cards: fully visible, crisp & solid
+      // Centered and upcoming card on the right: fully visible & solid
       return 1;
     } else {
-      // Farther cards queued on the right
+      // Further queued cards on the right
       const rightDiff = -diff;
       return Math.max(0.4, 1 - (rightDiff - 1) * 0.3);
     }
   });
 
-  // 3. Subtle graceful scale: stays full size in center, shrinks slightly as it exits left corner
+  // 3. Subtle scale: stays 1.0 across the screen, eases to 0.92 as it fades in the left corner
   const scale = useTransform(smoothProgress, (p) => {
     const diff = p - index;
-    if (diff > 0.85) {
-      const shrinkProgress = Math.min(1, (diff - 0.85) / 0.55);
-      return 1.0 - shrinkProgress * 0.1;
+    if (diff > 0.35) {
+      const shrinkProgress = Math.min(1, (diff - 0.35) / 0.6);
+      return 1.0 - shrinkProgress * 0.08;
     } else if (diff >= 0) {
       return 1.0;
     } else {
@@ -96,10 +97,10 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
     }
   });
 
-  // 4. Disable pointer events only when fully exited into the left corner
+  // 4. Disable pointer events when faded out in the left corner
   const pointerEvents = useTransform(smoothProgress, (p) => {
     const diff = p - index;
-    return diff > 1.35 ? "none" : "auto";
+    return diff > 0.9 ? "none" : "auto";
   });
 
   // 5. Z-index stacking: active card highest, earlier cards layer naturally
@@ -115,10 +116,10 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
         pointerEvents,
       }}
       onClick={() => onCardClick(dest, index)}
-      className={`absolute w-[320px] sm:w-[420px] md:w-[480px] lg:w-[520px] h-[480px] sm:h-[530px] md:h-[570px] lg:h-[600px] rounded-3xl overflow-hidden cursor-pointer group shadow-[0_25px_60px_rgba(0,0,0,0.9)] border transition-all duration-300 will-change-transform ${
+      className={`absolute w-[320px] sm:w-[420px] md:w-[480px] lg:w-[520px] h-[480px] sm:h-[530px] md:h-[570px] lg:h-[600px] rounded-3xl overflow-hidden cursor-pointer group shadow-[0_25px_60px_rgba(0,0,0,0.9)] border transition-[border-color,box-shadow] duration-300 will-change-transform ${
         isActive
           ? "border-amber-400/80 ring-2 ring-amber-400/40 shadow-[0_0_40px_rgba(251,191,36,0.35)]"
-          : "border-white/15 hover:border-white/40 hover:opacity-95"
+          : "border-white/15 hover:border-white/40"
       }`}
     >
       {/* 1. Large High-Resolution Campus Photography */}
