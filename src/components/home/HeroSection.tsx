@@ -34,8 +34,9 @@ import {
 
 // ============================================================================
 // INDIVIDUAL LARGE UNIVERSITY DESTINATION CARD
-// High-res imagery, all relevant text (title, tagline, description, stats) inside the box
-// Moves right to left as user scrolls, disappearing into the left corner
+// Slides normally from right to left as user scrolls.
+// When it reaches the left corner, it smoothly fades out and disappears completely.
+// All relevant text is kept inside the card box.
 // ============================================================================
 interface DestinationCardProps {
   dest: Destination;
@@ -43,6 +44,7 @@ interface DestinationCardProps {
   smoothProgress: MotionValue<number>;
   isActive: boolean;
   onCardClick: (dest: Destination, index: number) => void;
+  cardSpacing: number;
 }
 
 const DestinationCard: React.FC<DestinationCardProps> = ({
@@ -51,82 +53,66 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
   smoothProgress,
   isActive,
   onCardClick,
+  cardSpacing,
 }) => {
-  // Horizontal motion:
-  // Before index: queued on right (+480px per step)
-  // At index: centered (0px)
-  // Past index: slides far left into the corner (-920px) and disappears
+  // 1. Normal horizontal sliding from right to left:
+  // When smoothProgress = index -> card is centered (x = 0)
+  // When smoothProgress < index -> card is to the right (x > 0)
+  // When smoothProgress > index -> card moves to the left (x < 0)
   const x = useTransform(smoothProgress, (p) => {
-    const diff = p - index;
-    if (diff > 0) {
-      // Past center: glides rapidly towards the left corner
-      const leftProgress = Math.min(1.2, diff);
-      return -leftProgress * 920; // 0px -> -920px off to left corner
-    } else {
-      // Before center: queued on right with generous spacing for large cards
-      const rightDiff = -diff;
-      return rightDiff * 480; // 0px, +480px, +960px...
-    }
+    return (index - p) * cardSpacing;
   });
 
-  // Vertical drift into the corner
-  const y = useTransform(smoothProgress, (p) => {
-    const diff = p - index;
-    if (diff > 0) {
-      const leftProgress = Math.min(1, diff);
-      return -leftProgress * 40; // slight upward drift into corner
-    }
-    return 0;
-  });
-
-  // Opacity: full at center -> fades out to 0 as it disappears in the left corner
+  // 2. Smooth fade and disappear ONLY when reaching the far left corner:
+  // Stays 100% solid & visible in the middle and across the left side!
+  // Only begins fading when reaching the far left corner (diff > 0.85).
   const opacity = useTransform(smoothProgress, (p) => {
     const diff = p - index;
-    if (diff > 0) {
-      const leftProgress = Math.min(1, diff);
-      return Math.max(0, 1 - leftProgress * 1.35);
+    if (diff > 0.85) {
+      // Reaching the far left corner: smoothly fades from 1.0 to 0.0
+      const fadeProgress = Math.min(1, (diff - 0.85) / 0.55);
+      return Math.max(0, 1 - fadeProgress);
+    } else if (diff >= -1) {
+      // Centered and upcoming cards: fully visible, crisp & solid
+      return 1;
     } else {
+      // Farther cards queued on the right
       const rightDiff = -diff;
-      return Math.max(0.3, 1 - rightDiff * 0.32);
+      return Math.max(0.4, 1 - (rightDiff - 1) * 0.3);
     }
   });
 
-  // Scale: large at center -> shrinks as it disappears into the corner
+  // 3. Subtle graceful scale: stays full size in center, shrinks slightly as it exits left corner
   const scale = useTransform(smoothProgress, (p) => {
     const diff = p - index;
-    if (diff > 0) {
-      const leftProgress = Math.min(1, diff);
-      return 1.10 - leftProgress * 0.35; // 1.10 down to 0.75
+    if (diff > 0.85) {
+      const shrinkProgress = Math.min(1, (diff - 0.85) / 0.55);
+      return 1.0 - shrinkProgress * 0.1;
+    } else if (diff >= 0) {
+      return 1.0;
     } else {
       const rightDiff = Math.min(2, -diff);
-      return 1.10 - rightDiff * 0.20; // 0.90 up to 1.10
+      return 1.0 - rightDiff * 0.03;
     }
   });
 
-  // 3D rotation: subtle amphitheater tilt, turns outward into the corner
-  const rotateY = useTransform(smoothProgress, (p) => {
+  // 4. Disable pointer events only when fully exited into the left corner
+  const pointerEvents = useTransform(smoothProgress, (p) => {
     const diff = p - index;
-    if (diff > 0) {
-      const leftProgress = Math.min(1, diff);
-      return leftProgress * 22; // outward tilt into left corner
-    } else {
-      const rightDiff = Math.min(1, -diff);
-      return -rightDiff * 16; // incoming amphitheater slant
-    }
+    return diff > 1.35 ? "none" : "auto";
   });
 
-  const zIndex = isActive ? 30 : 15 - Math.abs(index);
+  // 5. Z-index stacking: active card highest, earlier cards layer naturally
+  const zIndex = isActive ? 30 : Math.max(1, 20 - index);
 
   return (
     <motion.div
       style={{
         x,
-        y,
         scale,
         opacity,
-        rotateY,
         zIndex,
-        transformStyle: "preserve-3d",
+        pointerEvents,
       }}
       onClick={() => onCardClick(dest, index)}
       className={`absolute w-[320px] sm:w-[420px] md:w-[480px] lg:w-[520px] h-[480px] sm:h-[530px] md:h-[570px] lg:h-[600px] rounded-3xl overflow-hidden cursor-pointer group shadow-[0_25px_60px_rgba(0,0,0,0.9)] border transition-all duration-300 will-change-transform ${
@@ -158,9 +144,8 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
         </span>
       </div>
 
-      {/* 4. Card Interior Content: Relevant text directly in the box */}
+      {/* 4. Card Interior Content: All relevant text appears inside the box */}
       <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7 z-10 flex flex-col justify-end text-left">
-        
         {/* Tagline Badge inside the box */}
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[10px] sm:text-[11px] font-mono-tech tracking-widest text-amber-300 uppercase mb-2.5 backdrop-blur-md w-fit">
           <Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" />
@@ -211,23 +196,42 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
 };
 
 // ============================================================================
-// MAIN HERO SECTION: LARGE IMAGES, TEXT INSIDE BOX, SCROLL-DRIVEN SLIDER
+// MAIN HERO SECTION: SAME BACKGROUND & NORMAL RIGHT-TO-LEFT SCROLL SLIDER
 // ============================================================================
 export const HeroSection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIdx, setActiveIdx] = useState<number>(0);
   const [isContentExpanded, setIsContentExpanded] = useState<boolean>(false);
+  const [cardSpacing, setCardSpacing] = useState<number>(540);
   const prevSlideRef = useRef<number>(0);
+
+  // Responsive card spacing computation
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setCardSpacing(340);
+      } else if (window.innerWidth < 768) {
+        setCardSpacing(440);
+      } else if (window.innerWidth < 1024) {
+        setCardSpacing(500);
+      } else {
+        setCardSpacing(540);
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Virtual scroll accumulator: 0 to (DESTINATIONS.length - 1)
   const targetProgress = useRef<number>(0);
   const progressMotion = useMotionValue(0);
 
-  // Smooth momentum spring physics for the virtual scroll
+  // Crisp, fast momentum spring physics for the virtual scroll
   const smoothProgress = useSpring(progressMotion, {
-    stiffness: 110,
+    stiffness: 150,
     damping: 24,
-    mass: 0.6,
+    mass: 0.45,
   });
 
   // Track the continuous active slide index based on progress
@@ -245,9 +249,6 @@ export const HeroSection: React.FC = () => {
   });
 
   const currentDest = DESTINATIONS[activeIdx] || DESTINATIONS[0];
-
-  // Parallax background scale on scroll
-  const bgScale = useTransform(smoothProgress, [0, DESTINATIONS.length - 1], [1.02, 1.15]);
 
   // Smooth slide jump
   const goToSlide = useCallback(
@@ -283,7 +284,8 @@ export const HeroSection: React.FC = () => {
       e.stopPropagation();
 
       const delta = e.deltaY !== 0 ? e.deltaY : e.deltaX;
-      const sensitivity = 0.0022;
+      // Faster, responsive scrolling speed (slides glide swiftly without endless scrolling)
+      const sensitivity = 0.0055;
       const newTarget = Math.max(
         0,
         Math.min(DESTINATIONS.length - 1, targetProgress.current + delta * sensitivity)
@@ -323,7 +325,7 @@ export const HeroSection: React.FC = () => {
         const dominantDelta = Math.abs(deltaX) > Math.abs(deltaY) ? deltaX : deltaY;
         const newTarget = Math.max(
           0,
-          Math.min(DESTINATIONS.length - 1, targetProgress.current + dominantDelta * 0.004)
+          Math.min(DESTINATIONS.length - 1, targetProgress.current + dominantDelta * 0.008)
         );
         targetProgress.current = newTarget;
         progressMotion.set(newTarget);
@@ -341,7 +343,7 @@ export const HeroSection: React.FC = () => {
     };
   }, [isContentExpanded, progressMotion]);
 
-  // Click card: navigates to full university content with smooth in-place transition
+  // Click card: opens full university content with smooth in-place transition
   const handleCardClick = (dest: Destination, index: number) => {
     soundEngine.playZoomChime();
     if (index !== activeIdx) {
@@ -372,36 +374,18 @@ export const HeroSection: React.FC = () => {
       ref={containerRef}
       className="relative w-full h-screen overflow-hidden bg-[#05070c] select-none flex flex-col justify-between"
     >
-      {/* 1. CINEMATIC FULL-SCREEN UNIVERSITY CAMPUS BACKGROUND */}
-      <motion.div
-        style={{ scale: bgScale }}
-        className="absolute inset-0 pointer-events-none overflow-hidden z-0"
-      >
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentDest.slug}
-            initial={{ opacity: 0, scale: 1.12 }}
-            animate={{ opacity: 1, scale: isContentExpanded ? 1.08 : 1.02 }}
-            exit={{ opacity: 0, scale: 0.98 }}
-            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute inset-0 w-full h-full bg-cover bg-center filter brightness-[0.50] contrast-125 saturate-110"
-            style={{ backgroundImage: `url(${currentDest.heroImage})` }}
-          />
-        </AnimatePresence>
-
-        {/* Dynamic Country Accent Ambient Glow */}
-        <motion.div
-          animate={{
-            background: `radial-gradient(circle at 50% 55%, ${currentDest.accentColor}35 0%, transparent 70%)`,
+      {/* 1. SINGLE CONSISTENT CINEMATIC BACKGROUND (SAME BACKGROUND ALWAYS) */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        <div
+          className="w-full h-full bg-cover bg-center filter brightness-[0.38] contrast-125 saturate-105"
+          style={{
+            backgroundImage: `url("https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=2400&q=85")`,
           }}
-          transition={{ duration: 1 }}
-          className="absolute inset-0"
         />
-
-        {/* Top & Bottom Vignette Shadow Gradients */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#05070c] via-black/35 to-black/70 pointer-events-none" />
-        <div className="absolute inset-0 shadow-[inset_0_0_140px_rgba(0,0,0,0.9)] pointer-events-none" />
-      </motion.div>
+        {/* Subtle Dark Vignette Gradients */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#05070c] via-black/45 to-[#05070c]/85" />
+        <div className="absolute inset-0 shadow-[inset_0_0_160px_rgba(5,7,12,0.95)]" />
+      </div>
 
       {/* 2. TOP HUD BAR: UNIVERSITY MATRIX BRANDING */}
       <header className="relative z-20 pt-20 sm:pt-22 px-6 md:px-12 flex items-center justify-between">
@@ -410,7 +394,7 @@ export const HeroSection: React.FC = () => {
           key={currentDest.slug}
           initial={{ opacity: 0, x: -15 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
           className="flex items-start gap-3 cursor-pointer group"
           onClick={() => setIsContentExpanded((prev) => !prev)}
         >
@@ -425,7 +409,9 @@ export const HeroSection: React.FC = () => {
               </span>
             </div>
             <span className="text-[10px] md:text-xs text-slate-400 tracking-widest font-mono-tech uppercase">
-              {isContentExpanded ? "EXPLORING UNIVERSITY DOSSIER" : "GLOBAL STUDY ODYSSEY • OFFICIAL ADMISSIONS PORTAL"}
+              {isContentExpanded
+                ? "EXPLORING UNIVERSITY DOSSIER"
+                : "GLOBAL STUDY ODYSSEY • OFFICIAL ADMISSIONS PORTAL"}
             </span>
           </div>
         </motion.div>
@@ -472,7 +458,7 @@ export const HeroSection: React.FC = () => {
         </div>
       </header>
 
-      {/* 3. CENTER STAGE: DUAL MODE (LARGE SLIDER vs IN-PLACE CONTENT VIEW) */}
+      {/* 3. CENTER STAGE: DUAL MODE (NORMAL SLIDER vs IN-PLACE CONTENT VIEW) */}
       <main className="relative z-20 flex-1 flex flex-col items-center justify-center py-2 px-4 overflow-visible">
         <AnimatePresence mode="wait">
           {isContentExpanded ? (
@@ -503,7 +489,9 @@ export const HeroSection: React.FC = () => {
               <div className="text-center mb-5">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 text-xs font-mono-tech tracking-wider uppercase mb-2">
                   <span className="text-base">{currentDest.flagEmoji}</span>
-                  <span>{currentDest.stats.visaSuccessRate} VISA APPROVAL RATE • {currentDest.code}</span>
+                  <span>
+                    {currentDest.stats.visaSuccessRate} VISA APPROVAL RATE • {currentDest.code}
+                  </span>
                 </div>
 
                 <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight drop-shadow-[0_12px_30px_rgba(0,0,0,0.9)]">
@@ -519,38 +507,62 @@ export const HeroSection: React.FC = () => {
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 w-full mb-5">
                 <div className="glass-panel p-3 rounded-2xl border border-white/10">
                   <Building2 className="w-4 h-4 text-cyan-400 mb-1" />
-                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">Universities</div>
-                  <div className="text-xs font-bold font-mono-tech text-white">{currentDest.stats.universities}+ Campuses</div>
+                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">
+                    Universities
+                  </div>
+                  <div className="text-xs font-bold font-mono-tech text-white">
+                    {currentDest.stats.universities}+ Campuses
+                  </div>
                 </div>
 
                 <div className="glass-panel p-3 rounded-2xl border border-white/10">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 mb-1" />
-                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">Visa Ratio</div>
-                  <div className="text-xs font-bold font-mono-tech text-white">{currentDest.stats.visaSuccessRate} Approval</div>
+                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">
+                    Visa Ratio
+                  </div>
+                  <div className="text-xs font-bold font-mono-tech text-white">
+                    {currentDest.stats.visaSuccessRate} Approval
+                  </div>
                 </div>
 
                 <div className="glass-panel p-3 rounded-2xl border border-white/10">
                   <DollarSign className="w-4 h-4 text-amber-400 mb-1" />
-                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">Avg Tuition</div>
-                  <div className="text-xs font-bold font-mono-tech text-white truncate">{currentDest.stats.averageTuition}</div>
+                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">
+                    Avg Tuition
+                  </div>
+                  <div className="text-xs font-bold font-mono-tech text-white truncate">
+                    {currentDest.stats.averageTuition}
+                  </div>
                 </div>
 
                 <div className="glass-panel p-3 rounded-2xl border border-white/10">
                   <Calendar className="w-4 h-4 text-purple-400 mb-1" />
-                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">Intakes / Yr</div>
-                  <div className="text-xs font-bold font-mono-tech text-white">{currentDest.stats.intakesPerYear} Intakes</div>
+                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">
+                    Intakes / Yr
+                  </div>
+                  <div className="text-xs font-bold font-mono-tech text-white">
+                    {currentDest.stats.intakesPerYear} Intakes
+                  </div>
                 </div>
 
                 <div className="glass-panel p-3 rounded-2xl border border-white/10">
                   <Award className="w-4 h-4 text-rose-400 mb-1" />
-                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">Scholarships</div>
-                  <div className="text-xs font-bold font-mono-tech text-white">{currentDest.stats.scholarshipsAvailable}+ Listed</div>
+                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">
+                    Scholarships
+                  </div>
+                  <div className="text-xs font-bold font-mono-tech text-white">
+                    {currentDest.stats.scholarshipsAvailable}+ Listed
+                  </div>
                 </div>
 
                 <div className="glass-panel p-3 rounded-2xl border border-white/10">
                   <Briefcase className="w-4 h-4 text-yellow-400 mb-1" />
-                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">Post-Study Work</div>
-                  <div className="text-xs font-bold font-mono-tech text-white truncate">2 – 4 Years</div>
+                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">
+                    Post-Study Work
+                  </div>
+                  <div className="text-xs font-bold font-mono-tech text-white truncate">
+                    2 – 4 Years
+                  </div>
                 </div>
               </div>
 
@@ -564,7 +576,10 @@ export const HeroSection: React.FC = () => {
                   </h3>
                   <ul className="space-y-2">
                     {currentDest.highlights.slice(0, 4).map((h, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-xs text-slate-300 leading-relaxed">
+                      <li
+                        key={idx}
+                        className="flex items-start gap-2 text-xs text-slate-300 leading-relaxed"
+                      >
                         <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0" />
                         <span>{h}</span>
                       </li>
@@ -572,7 +587,8 @@ export const HeroSection: React.FC = () => {
                   </ul>
 
                   <div className="pt-2 border-t border-white/10 text-xs font-mono-tech text-slate-400">
-                    <span className="text-white font-medium">Work Rights:</span> {currentDest.lifestyle.workRights}
+                    <span className="text-white font-medium">Work Rights:</span>{" "}
+                    {currentDest.lifestyle.workRights}
                   </div>
                 </div>
 
@@ -627,7 +643,10 @@ export const HeroSection: React.FC = () => {
             </motion.div>
           ) : (
             /* ================================================================
-               MODE B: 3D LARGE CARDS SLIDER (TEXT ALL INSIDE BOX, NO BIG FLOATING TITLE)
+               MODE B: NORMAL RIGHT-TO-LEFT CARDS SLIDER
+               Cards slide normally from right to left as user scrolls.
+               When reaching the left corner, each card smoothly fades and disappears.
+               All text is inside the card box.
                ================================================================ */
             <motion.div
               key="carousel-stage"
@@ -637,11 +656,8 @@ export const HeroSection: React.FC = () => {
               transition={{ duration: 0.4 }}
               className="w-full flex flex-col items-center justify-center"
             >
-              {/* Horizontal Large Cards Stage: Slides move right-to-left one by one, disappearing in left corner */}
-              <div
-                className="relative w-full max-w-7xl h-[500px] sm:h-[550px] md:h-[590px] lg:h-[620px] flex items-center justify-center overflow-visible"
-                style={{ perspective: "1500px" }}
-              >
+              {/* Horizontal Large Cards Stage */}
+              <div className="relative w-full max-w-7xl h-[500px] sm:h-[550px] md:h-[590px] lg:h-[620px] flex items-center justify-center overflow-visible">
                 {DESTINATIONS.map((dest, i) => (
                   <DestinationCard
                     key={dest.slug}
@@ -650,6 +666,7 @@ export const HeroSection: React.FC = () => {
                     smoothProgress={smoothProgress}
                     isActive={activeIdx === i}
                     onCardClick={handleCardClick}
+                    cardSpacing={cardSpacing}
                   />
                 ))}
               </div>
@@ -657,7 +674,7 @@ export const HeroSection: React.FC = () => {
               {/* Scroll Hint beneath the large cards */}
               <div className="mt-4 text-center">
                 <span className="text-[10px] font-mono-tech text-slate-400 uppercase tracking-widest animate-pulse">
-                  SCROLL MOUSE WHEEL TO GLIDE SLIDES RIGHT TO LEFT • CLICK CARD TO OPEN FULL UNIVERSITY DOSSIER
+                  SCROLL MOUSE WHEEL TO GLIDE SLIDES RIGHT TO LEFT • CLICK CARD TO OPEN FULL DOSSIER
                 </span>
               </div>
             </motion.div>

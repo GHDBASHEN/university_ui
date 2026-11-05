@@ -10,7 +10,6 @@ import { soundEngine } from "@/components/shared/SoundEngine";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/destinations", label: "Destinations" },
-  { href: "/expedition", label: "3D Odyssey" },
   { href: "/about", label: "About" },
   { href: "/events", label: "Events" },
   { href: "/blog", label: "Blog" },
