@@ -14,6 +14,7 @@ import Link from "next/link";
 import { DESTINATIONS, Destination } from "@/data/destinations";
 import { soundEngine } from "@/components/shared/SoundEngine";
 import { springDefault } from "@/lib/motion";
+import { DestinationRoom3D, preloadDestinationRoom } from "@/components/ui/DestinationRoom3D";
 import {
   Compass,
   ArrowRight,
@@ -23,13 +24,9 @@ import {
   Eye,
   Activity,
   Layers,
-  GraduationCap,
   Building2,
-  Calendar,
   Award,
   DollarSign,
-  Briefcase,
-  CheckCircle2,
   Maximize2,
 } from "lucide-react";
 
@@ -119,6 +116,7 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
 
   return (
     <motion.div
+      layoutId={`destination-card-${dest.slug}`}
       style={{
         x,
         scale,
@@ -127,6 +125,8 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
         pointerEvents,
       }}
       onClick={() => onCardClick(dest, index)}
+      onMouseEnter={() => preloadDestinationRoom(dest)}
+      onFocus={() => preloadDestinationRoom(dest)}
       className={`absolute w-[320px] sm:w-[420px] md:w-[480px] lg:w-[520px] h-[480px] sm:h-[530px] md:h-[570px] lg:h-[600px] rounded-3xl overflow-hidden cursor-pointer group shadow-[0_25px_60px_rgba(0,0,0,0.9)] border transition-[border-color,box-shadow] duration-300 will-change-transform ${
         isActive
           ? "border-amber-400/80 ring-2 ring-amber-400/40 shadow-[0_0_40px_rgba(251,191,36,0.35)]"
@@ -196,7 +196,7 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
         <div className="mt-4 pt-3 border-t border-white/15 flex items-center justify-between text-xs font-mono-tech text-amber-400 group-hover:text-amber-300 transition-colors">
           <span className="flex items-center gap-2 font-bold tracking-wider uppercase">
             <Eye className="w-4 h-4 text-amber-400" />
-            <span>CLICK TO OPEN FULL DOSSIER</span>
+            <span>CLICK TO ENTER 3D ROOM</span>
           </span>
           <div className="w-7 h-7 rounded-full bg-amber-400/20 border border-amber-400/40 flex items-center justify-center group-hover:bg-amber-400 group-hover:text-black transition-all">
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -483,254 +483,74 @@ export const HeroSection: React.FC = () => {
         </div>
       </header>
 
-      {/* 3. CENTER STAGE: DUAL MODE (NORMAL SLIDER vs IN-PLACE CONTENT VIEW) */}
+      {/* 3. CENTER STAGE: CAROUSEL STAGE + FULLSCREEN 3D ROOM ON CLICK */}
       <main className="relative z-20 flex-1 flex flex-col items-center justify-center py-2 px-4 overflow-visible">
-        <AnimatePresence mode="wait">
-          {isContentExpanded ? (
-            /* ================================================================
-               MODE A: IN-PLACE FULL-SCREEN UNIVERSITY CONTENT VIEW
-               ================================================================ */
-            <motion.div
-              key={`content-${currentDest.slug}`}
-              initial={{ opacity: 0, y: 30, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -25, scale: 0.95 }}
-              transition={springDefault}
-              className="w-full max-w-5xl mx-auto flex flex-col items-center text-white my-auto max-h-[72vh] overflow-y-auto px-2"
-            >
-              {/* Back to Carousel Pill */}
-              <button
-                onClick={() => {
-                  soundEngine.playCardSwoosh();
-                  setIsContentExpanded(false);
-                }}
-                className="mb-4 px-4 py-1.5 rounded-full glass-pill border border-white/20 text-xs font-mono-tech text-slate-300 hover:text-white hover:border-amber-400/50 flex items-center gap-2 transition-all shadow-md group"
-              >
-                <ChevronLeft className="w-3.5 h-3.5 text-amber-400 group-hover:-translate-x-1 transition-transform" />
-                <span>RETURN TO SLIDER CAROUSEL</span>
-              </button>
-
-              {/* Grand University Headline */}
-              <div className="text-center mb-5">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 text-xs font-mono-tech tracking-wider uppercase mb-2">
-                  <span className="text-base">{currentDest.flagEmoji}</span>
-                  <span>
-                    {currentDest.stats.visaSuccessRate} VISA APPROVAL RATE • {currentDest.code}
-                  </span>
-                </div>
-
-                <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight drop-shadow-[0_12px_30px_rgba(0,0,0,0.9)]">
-                  {currentDest.grandTitle}
-                </h1>
-
-                <p className="text-slate-200 text-sm sm:text-base mt-2 max-w-2xl mx-auto font-light leading-relaxed">
-                  {currentDest.description}
-                </p>
+        <div className="relative w-full flex flex-col items-center justify-center">
+          {/* CINEMATIC TITLE ON FIRST LOAD: BACKGROUND + TITLE ONLY, NO SLIDES */}
+          <motion.div
+            style={{
+              opacity: titleOpacity,
+              y: titleY,
+              scale: titleScale,
+              pointerEvents: titlePointerEvents,
+            }}
+            className="absolute inset-0 z-40 flex flex-col items-center justify-center pointer-events-none px-4 select-none"
+          >
+            <div className="flex flex-col items-center text-center max-w-4xl mx-auto p-6 sm:p-12">
+              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-amber-400/15 border border-amber-400/30 text-amber-300 text-xs sm:text-sm font-mono-tech tracking-[0.28em] uppercase mb-5 backdrop-blur-md shadow-[0_0_25px_rgba(251,191,36,0.25)]">
+                <Sparkles className="w-4 h-4 text-amber-400" />
+                <span>GLOBAL HIGHER EDUCATION ODYSSEY</span>
               </div>
 
-              {/* University Telemetry Metrics */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 w-full mb-5">
-                <div className="glass-panel p-3 rounded-2xl border border-white/10">
-                  <Building2 className="w-4 h-4 text-cyan-400 mb-1" />
-                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">
-                    Universities
-                  </div>
-                  <div className="text-xs font-bold font-mono-tech text-white">
-                    {currentDest.stats.universities}+ Campuses
-                  </div>
-                </div>
+              <h1 className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-white tracking-tight drop-shadow-[0_15px_40px_rgba(0,0,0,0.95)] leading-[1.05]">
+                Traverse World Universities
+              </h1>
 
-                <div className="glass-panel p-3 rounded-2xl border border-white/10">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 mb-1" />
-                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">
-                    Visa Ratio
-                  </div>
-                  <div className="text-xs font-bold font-mono-tech text-white">
-                    {currentDest.stats.visaSuccessRate} Approval
-                  </div>
-                </div>
+              <p className="mt-4 text-slate-200 text-sm sm:text-base md:text-lg font-light max-w-2xl mx-auto leading-relaxed font-mono-tech tracking-wider uppercase drop-shadow">
+                Collegiate Heritage • Russell Group • Ivy League • Group of Eight
+              </p>
 
-                <div className="glass-panel p-3 rounded-2xl border border-white/10">
-                  <DollarSign className="w-4 h-4 text-amber-400 mb-1" />
-                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">
-                    Avg Tuition
-                  </div>
-                  <div className="text-xs font-bold font-mono-tech text-white truncate">
-                    {currentDest.stats.averageTuition}
-                  </div>
-                </div>
-
-                <div className="glass-panel p-3 rounded-2xl border border-white/10">
-                  <Calendar className="w-4 h-4 text-purple-400 mb-1" />
-                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">
-                    Intakes / Yr
-                  </div>
-                  <div className="text-xs font-bold font-mono-tech text-white">
-                    {currentDest.stats.intakesPerYear} Intakes
-                  </div>
-                </div>
-
-                <div className="glass-panel p-3 rounded-2xl border border-white/10">
-                  <Award className="w-4 h-4 text-rose-400 mb-1" />
-                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">
-                    Scholarships
-                  </div>
-                  <div className="text-xs font-bold font-mono-tech text-white">
-                    {currentDest.stats.scholarshipsAvailable}+ Listed
-                  </div>
-                </div>
-
-                <div className="glass-panel p-3 rounded-2xl border border-white/10">
-                  <Briefcase className="w-4 h-4 text-yellow-400 mb-1" />
-                  <div className="text-[9px] font-mono-tech uppercase text-slate-400">
-                    Post-Study Work
-                  </div>
-                  <div className="text-xs font-bold font-mono-tech text-white truncate">
-                    2 – 4 Years
-                  </div>
-                </div>
+              <div className="mt-8 flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/10 border border-white/25 backdrop-blur-md text-white text-xs sm:text-sm font-mono-tech shadow-lg animate-pulse">
+                <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping" />
+                <span className="tracking-widest uppercase">SCROLL TO EXPLORE DESTINATIONS</span>
               </div>
+            </div>
+          </motion.div>
 
-              {/* Two Column Layout: Highlights & Top Partner Universities */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full mb-5">
-                {/* Academic Highlights & Lifestyle */}
-                <div className="glass-panel p-5 rounded-2xl border border-white/10 space-y-3 text-left">
-                  <h3 className="text-xs font-mono-tech uppercase tracking-[0.2em] text-amber-400 flex items-center gap-2">
-                    <GraduationCap className="w-4 h-4" />
-                    <span>ACADEMIC PRIVILEGES & LIFESTYLE</span>
-                  </h3>
-                  <ul className="space-y-2">
-                    {currentDest.highlights.slice(0, 4).map((h, idx) => (
-                      <li
-                        key={idx}
-                        className="flex items-start gap-2 text-xs text-slate-300 leading-relaxed"
-                      >
-                        <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0" />
-                        <span>{h}</span>
-                      </li>
-                    ))}
-                  </ul>
+          {/* Horizontal Large Cards Stage */}
+          <div className="relative w-full max-w-7xl h-[500px] sm:h-[550px] md:h-[590px] lg:h-[620px] flex items-center justify-center overflow-visible">
+            {DESTINATIONS.map((dest, i) => (
+              <DestinationCard
+                key={dest.slug}
+                dest={dest}
+                index={i}
+                smoothProgress={smoothProgress}
+                isActive={activeIdx === i}
+                onCardClick={handleCardClick}
+                cardSpacing={cardSpacing}
+              />
+            ))}
+          </div>
 
-                  <div className="pt-2 border-t border-white/10 text-xs font-mono-tech text-slate-400">
-                    <span className="text-white font-medium">Work Rights:</span>{" "}
-                    {currentDest.lifestyle.workRights}
-                  </div>
-                </div>
+          {/* Scroll Hint beneath the large cards */}
+          <div className="mt-4 text-center">
+            <span className="text-[10px] font-mono-tech text-slate-400 uppercase tracking-widest">
+              SCROLL MOUSE WHEEL TO GLIDE DESTINATIONS RIGHT TO LEFT • CLICK CARD TO ENTER 3D ROOM
+            </span>
+          </div>
+        </div>
 
-                {/* Top Partner Universities List */}
-                <div className="glass-panel p-5 rounded-2xl border border-white/10 space-y-3 text-left">
-                  <h3 className="text-xs font-mono-tech uppercase tracking-[0.2em] text-cyan-400 flex items-center gap-2">
-                    <Building2 className="w-4 h-4" />
-                    <span>FLAGSHIP PARTNER INSTITUTIONS</span>
-                  </h3>
-                  <div className="space-y-2">
-                    {currentDest.universities.slice(0, 4).map((uni, idx) => (
-                      <div
-                        key={uni.name}
-                        className="flex items-center justify-between p-2 rounded-xl bg-white/5 border border-white/10 text-xs font-mono-tech"
-                      >
-                        <div className="flex items-center gap-2 truncate">
-                          <span className="w-5 h-5 rounded-full bg-white/10 text-[10px] flex items-center justify-center text-slate-300 shrink-0">
-                            {idx + 1}
-                          </span>
-                          <span className="text-white font-medium truncate">{uni.name}</span>
-                        </div>
-                        <span className="px-2 py-0.5 rounded text-[9px] font-bold bg-amber-400/20 text-amber-300 border border-amber-400/30 shrink-0 ml-2">
-                          {uni.ranking.split("—")[0]}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center justify-center gap-4">
-                <Link
-                  href={`/destinations/${currentDest.slug}`}
-                  onClick={() => soundEngine.playClick()}
-                  className="px-8 py-3 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 text-black font-bold font-mono-tech text-xs sm:text-sm uppercase tracking-wider shadow-[0_0_25px_rgba(251,191,36,0.5)] hover:scale-105 active:scale-95 transition-all flex items-center gap-2"
-                >
-                  <Building2 className="w-4 h-4 text-black" />
-                  <span>EXPLORE ALL {currentDest.name.toUpperCase()} UNIVERSITIES</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-
-                <Link
-                  href="/appointments"
-                  onClick={() => soundEngine.playClick()}
-                  className="px-6 py-3 rounded-xl glass-panel border border-white/20 text-white font-mono-tech text-xs sm:text-sm uppercase tracking-wider hover:border-amber-400/50 hover:bg-white/10 transition-all flex items-center gap-2"
-                >
-                  <Sparkles className="w-4 h-4 text-amber-400" />
-                  <span>BOOK FREE 1-ON-1 ADVISORY</span>
-                </Link>
-              </div>
-            </motion.div>
-          ) : (
-            /* ================================================================
-               MODE B: TITLE SCREEN (INITIAL LOAD) -> CARDS SLIDER ON SCROLL
-               ================================================================ */
-            <motion.div
-              key="carousel-stage"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={springDefault}
-              className="relative w-full flex flex-col items-center justify-center"
-            >
-              {/* CINEMATIC TITLE ON FIRST LOAD: BACKGROUND + TITLE ONLY, NO SLIDES */}
-              <motion.div
-                style={{
-                  opacity: titleOpacity,
-                  y: titleY,
-                  scale: titleScale,
-                  pointerEvents: titlePointerEvents,
-                }}
-                className="absolute inset-0 z-40 flex flex-col items-center justify-center pointer-events-none px-4 select-none"
-              >
-                <div className="flex flex-col items-center text-center max-w-4xl mx-auto p-6 sm:p-12">
-                  <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-amber-400/15 border border-amber-400/30 text-amber-300 text-xs sm:text-sm font-mono-tech tracking-[0.28em] uppercase mb-5 backdrop-blur-md shadow-[0_0_25px_rgba(251,191,36,0.25)]">
-                    <Sparkles className="w-4 h-4 text-amber-400" />
-                    <span>GLOBAL HIGHER EDUCATION ODYSSEY</span>
-                  </div>
-
-                  <h1 className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-white tracking-tight drop-shadow-[0_15px_40px_rgba(0,0,0,0.95)] leading-[1.05]">
-                    Traverse World Universities
-                  </h1>
-
-                  <p className="mt-4 text-slate-200 text-sm sm:text-base md:text-lg font-light max-w-2xl mx-auto leading-relaxed font-mono-tech tracking-wider uppercase drop-shadow">
-                    Collegiate Heritage • Russell Group • Ivy League • Group of Eight
-                  </p>
-
-                  <div className="mt-8 flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/10 border border-white/25 backdrop-blur-md text-white text-xs sm:text-sm font-mono-tech shadow-lg animate-pulse">
-                    <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping" />
-                    <span className="tracking-widest uppercase">SCROLL TO EXPLORE DESTINATIONS</span>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Horizontal Large Cards Stage */}
-              <div className="relative w-full max-w-7xl h-[500px] sm:h-[550px] md:h-[590px] lg:h-[620px] flex items-center justify-center overflow-visible">
-                {DESTINATIONS.map((dest, i) => (
-                  <DestinationCard
-                    key={dest.slug}
-                    dest={dest}
-                    index={i}
-                    smoothProgress={smoothProgress}
-                    isActive={activeIdx === i}
-                    onCardClick={handleCardClick}
-                    cardSpacing={cardSpacing}
-                  />
-                ))}
-              </div>
-
-              {/* Scroll Hint beneath the large cards */}
-              <div className="mt-4 text-center">
-                <span className="text-[10px] font-mono-tech text-slate-400 uppercase tracking-widest">
-                  SCROLL MOUSE WHEEL TO GLIDE DESTINATIONS RIGHT TO LEFT • CLICK CARD TO OPEN FULL DOSSIER
-                </span>
-              </div>
-            </motion.div>
+        {/* FULLSCREEN 3D ROOM MORPH (TIER 2 CSS 3D ROOM) */}
+        <AnimatePresence>
+          {isContentExpanded && (
+            <DestinationRoom3D
+              destination={currentDest}
+              onClose={() => {
+                soundEngine.playCardSwoosh();
+                setIsContentExpanded(false);
+              }}
+              layoutId={'destination-card-' + currentDest.slug}
+            />
           )}
         </AnimatePresence>
       </main>

@@ -1,15 +1,17 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { DESTINATIONS, Destination } from "@/data/destinations";
 import { soundEngine } from "@/components/shared/SoundEngine";
-import { ArrowRight, MapPin, Sparkles, Building2, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Sparkles, Building2, CheckCircle2, Eye } from "lucide-react";
 import { springDefault, springSoft, sectionViewport } from "@/lib/motion";
+import { DestinationRoom3D, preloadDestinationRoom } from "@/components/ui/DestinationRoom3D";
 
 export const DestinationsPreview: React.FC = () => {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const [active3DDest, setActive3DDest] = useState<Destination | null>(null);
 
   return (
     <section className="relative z-10 py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/10">
@@ -64,6 +66,7 @@ export const DestinationsPreview: React.FC = () => {
           return (
             <motion.div
               key={dest.slug}
+              layoutId={`preview-destination-card-${dest.slug}`}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={sectionViewport}
@@ -71,13 +74,16 @@ export const DestinationsPreview: React.FC = () => {
               onHoverStart={() => {
                 soundEngine.playCardSwoosh();
                 setHoveredIdx(idx);
+                preloadDestinationRoom(dest);
               }}
               onHoverEnd={() => setHoveredIdx(null)}
               whileTap={{ scale: 0.98 }}
             >
-              <Link
-                href={`/destinations/${dest.slug}`}
-                onClick={() => soundEngine.playZoomChime()}
+              <div
+                onClick={() => {
+                  soundEngine.playZoomChime();
+                  setActive3DDest(dest);
+                }}
                 className="group block relative h-[480px] sm:h-[540px] rounded-3xl overflow-hidden glass-card cursor-pointer border border-white/15 transition-all duration-500 hover:border-amber-400/50 shadow-2xl"
               >
                 {/* Background Image with VR-style Zoom Scale */}
@@ -144,8 +150,8 @@ export const DestinationsPreview: React.FC = () => {
                   {/* CTA Button Bar */}
                   <div className="mt-5 pt-3 border-t border-white/15 flex items-center justify-between">
                     <span className="text-xs font-mono-tech text-amber-400 uppercase tracking-widest flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
-                      <MapPin className="w-3.5 h-3.5" />
-                      ENTER {dest.shortName} VIBE
+                      <Eye className="w-3.5 h-3.5" />
+                      ENTER {dest.shortName} 3D ROOM
                     </span>
 
                     <div className="w-8 h-8 rounded-full bg-amber-400/20 group-hover:bg-amber-400 text-amber-400 group-hover:text-black flex items-center justify-center transition-all">
@@ -156,11 +162,25 @@ export const DestinationsPreview: React.FC = () => {
 
                 {/* Subtle top edge specular highlight */}
                 <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-              </Link>
+              </div>
             </motion.div>
           );
         })}
       </div>
+
+      {/* FULLSCREEN 3D ROOM MORPH (TIER 2 CSS 3D ROOM) */}
+      <AnimatePresence>
+        {active3DDest && (
+          <DestinationRoom3D
+            destination={active3DDest}
+            onClose={() => {
+              soundEngine.playCardSwoosh();
+              setActive3DDest(null);
+            }}
+            layoutId={`preview-destination-card-${active3DDest.slug}`}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 };

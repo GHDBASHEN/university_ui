@@ -6,12 +6,15 @@ import Footer from "@/components/layout/Footer";
 import ChatBot from "@/components/shared/ChatBot";
 import { DESTINATIONS, Destination } from "@/data/destinations";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { ArrowRight, Plane } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, Plane, Eye } from "lucide-react";
 import { springDefault, sectionViewport } from "@/lib/motion";
+import { DestinationRoom3D, preloadDestinationRoom } from "@/components/ui/DestinationRoom3D";
+import { soundEngine } from "@/components/shared/SoundEngine";
 
 export default function DestinationsPage() {
   const [filter, setFilter] = useState<string>("All");
+  const [selectedRoomDest, setSelectedRoomDest] = useState<Destination | null>(null);
 
   const filtered = filter === "All"
     ? DESTINATIONS
@@ -75,15 +78,23 @@ export default function DestinationsPage() {
           {filtered.map((dest: Destination, idx: number) => (
             <motion.div
               key={dest.slug}
+              layoutId={`dest-page-card-${dest.slug}`}
               initial={{ opacity: 0, y: 22 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={sectionViewport}
               transition={{ ...springDefault, delay: idx * 0.08 }}
+              onMouseEnter={() => preloadDestinationRoom(dest)}
               whileHover={{ y: -8 }}
               className="glass-panel rounded-3xl overflow-hidden border border-white/15 flex flex-col justify-between group hover:border-amber-400/50 transition-all shadow-2xl"
             >
               {/* Image with zoom */}
-              <div className="relative h-64 overflow-hidden">
+              <div
+                className="relative h-64 overflow-hidden cursor-pointer"
+                onClick={() => {
+                  soundEngine.playZoomChime();
+                  setSelectedRoomDest(dest);
+                }}
+              >
                 <div
                   className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110 filter brightness-90"
                   style={{ backgroundImage: `url(${dest.heroImage})` }}
@@ -97,9 +108,17 @@ export default function DestinationsPage() {
                   </span>
                 </div>
 
-                <div className="absolute top-4 right-4 z-10">
+                <div className="absolute top-4 right-4 z-10 flex items-center gap-2">
                   <span className="text-[10px] font-mono-tech uppercase px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
                     {dest.stats.visaSuccessRate} VISA RATE
+                  </span>
+                </div>
+
+                {/* 3D Room overlay pill */}
+                <div className="absolute bottom-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="px-3 py-1 rounded-full bg-amber-400 text-black font-mono-tech text-[10px] uppercase font-bold tracking-wider flex items-center gap-1 shadow-lg">
+                    <Eye size={12} />
+                    <span>LAUNCH 3D ROOM</span>
                   </span>
                 </div>
               </div>
@@ -167,6 +186,20 @@ export default function DestinationsPage() {
           ))}
         </div>
       </section>
+
+      {/* FULLSCREEN 3D ROOM MORPH (TIER 2 CSS 3D ROOM) */}
+      <AnimatePresence>
+        {selectedRoomDest && (
+          <DestinationRoom3D
+            destination={selectedRoomDest}
+            onClose={() => {
+              soundEngine.playCardSwoosh();
+              setSelectedRoomDest(null);
+            }}
+            layoutId={`dest-page-card-${selectedRoomDest.slug}`}
+          />
+        )}
+      </AnimatePresence>
 
       <ChatBot />
       <Footer />
