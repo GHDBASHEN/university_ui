@@ -16,52 +16,45 @@ import {
   Minimize2,
 } from "lucide-react";
 
-// Curated high-resolution 3D layer maps for CSS 3D Room depth planes
-interface DestinationLayers {
-  skyLayer: string;
-  midLayer: string;
-  focalLayer: string;
-  fgLayer: string;
+// Curated crystal-clear high-definition destination scene data
+interface DestinationSceneData {
+  backgroundImage: string;
   accentGlow: string;
   coordinates: string;
   timezone: string;
 }
 
-const DESTINATION_3D_LAYERS: Record<string, DestinationLayers> = {
+const DESTINATION_SCENE_DATA: Record<string, DestinationSceneData> = {
   "united-kingdom": {
-    skyLayer: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=2400&q=80",
-    midLayer: "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=2000&q=80",
-    focalLayer: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=2400&q=85",
-    fgLayer: "https://images.unsplash.com/photo-1582201942988-13e60e4556ee?auto=format&fit=crop&w=1600&q=80",
-    accentGlow: "rgba(59, 130, 246, 0.35)",
-    coordinates: "51.7520° N, 1.2577° W (Oxford)",
+    // Ultra high-res Westminster & Big Ben on the Thames at dusk - crisp, unmistakable British landmark
+    backgroundImage:
+      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=2560&q=90",
+    accentGlow: "rgba(59, 130, 246, 0.45)",
+    coordinates: "51.5007° N, 0.1246° W (London / Oxford)",
     timezone: "GMT / UTC+0",
   },
   australia: {
-    skyLayer: "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=2400&q=80",
-    midLayer: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=2000&q=80",
-    focalLayer: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=2400&q=85",
-    fgLayer: "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1600&q=80",
-    accentGlow: "rgba(245, 158, 11, 0.4)",
-    coordinates: "33.8688° S, 151.2093° E (Sydney)",
+    // Ultra high-res Sydney Harbour & iconic Opera House under clear Australian sky
+    backgroundImage:
+      "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=2560&q=90",
+    accentGlow: "rgba(245, 158, 11, 0.45)",
+    coordinates: "33.8568° S, 151.2153° E (Sydney / Melbourne)",
     timezone: "AEST / UTC+10",
   },
   canada: {
-    skyLayer: "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=2400&q=80",
-    midLayer: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=2000&q=80",
-    focalLayer: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=2400&q=85",
-    fgLayer: "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1600&q=80",
-    accentGlow: "rgba(239, 68, 68, 0.35)",
-    coordinates: "43.6629° N, 79.3957° W (Toronto)",
+    // Pristine high-res turquoise glacial waters and peaks of Banff / Moraine Lake
+    backgroundImage:
+      "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=2560&q=90",
+    accentGlow: "rgba(239, 68, 68, 0.45)",
+    coordinates: "43.6629° N, 79.3957° W (Toronto / Vancouver)",
     timezone: "EST / UTC-5",
   },
   "united-states": {
-    skyLayer: "https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?auto=format&fit=crop&w=2400&q=80",
-    midLayer: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=2000&q=80",
-    focalLayer: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=2400&q=85",
-    fgLayer: "https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?auto=format&fit=crop&w=1600&q=80",
-    accentGlow: "rgba(168, 85, 247, 0.35)",
-    coordinates: "42.3770° N, 71.1167° W (Cambridge)",
+    // Historic Harvard Yard collegiate quad architecture with lush green lawns
+    backgroundImage:
+      "https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?auto=format&fit=crop&w=2560&q=90",
+    accentGlow: "rgba(168, 85, 247, 0.45)",
+    coordinates: "42.3770° N, 71.1167° W (Cambridge / Boston)",
     timezone: "EST / UTC-5",
   },
 };
@@ -69,14 +62,12 @@ const DESTINATION_3D_LAYERS: Record<string, DestinationLayers> = {
 // Preload helper so clicking feels instantaneous without texture loading lag
 export function preloadDestinationRoom(dest: Destination) {
   if (typeof window === "undefined") return;
-  const layers = DESTINATION_3D_LAYERS[dest.slug];
-  if (!layers) return;
-
-  const urls = [layers.skyLayer, layers.midLayer, layers.focalLayer, layers.fgLayer, dest.heroImage, dest.cardImage];
-  urls.forEach((url) => {
+  const scene = DESTINATION_SCENE_DATA[dest.slug];
+  const url = scene?.backgroundImage || dest.heroImage || dest.cardImage;
+  if (url) {
     const img = new Image();
     img.src = url;
-  });
+  }
 }
 
 interface DestinationRoom3DProps {
@@ -108,18 +99,15 @@ export const DestinationRoom3D: React.FC<DestinationRoom3DProps> = ({
   const smoothMouseY = useSpring(rawMouseY, springConfig);
 
   // CSS 3D Room rotational tilts
-  const rotateX = useTransform(smoothMouseY, [-0.5, 0.5], [10, -10]);
-  const rotateY = useTransform(smoothMouseX, [-0.5, 0.5], [-16, 16]);
+  const rotateX = useTransform(smoothMouseY, [-0.5, 0.5], [8, -8]);
+  const rotateY = useTransform(smoothMouseX, [-0.5, 0.5], [-12, 12]);
 
   // Parallax translation offsets per layer
-  const bgTranslateX = useTransform(smoothMouseX, [-0.5, 0.5], [30, -30]);
-  const bgTranslateY = useTransform(smoothMouseY, [-0.5, 0.5], [20, -20]);
+  const bgTranslateX = useTransform(smoothMouseX, [-0.5, 0.5], [25, -25]);
+  const bgTranslateY = useTransform(smoothMouseY, [-0.5, 0.5], [16, -16]);
 
-  const midTranslateX = useTransform(smoothMouseX, [-0.5, 0.5], [55, -55]);
-  const midTranslateY = useTransform(smoothMouseY, [-0.5, 0.5], [35, -35]);
-
-  const focalTranslateX = useTransform(smoothMouseX, [-0.5, 0.5], [75, -75]);
-  const focalTranslateY = useTransform(smoothMouseY, [-0.5, 0.5], [45, -45]);
+  const midTranslateX = useTransform(smoothMouseX, [-0.5, 0.5], [45, -45]);
+  const midTranslateY = useTransform(smoothMouseY, [-0.5, 0.5], [28, -28]);
 
   // Specular light coordinates
   const lightX = useTransform(smoothMouseX, [-0.5, 0.5], ["30%", "70%"]);
@@ -181,11 +169,8 @@ export const DestinationRoom3D: React.FC<DestinationRoom3DProps> = ({
     }
   };
 
-  const layers = DESTINATION_3D_LAYERS[destination.slug] || {
-    skyLayer: destination.heroImage,
-    midLayer: destination.cardImage,
-    focalLayer: destination.heroImage,
-    fgLayer: destination.cardImage,
+  const scene = DESTINATION_SCENE_DATA[destination.slug] || {
+    backgroundImage: destination.heroImage || destination.cardImage,
     accentGlow: destination.accentColor,
     coordinates: "45.0000° N, 0.0000° E",
     timezone: "UTC",
@@ -203,7 +188,7 @@ export const DestinationRoom3D: React.FC<DestinationRoom3DProps> = ({
       }}
     >
       {/* =====================================================================
-          TIER 2: CSS 3D ROOM (3–5 LAYERED PLANES ON TRANSLATE-Z)
+          TIER 2: CSS 3D ROOM (SINGLE CRYSTAL-CLEAR SCENE WITH 3D DEPTH)
           ===================================================================== */}
       <motion.div
         className="absolute inset-0 w-full h-full pointer-events-none"
@@ -213,61 +198,40 @@ export const DestinationRoom3D: React.FC<DestinationRoom3DProps> = ({
           rotateY: reducedMotion ? 0 : rotateY,
         }}
       >
-        {/* Layer 1: Deep Sky & Horizon (translateZ: -280px, scale: 1.45) */}
+        {/* 1. Crystal-Clear Single High-Resolution Destination Background Image */}
         <motion.div
-          className="absolute inset-[-15%] bg-cover bg-center filter brightness-50 contrast-125"
+          className="absolute inset-[-12%] bg-cover bg-center filter brightness-[0.72] contrast-[1.08] saturate-[1.12]"
           style={{
-            backgroundImage: `url(${layers.skyLayer})`,
-            transform: reducedMotion ? "none" : "translateZ(-280px) scale(1.45)",
+            backgroundImage: `url(${scene.backgroundImage})`,
+            transform: reducedMotion ? "none" : "translateZ(-80px) scale(1.18)",
             x: reducedMotion ? 0 : bgTranslateX,
             y: reducedMotion ? 0 : bgTranslateY,
           }}
         />
 
-        {/* Ambient Dark Room Fog & Vignette */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#04060A] via-black/40 to-[#04060A]/80 pointer-events-none" />
+        {/* 2. Soft Atmospheric Depth Vignette (Ensures HUD & Card Readability without Washing Out Photo) */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#04060A]/90 via-transparent to-[#04060A]/75 pointer-events-none" />
+        <div className="absolute inset-0 shadow-[inset_0_0_120px_rgba(4,6,10,0.8)] pointer-events-none" />
 
-        {/* Layer 2: Midground Architectural Panorama (translateZ: -140px, scale: 1.25) */}
+        {/* 3. Subtle Cyber-Spatial Coordinate Grid Layer (Floats on translateZ: -20px) */}
         {!reducedMotion && (
           <motion.div
-            className="absolute inset-[-10%] bg-cover bg-center opacity-65 mix-blend-screen filter saturate-125 brightness-90"
+            className="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(#ffffff15_1px,transparent_1px)] [background-size:28px_28px]"
             style={{
-              backgroundImage: `url(${layers.midLayer})`,
-              transform: "translateZ(-140px) scale(1.25)",
+              transform: "translateZ(-20px)",
               x: midTranslateX,
               y: midTranslateY,
             }}
           />
         )}
 
-        {/* Layer 3: Focal Architectural Landmark Quad (translateZ: 0px, scale: 1.05) */}
-        <motion.div
-          className="absolute inset-[-5%] bg-cover bg-center opacity-45 mix-blend-screen filter contrast-125 brightness-85"
-          style={{
-            backgroundImage: `url(${layers.focalLayer})`,
-            transform: reducedMotion ? "none" : "translateZ(0px) scale(1.05)",
-            x: reducedMotion ? 0 : focalTranslateX,
-            y: reducedMotion ? 0 : focalTranslateY,
-          }}
-        />
-
-        {/* Layer 4: Dynamic Specular Beam & Atmosphere Glow (translateZ: +90px) */}
+        {/* 4. Mouse-Directed Specular Light Beam (Floats on translateZ: +40px) */}
         {!reducedMotion && (
           <motion.div
-            className="absolute inset-0 pointer-events-none opacity-40 mix-blend-color-dodge transition-all duration-300"
+            className="absolute inset-0 pointer-events-none opacity-40 mix-blend-screen transition-all duration-300"
             style={{
-              transform: "translateZ(90px)",
-              background: `radial-gradient(circle at ${lightX} ${lightY}, ${layers.accentGlow} 0%, rgba(251,191,36,0.15) 30%, transparent 70%)`,
-            }}
-          />
-        )}
-
-        {/* Layer 5: Foreground Architectural Framing (translateZ: +180px) */}
-        {!reducedMotion && (
-          <div
-            className="absolute inset-0 pointer-events-none shadow-[inset_0_0_180px_rgba(4,6,10,0.95)]"
-            style={{
-              transform: "translateZ(180px)",
+              transform: "translateZ(40px)",
+              background: `radial-gradient(circle at ${lightX} ${lightY}, ${scene.accentGlow} 0%, rgba(251,191,36,0.12) 30%, transparent 65%)`,
             }}
           />
         )}
@@ -291,9 +255,9 @@ export const DestinationRoom3D: React.FC<DestinationRoom3DProps> = ({
               </span>
             </div>
             <div className="text-[10px] font-mono-tech text-slate-400 tracking-widest uppercase flex items-center gap-2 mt-0.5">
-              <span>{layers.coordinates}</span>
+              <span>{scene.coordinates}</span>
               <span>•</span>
-              <span className="text-cyan-400">{layers.timezone}</span>
+              <span className="text-cyan-400">{scene.timezone}</span>
             </div>
           </div>
         </div>
