@@ -139,6 +139,15 @@ export const DestinationRoom3D: React.FC<DestinationRoom3DProps> = ({
     [rawMouseX, rawMouseY, reducedMotion]
   );
 
+  // Lock body scroll while 3D room is open
+  useEffect(() => {
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, []);
+
   // Keyboard accessibility: Escape to close and focus restoration
   useEffect(() => {
     // Focus the close button when opened

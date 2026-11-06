@@ -18,7 +18,7 @@ import { springDefault, sectionViewport } from "@/lib/motion";
 
 export default function HomePage() {
   return (
-    <div className="relative min-h-screen bg-[#07090E] text-slate-100 overflow-x-hidden">
+    <div className="relative min-h-screen bg-[#07090E] text-slate-100 overflow-x-clip">
       {/* Global Navigation */}
       <Navbar />
 
