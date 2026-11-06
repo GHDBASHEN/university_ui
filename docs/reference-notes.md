@@ -1,0 +1,10 @@
+1. Pinned Chamber Architecture: The viewport acts as an unyielding theatrical stage where sections anchor rigidly, transforming the downward scroll gesture into horizontal spatial revelation and progressive narrative unmasking.
+2. Narrative-Bound Typography: Headlines and editorial claims don't simply slide by; their opacity, character kerning, and spatial offsets are directly scrubbed by scroll progress, commanding reading cadence.
+3. The Cursor as an Adaptive Instrument: Rather than an inert system arrow, the cursor behaves as a tactile physical probe that shifts state (hover snap, drag target, label revealer, magnetic pull) based on what it touches.
+4. Spring Mechanics Over Duration Curves: Transitions abandon stiff cubic-beziers in favor of mass, tension, and damping, making every spatial transformation feel rooted in Newtonian physics and physical weight.
+5. Radical Aesthetic Discipline: The experience relies on ruthless chromatic restraint—a pitch-dark foundation, stark typography, and a single high-signal accent color—allowing motion and layout geometry to convey gravity.
+6. Negative Space as Pacing: Expansive voids around monumental typography generate architectural stillness, giving every interactive element room to breathe and accentuating micro-movements.
+7. Consequential Feedback Loops: Every hover, drag, and click triggers an immediate, tangible state shift, providing instant acoustic and visual confirmation that the user is manipulating a living mechanism.
+8. Contextual Marginalia & Footnotes: Subtle metadata, coordinates, and editorial annotations hover discreetly on perimeter lines, surfacing deep context only when deliberately probed without cluttering the master view.
+9. Acoustic Restraint: Sound is deployed strictly as an understated tactile accent (subtle clicks, frequency swooshes, low-gain resonance) that confirms spatial changes without overwhelming the auditory field.
+10. Mobile Architectural Degradation: On touch interfaces and narrow viewports, pinned chambers gracefully unlock into frictionless vertical rhythms, avoiding scroll-hijacking while preserving typographic grandeur.
