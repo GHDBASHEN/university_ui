@@ -13,6 +13,7 @@ import {
 import Link from "next/link";
 import { DESTINATIONS, Destination } from "@/data/destinations";
 import { soundEngine } from "@/components/shared/SoundEngine";
+import { springDefault } from "@/lib/motion";
 import {
   Compass,
   ArrowRight,
@@ -415,7 +416,7 @@ export const HeroSection: React.FC = () => {
           key={activeIdx >= 0 ? currentDest.slug : "intro"}
           initial={{ opacity: 0, x: -15 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4 }}
+          transition={springDefault}
           className="flex items-start gap-3 cursor-pointer group"
           onClick={() => goToSlide(0)}
         >
@@ -494,7 +495,7 @@ export const HeroSection: React.FC = () => {
               initial={{ opacity: 0, y: 30, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -25, scale: 0.95 }}
-              transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+              transition={springDefault}
               className="w-full max-w-5xl mx-auto flex flex-col items-center text-white my-auto max-h-[72vh] overflow-y-auto px-2"
             >
               {/* Back to Carousel Pill */}
@@ -674,7 +675,7 @@ export const HeroSection: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.4 }}
+              transition={springDefault}
               className="relative w-full flex flex-col items-center justify-center"
             >
               {/* CINEMATIC TITLE ON FIRST LOAD: BACKGROUND + TITLE ONLY, NO SLIDES */}
@@ -859,15 +860,14 @@ export const HeroSection: React.FC = () => {
           {/* Dynamic Progress Line */}
           <div className="w-20 sm:w-28 h-[2px] bg-white/20 rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-amber-400"
+              className="h-full bg-amber-400 w-full origin-left"
               animate={{
-                width: `${
+                scaleX:
                   activeIdx >= 0
-                    ? ((activeIdx + 1) / DESTINATIONS.length) * 100
-                    : 0
-                }%`,
+                    ? (activeIdx + 1) / DESTINATIONS.length
+                    : 0,
               }}
-              transition={{ ease: "easeInOut", duration: 0.3 }}
+              transition={springDefault}
             />
           </div>
 

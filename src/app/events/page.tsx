@@ -9,13 +9,9 @@ import { motion } from "framer-motion";
 import {
   Calendar,
   MapPin,
-  Clock,
-  ArrowRight,
-  Sparkles,
-  Users,
-  Video,
   Ticket,
 } from "lucide-react";
+import { springDefault, sectionViewport } from "@/lib/motion";
 
 export default function EventsPage() {
   const [activeTab, setActiveTab] = useState<string>("all");
@@ -31,8 +27,9 @@ export default function EventsPage() {
       <section className="relative pt-36 pb-28 px-6 md:px-12 max-w-7xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
+            transition={springDefault}
             className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-mono-tech uppercase tracking-widest mb-4"
           >
             <Calendar className="w-3.5 h-3.5 text-amber-400" />
@@ -42,16 +39,16 @@ export default function EventsPage() {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
+            transition={{ ...springDefault, delay: 0.08 }}
             className="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight"
           >
             Connect With University Deans
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            transition={{ ...springDefault, delay: 0.16 }}
             className="text-slate-300 text-sm sm:text-base mt-4 max-w-2xl mx-auto font-light leading-relaxed"
           >
             Meet international university admissions directors face-to-face. Attend scholarship evaluation workshops, visa seminars, and live virtual interactive briefings.
@@ -86,9 +83,10 @@ export default function EventsPage() {
           {filtered.map((item: Event, idx: number) => (
             <motion.div
               key={item.id}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.1, duration: 0.5 }}
+              initial={{ opacity: 0, y: 22 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={sectionViewport}
+              transition={{ ...springDefault, delay: idx * 0.08 }}
               className="glass-panel rounded-3xl overflow-hidden border border-white/15 flex flex-col justify-between group hover:border-amber-400/40 transition-all shadow-xl"
             >
               <div className="relative h-48 overflow-hidden">

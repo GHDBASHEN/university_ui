@@ -6,6 +6,7 @@ import Link from "next/link";
 import { DESTINATIONS, Destination } from "@/data/destinations";
 import { soundEngine } from "@/components/shared/SoundEngine";
 import { ArrowRight, MapPin, Sparkles, Building2, CheckCircle2 } from "lucide-react";
+import { springDefault, springSoft, sectionViewport } from "@/lib/motion";
 
 export const DestinationsPreview: React.FC = () => {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
@@ -16,9 +17,10 @@ export const DestinationsPreview: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
         <div>
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={sectionViewport}
+            transition={springDefault}
             className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-mono-tech uppercase tracking-widest mb-3.5"
           >
             <Sparkles className="w-3.5 h-3.5 text-amber-400" />
@@ -28,18 +30,18 @@ export const DestinationsPreview: React.FC = () => {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ delay: 0.1 }}
+            viewport={sectionViewport}
+            transition={{ ...springDefault, delay: 0.08 }}
             className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight"
           >
             Choose Your Horizon. Dive Inside.
           </motion.h2>
 
           <motion.p
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ delay: 0.2 }}
+            viewport={sectionViewport}
+            transition={{ ...springDefault, delay: 0.16 }}
             className="text-slate-300 text-sm sm:text-base mt-3 max-w-2xl font-light"
           >
             Click any destination to experience an immersive VR-style transition into that country&apos;s educational ecosystem, universities, and student lifestyle.
@@ -62,10 +64,10 @@ export const DestinationsPreview: React.FC = () => {
           return (
             <motion.div
               key={dest.slug}
-              initial={{ opacity: 0, y: 35 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ delay: idx * 0.12, duration: 0.6 }}
+              viewport={sectionViewport}
+              transition={{ ...springDefault, delay: idx * 0.1 }}
               onHoverStart={() => {
                 soundEngine.playCardSwoosh();
                 setHoveredIdx(idx);
@@ -83,7 +85,7 @@ export const DestinationsPreview: React.FC = () => {
                   animate={{
                     scale: isHovered ? 1.15 : 1.02,
                   }}
-                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  transition={springSoft}
                   className="absolute inset-0 bg-cover bg-center"
                   style={{ backgroundImage: `url(${dest.heroImage})` }}
                 />

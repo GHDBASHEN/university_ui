@@ -2,7 +2,7 @@
 
 import React from "react";
 import { PartnerLogo } from "@/data/partners";
-import { Award, MapPin, ExternalLink } from "lucide-react";
+import { MapPin } from "lucide-react";
 import Link from "next/link";
 
 interface LogoSliderProps {

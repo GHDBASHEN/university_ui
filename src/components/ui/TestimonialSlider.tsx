@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react";
+import { springDefault } from "@/lib/motion";
 
 interface Testimonial {
   id?: string;
@@ -76,7 +77,7 @@ export default function TestimonialSlider({ testimonials }: TestimonialSliderPro
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ duration: 0.4, ease: "easeInOut" }}
+            transition={springDefault}
             className="w-full"
           >
             {/* Stars */}

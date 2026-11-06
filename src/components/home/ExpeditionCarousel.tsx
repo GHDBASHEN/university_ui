@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { EXPEDITION_DESTINATIONS, ExpeditionDestination } from "@/data/expeditions";
 import { soundEngine } from "@/components/shared/SoundEngine";
+import { springDefault, springSoft } from "@/lib/motion";
 
 interface ExpeditionCarouselProps {
   initialIndex?: number;
@@ -124,7 +125,7 @@ export const ExpeditionCarousel: React.FC<ExpeditionCarouselProps> = ({
             initial={{ opacity: 0, scale: 1.08 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1.03 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            transition={springSoft}
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: `url(${activeDest.image})` }}
           />
@@ -182,7 +183,7 @@ export const ExpeditionCarousel: React.FC<ExpeditionCarouselProps> = ({
           key={activeDest.id + "-title"}
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+          transition={springDefault}
           className="text-center max-w-3xl mb-4 sm:mb-6"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/15 text-[11px] font-mono tracking-widest text-slate-300 uppercase mb-2 backdrop-blur-md">

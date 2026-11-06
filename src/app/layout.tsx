@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Outfit, Syne, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import { MotionProvider } from "@/context/MotionContext";
+import { SmoothScrollProvider } from "@/components/shared/SmoothScrollProvider";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -32,11 +35,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark scroll-smooth">
+    <html lang="en" className="dark">
       <body
         className={`${outfit.variable} ${syne.variable} ${spaceGrotesk.variable} font-heading antialiased bg-[#07090E] text-slate-100 min-h-screen overflow-x-hidden selection:bg-amber-400 selection:text-black`}
       >
-        {children}
+        <MotionProvider>
+          <SmoothScrollProvider>
+            <ScrollProgress />
+            {children}
+          </SmoothScrollProvider>
+        </MotionProvider>
       </body>
     </html>
   );

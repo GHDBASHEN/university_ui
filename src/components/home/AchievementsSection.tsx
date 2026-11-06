@@ -3,6 +3,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { Users, Award, GraduationCap, Globe2, CalendarCheck, ShieldCheck } from "lucide-react";
+import { springDefault, sectionViewport } from "@/lib/motion";
 
 interface Achievement {
   value: number;
@@ -99,10 +100,10 @@ const CounterCard: React.FC<{ achievement: Achievement; delay: number }> = ({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ delay: delay * 0.08, duration: 0.6 }}
+      viewport={sectionViewport}
+      transition={{ ...springDefault, delay: delay * 0.06 }}
       whileHover={{ y: -6, scale: 1.02 }}
       className="glass-panel p-6 sm:p-7 rounded-3xl border border-white/10 relative overflow-hidden group hover:border-amber-400/40 transition-all shadow-xl flex flex-col justify-between"
     >
@@ -156,9 +157,10 @@ export const AchievementsSection: React.FC = () => {
     <section className="relative z-10 py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/10">
       <div className="text-center max-w-3xl mx-auto mb-16">
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={sectionViewport}
+          transition={springDefault}
           className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-400/10 border border-cyan-400/30 text-cyan-300 text-xs font-mono-tech uppercase tracking-widest mb-3"
         >
           <Award className="w-3.5 h-3.5 text-cyan-400" />
@@ -168,18 +170,18 @@ export const AchievementsSection: React.FC = () => {
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ delay: 0.1 }}
+          viewport={sectionViewport}
+          transition={{ ...springDefault, delay: 0.08 }}
           className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight"
         >
           Numbers That Define Academic Excellence
         </motion.h2>
 
         <motion.p
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ delay: 0.2 }}
+          viewport={sectionViewport}
+          transition={{ ...springDefault, delay: 0.16 }}
           className="text-slate-300 text-sm sm:text-base mt-4 font-light text-balance"
         >
           Over a decade of relentless dedication toward connecting ambitious minds

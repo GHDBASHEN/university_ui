@@ -12,14 +12,12 @@ import { motion } from "framer-motion";
 import {
   ShieldCheck,
   Compass,
-  Award,
-  Users,
   Target,
-  CheckCircle2,
   Sparkles,
   ArrowRight,
   Globe2,
 } from "lucide-react";
+import { springDefault, sectionViewport } from "@/lib/motion";
 
 export default function AboutPage() {
   const leadership = [
@@ -50,8 +48,9 @@ export default function AboutPage() {
       {/* Hero Section */}
       <section className="relative pt-36 pb-20 px-6 md:px-12 max-w-7xl mx-auto text-center">
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={springDefault}
           className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-mono-tech uppercase tracking-widest mb-4"
         >
           <Compass className="w-3.5 h-3.5 text-amber-400" />
@@ -61,16 +60,16 @@ export default function AboutPage() {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
+          transition={{ ...springDefault, delay: 0.08 }}
           className="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight"
         >
           Bridging Ambition to World-Class Institutions
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
+          transition={{ ...springDefault, delay: 0.16 }}
           className="text-slate-300 text-sm sm:text-base mt-4 max-w-3xl mx-auto font-light leading-relaxed"
         >
           Founded in 2014, AURA Global Education has transformed the study abroad consultancy model. We operate not as simple ticket-brokers, but as strategic academic navigators for scholars reaching for Russell Group, Australian Group of Eight, and Canadian U15 faculties.
@@ -80,29 +79,47 @@ export default function AboutPage() {
       {/* Mission & Vision Split */}
       <section className="relative z-10 py-16 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="glass-panel p-8 rounded-3xl border border-white/15">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={sectionViewport}
+            transition={springDefault}
+            className="glass-panel p-8 rounded-3xl border border-white/15"
+          >
             <Target className="w-8 h-8 text-amber-400 mb-4" />
             <h3 className="font-display text-xl font-bold text-white">Our Mission</h3>
             <p className="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed font-light">
               Democratize access to tier-one global tertiary institutions by providing ethical, transparent, and research-grade counseling with zero compromise on student career fit.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="glass-panel p-8 rounded-3xl border border-white/15">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={sectionViewport}
+            transition={{ ...springDefault, delay: 0.08 }}
+            className="glass-panel p-8 rounded-3xl border border-white/15"
+          >
             <Globe2 className="w-8 h-8 text-cyan-400 mb-4" />
             <h3 className="font-display text-xl font-bold text-white">Our Global Reach</h3>
             <p className="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed font-light">
               Direct recruitment partnerships across 200+ universities in the United Kingdom, Australia, and Canada, backed by regional counseling offices across Asia, the Middle East, and Europe.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="glass-panel p-8 rounded-3xl border border-white/15">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={sectionViewport}
+            transition={{ ...springDefault, delay: 0.16 }}
+            className="glass-panel p-8 rounded-3xl border border-white/15"
+          >
             <ShieldCheck className="w-8 h-8 text-emerald-400 mb-4" />
             <h3 className="font-display text-xl font-bold text-white">Ethical Standards</h3>
             <p className="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed font-light">
               Certified by ICEF, the British Council, and PIER Australia. Every application adheres strictly to international embassy compliance protocols with a 98% visa success metric.
             </p>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -111,19 +128,29 @@ export default function AboutPage() {
 
       {/* Leadership Showcase */}
       <section className="relative z-10 py-20 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={sectionViewport}
+          transition={springDefault}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
           <span className="text-xs font-mono-tech uppercase text-amber-400 tracking-widest">
             DIRECTORS & SENIOR ADVISORS
           </span>
           <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mt-2">
             Guided by Proven Academic Mentors
           </h2>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {leadership.map((leader) => (
-            <div
+          {leadership.map((leader, idx) => (
+            <motion.div
               key={leader.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={sectionViewport}
+              transition={{ ...springDefault, delay: idx * 0.08 }}
               className="glass-panel p-6 rounded-3xl border border-white/15 flex flex-col items-center text-center group hover:border-amber-400/40 transition-all shadow-xl"
             >
               <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-white/20 group-hover:border-amber-400 transition-colors mb-4">
@@ -143,23 +170,35 @@ export default function AboutPage() {
               <p className="text-xs text-slate-400 mt-2">
                 {leader.credentials}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
 
       {/* University Partners Carousel */}
-      <section className="relative z-10 py-16 border-t border-white/10 bg-black/40">
+      <motion.section
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={sectionViewport}
+        transition={springDefault}
+        className="relative z-10 py-16 border-t border-white/10 bg-black/40"
+      >
         <div className="max-w-7xl mx-auto px-6 mb-6 text-center">
           <span className="text-xs font-mono-tech uppercase tracking-widest text-slate-400">
             OFFICIAL ADMISSIONS PARTNERS
           </span>
         </div>
         <LogoSlider logos={PARTNER_LOGOS} />
-      </section>
+      </motion.section>
 
       {/* Final CTA */}
-      <section className="relative z-10 py-20 px-6 md:px-12 max-w-5xl mx-auto text-center">
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={sectionViewport}
+        transition={springDefault}
+        className="relative z-10 py-20 px-6 md:px-12 max-w-5xl mx-auto text-center"
+      >
         <h2 className="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight">
           Ready to Discuss Your Study Abroad Future?
         </h2>
@@ -177,7 +216,7 @@ export default function AboutPage() {
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
-      </section>
+      </motion.section>
 
       <ChatBot />
       <Footer />

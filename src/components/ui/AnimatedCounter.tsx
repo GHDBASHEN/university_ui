@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, useInView } from "framer-motion";
+import { springDefault, sectionViewport } from "@/lib/motion";
 
 interface AnimatedCounterProps {
   value: number;
@@ -46,10 +47,10 @@ export default function AnimatedCounter({ value, suffix = "", label, icon }: Ani
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      viewport={sectionViewport}
+      transition={springDefault}
       whileHover={{ y: -4 }}
       className="relative p-6 rounded-2xl bg-white/[0.04] border border-white/10 backdrop-blur-sm hover:border-amber-400/20 hover:bg-white/[0.06] transition-all duration-500 group hover:shadow-lg hover:shadow-amber-400/5"
     >

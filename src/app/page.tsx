@@ -13,7 +13,8 @@ import { PARTNER_LOGOS } from "@/data/partners";
 import { TESTIMONIALS } from "@/data/testimonials";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Calendar, BookOpen, ArrowRight, ShieldCheck, Sparkles, HelpCircle } from "lucide-react";
+import { Calendar, Sparkles } from "lucide-react";
+import { springDefault, sectionViewport } from "@/lib/motion";
 
 export default function HomePage() {
   return (
@@ -25,14 +26,20 @@ export default function HomePage() {
       <HeroSection />
 
       {/* 2. Partner Universities Infinite Marquee */}
-      <section className="relative z-10 py-12 border-y border-white/10 bg-black/40 backdrop-blur-md">
+      <motion.section
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={sectionViewport}
+        transition={springDefault}
+        className="relative z-10 py-12 border-y border-white/10 bg-black/40 backdrop-blur-md"
+      >
         <div className="max-w-7xl mx-auto px-6 mb-6 text-center">
           <span className="text-xs font-mono-tech uppercase tracking-widest text-slate-400">
             OFFICIAL ADMISSIONS PARTNERS WITH 200+ GLOBAL UNIVERSITIES
           </span>
         </div>
         <LogoSlider logos={PARTNER_LOGOS} />
-      </section>
+      </motion.section>
 
       {/* 3. Study Abroad Destinations (UK, Australia, Canada with VR Zoom) */}
       <DestinationsPreview />
@@ -44,9 +51,10 @@ export default function HomePage() {
       <section className="relative z-10 py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/10">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={sectionViewport}
+            transition={springDefault}
             className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-mono-tech uppercase tracking-widest mb-3"
           >
             <Sparkles className="w-3.5 h-3.5 text-amber-400" />
@@ -56,18 +64,18 @@ export default function HomePage() {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ delay: 0.1 }}
+            viewport={sectionViewport}
+            transition={{ ...springDefault, delay: 0.08 }}
             className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight"
           >
             Stories of Global Transformation
           </motion.h2>
 
           <motion.p
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ delay: 0.2 }}
+            viewport={sectionViewport}
+            transition={{ ...springDefault, delay: 0.16 }}
             className="text-slate-300 text-sm sm:text-base mt-4 font-light text-balance"
           >
             Hear from scholars who journeyed from initial consultation to graduation day across our top partner faculties.
@@ -78,7 +86,13 @@ export default function HomePage() {
       </section>
 
       {/* 6. Quick Interactive Banner / Call-to-Action to Events & Appointments */}
-      <section className="relative z-10 py-20 px-6 md:px-12 max-w-7xl mx-auto">
+      <motion.section
+        initial={{ opacity: 0, y: 22 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={sectionViewport}
+        transition={springDefault}
+        className="relative z-10 py-20 px-6 md:px-12 max-w-7xl mx-auto"
+      >
         <div className="glass-card-active rounded-3xl p-8 sm:p-14 border border-amber-400/40 relative overflow-hidden shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="max-w-2xl">
             <span className="text-xs font-mono-tech uppercase text-amber-300 tracking-widest bg-amber-400/10 border border-amber-400/30 px-3 py-1 rounded-full">
@@ -108,7 +122,7 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Global Chatbot Floating Assistant */}
       <ChatBot />

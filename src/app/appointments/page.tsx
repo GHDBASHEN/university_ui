@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ChatBot from "@/components/shared/ChatBot";
-import { DESTINATIONS } from "@/data/destinations";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
+import { springDefault } from "@/lib/motion";
 import {
   Calendar,
   Clock,
@@ -54,8 +54,9 @@ export default function AppointmentsPage() {
       <section className="relative pt-36 pb-28 px-6 md:px-12 max-w-5xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-14">
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
+            transition={springDefault}
             className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-mono-tech uppercase tracking-widest mb-4"
           >
             <Calendar className="w-3.5 h-3.5 text-amber-400" />
@@ -65,16 +66,16 @@ export default function AppointmentsPage() {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
+            transition={{ ...springDefault, delay: 0.08 }}
             className="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight"
           >
             Book Free Consultation
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            transition={{ ...springDefault, delay: 0.16 }}
             className="text-slate-300 text-sm sm:text-base mt-3 max-w-2xl mx-auto font-light"
           >
             Schedule a dedicated 45-minute strategic session with our certified counselors. Receive tailored university shortlists, scholarship roadmaps, and visa guidance.
@@ -83,9 +84,9 @@ export default function AppointmentsPage() {
 
         {!submitted ? (
           <motion.div
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
+            transition={{ ...springDefault, delay: 0.24 }}
             className="glass-panel p-6 sm:p-12 rounded-3xl border border-white/20 shadow-2xl relative overflow-hidden"
           >
             {/* Ambient Accent Glow */}

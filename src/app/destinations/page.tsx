@@ -7,16 +7,8 @@ import ChatBot from "@/components/shared/ChatBot";
 import { DESTINATIONS, Destination } from "@/data/destinations";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import {
-  MapPin,
-  ArrowRight,
-  Globe2,
-  Building2,
-  Award,
-  Sparkles,
-  Plane,
-  CheckCircle2,
-} from "lucide-react";
+import { ArrowRight, Plane } from "lucide-react";
+import { springDefault, sectionViewport } from "@/lib/motion";
 
 export default function DestinationsPage() {
   const [filter, setFilter] = useState<string>("All");
@@ -32,8 +24,9 @@ export default function DestinationsPage() {
       {/* Header Banner */}
       <section className="relative pt-36 pb-20 px-6 md:px-12 max-w-7xl mx-auto text-center">
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={springDefault}
           className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-mono-tech uppercase tracking-widest mb-4"
         >
           <Plane className="w-3.5 h-3.5 text-amber-400" />
@@ -43,16 +36,16 @@ export default function DestinationsPage() {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
+          transition={{ ...springDefault, delay: 0.08 }}
           className="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight"
         >
           Explore Countries & Universities
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
+          transition={{ ...springDefault, delay: 0.16 }}
           className="text-slate-300 text-sm sm:text-base mt-4 max-w-2xl mx-auto font-light leading-relaxed"
         >
           Select a premier destination below to immerse yourself in its university network, post-study work rights, cost of living, and visa processes.
@@ -82,9 +75,10 @@ export default function DestinationsPage() {
           {filtered.map((dest: Destination, idx: number) => (
             <motion.div
               key={dest.slug}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.1, duration: 0.5 }}
+              initial={{ opacity: 0, y: 22 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={sectionViewport}
+              transition={{ ...springDefault, delay: idx * 0.08 }}
               whileHover={{ y: -8 }}
               className="glass-panel rounded-3xl overflow-hidden border border-white/15 flex flex-col justify-between group hover:border-amber-400/50 transition-all shadow-2xl"
             >

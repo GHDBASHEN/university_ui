@@ -4,6 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Send, MapPin, Phone, Mail, Globe, Share2, MessageCircle, Video } from "lucide-react";
+import { ReduceMotionToggle } from "@/components/ui/ReduceMotionToggle";
+import { springDefault } from "@/lib/motion";
 
 const quickLinks = [
   { href: "/about", label: "About Us" },
@@ -162,6 +164,7 @@ export default function Footer() {
               <motion.p
                 initial={{ opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
+                transition={springDefault}
                 className="text-xs text-emerald-400 mt-2"
               >
                 Subscribed successfully!
@@ -176,6 +179,7 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Aura Global Education. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
+            <ReduceMotionToggle variant="badge" />
             <Link
               href="/privacy"
               className="text-xs text-slate-500 hover:text-slate-300 transition-colors"

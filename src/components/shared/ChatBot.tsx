@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send, Bot, Loader2 } from "lucide-react";
+import { springSnappy, springDefault } from "@/lib/motion";
 
 interface ChatMessage {
   id: string;
@@ -133,7 +134,7 @@ export default function ChatBot() {
                   key={msg.id}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.25 }}
+                  transition={springDefault}
                   className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                 >
                   <div
@@ -205,7 +206,7 @@ export default function ChatBot() {
               initial={{ rotate: -90, opacity: 0 }}
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: 90, opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={springSnappy}
             >
               <X size={22} />
             </motion.div>
@@ -215,7 +216,7 @@ export default function ChatBot() {
               initial={{ rotate: 90, opacity: 0 }}
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: -90, opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={springSnappy}
             >
               <MessageCircle size={22} />
             </motion.div>

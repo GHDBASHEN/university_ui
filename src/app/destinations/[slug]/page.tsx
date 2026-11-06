@@ -5,12 +5,11 @@ import { notFound, useParams } from "next/navigation";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ChatBot from "@/components/shared/ChatBot";
-import { DESTINATIONS, Destination } from "@/data/destinations";
+import { DESTINATIONS } from "@/data/destinations";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   GraduationCap,
-  Calendar,
   DollarSign,
   Award,
   CheckCircle2,
@@ -18,10 +17,10 @@ import {
   ArrowRight,
   Sun,
   Briefcase,
-  Layers,
   Sparkles,
   BookOpen,
 } from "lucide-react";
+import { springDefault, sectionViewport } from "@/lib/motion";
 
 export default function DestinationDetailPage() {
   const params = useParams();
@@ -71,27 +70,27 @@ export default function DestinationDetailPage() {
           </motion.div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.7 }}
+            transition={{ ...springDefault, delay: 0.08 }}
             className="font-display text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight"
           >
             {destination.name}
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            transition={{ ...springDefault, delay: 0.16 }}
             className="text-amber-300 font-mono-tech text-base sm:text-xl uppercase tracking-wider mt-3"
           >
             {destination.tagline}
           </motion.p>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
+            transition={{ ...springDefault, delay: 0.24 }}
             className="text-slate-200 text-sm sm:text-base mt-4 max-w-3xl mx-auto leading-relaxed font-light"
           >
             {destination.description}
@@ -99,9 +98,9 @@ export default function DestinationDetailPage() {
 
           {/* Quick Action CTAs */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
+            transition={{ ...springDefault, delay: 0.32 }}
             className="mt-8 flex flex-wrap items-center justify-center gap-4"
           >
             <Link
@@ -124,7 +123,13 @@ export default function DestinationDetailPage() {
       </section>
 
       {/* 2. Key Country Metrics Bar */}
-      <section className="relative z-10 py-12 px-6 md:px-12 max-w-7xl mx-auto">
+      <motion.section
+        initial={{ opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={sectionViewport}
+        transition={springDefault}
+        className="relative z-10 py-12 px-6 md:px-12 max-w-7xl mx-auto"
+      >
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
           <div className="glass-panel p-5 rounded-2xl border border-white/10">
             <div className="text-[10px] font-mono-tech uppercase text-slate-400">Total Universities</div>
@@ -166,10 +171,16 @@ export default function DestinationDetailPage() {
             <div className="text-[10px] text-purple-300 font-mono-tech mt-1">Partial & Full Grants</div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 3. Lifestyle, Work Rights & Culture Matrix */}
-      <section className="relative z-10 py-16 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/10">
+      <motion.section
+        initial={{ opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={sectionViewport}
+        transition={springDefault}
+        className="relative z-10 py-16 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/10"
+      >
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="text-xs font-mono-tech uppercase text-amber-400 tracking-widest">
             {destination.shortName} LIVING REALITY
@@ -204,10 +215,17 @@ export default function DestinationDetailPage() {
             <div className="text-sm font-semibold text-white mt-1">{destination.lifestyle.culture}</div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 4. Interactive Universities List / Details */}
-      <section id="universities" className="relative z-10 py-20 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/10">
+      <motion.section
+        id="universities"
+        initial={{ opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={sectionViewport}
+        transition={springDefault}
+        className="relative z-10 py-20 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/10"
+      >
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-xs font-mono-tech uppercase text-cyan-400 tracking-widest bg-cyan-400/10 border border-cyan-400/30 px-3.5 py-1 rounded-full">
             AFFILIATED INSTITUTIONS
@@ -319,7 +337,7 @@ export default function DestinationDetailPage() {
             )}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       <ChatBot />
       <Footer />

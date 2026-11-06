@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { soundEngine } from "@/components/shared/SoundEngine";
+import { springDefault } from "@/lib/motion";
+import { ReduceMotionToggle } from "@/components/ui/ReduceMotionToggle";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -46,7 +48,7 @@ export default function Navbar() {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={springDefault}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
             ? "bg-[#07090E]/90 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-black/30"
@@ -110,7 +112,9 @@ export default function Navbar() {
             </div>
 
             {/* CTA + Mobile Toggle */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
+              <ReduceMotionToggle variant="compact" />
+
               <Link
                 href="/appointments"
                 onClick={() => soundEngine.playClick()}
@@ -159,7 +163,7 @@ export default function Navbar() {
                         key={link.href}
                         initial={{ opacity: 0, x: 30 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.05 * i, duration: 0.3 }}
+                        transition={{ ...springDefault, delay: 0.04 * i }}
                       >
                         <Link
                           href={link.href}
@@ -177,7 +181,11 @@ export default function Navbar() {
                   })}
                 </div>
 
-                <div className="mt-auto">
+                <div className="mt-auto flex flex-col gap-3">
+                  <div className="flex items-center justify-between py-2 border-t border-white/10">
+                    <span className="text-xs font-mono-tech text-slate-400">ANIMATIONS</span>
+                    <ReduceMotionToggle variant="badge" />
+                  </div>
                   <Link
                     href="/appointments"
                     onClick={() => setMobileOpen(false)}
